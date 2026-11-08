@@ -1,5 +1,130 @@
 [
   {
+    "name": "tmo-wfc",
+    "label": "TMO-WFC",
+    "emoji": "📶",
+    "icon": "📶",
+    "rule_name": "TMO-WFC",
+    "group_label": "📶 TMO-WFC",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "tmo-wfc-domain",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-domain.yaml",
+        "path": "./ruleset/tmo-wfc-domain.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "tmo-wfc-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-ip.yaml",
+        "path": "./ruleset/tmo-wfc-ip.yaml",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "gg-wfc",
+    "label": "GG-WFC",
+    "emoji": "📞",
+    "icon": "📞",
+    "rule_name": "GG-WFC",
+    "group_label": "📶 GG-WFC",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "gg-wfc-domain",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-domain.yaml",
+        "path": "./ruleset/gg-wfc-domain.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "gg-wfc-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-ip.yaml",
+        "path": "./ruleset/gg-wfc-ip.yaml",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "eset-cn",
+    "label": "ESET CN",
+    "emoji": "🇨🇳",
+    "icon": "🇨🇳",
+    "rule_name": "ESET CN",
+    "group_label": "🛡️ ESET CN",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "eset-cn",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn.yaml",
+        "path": "./ruleset/eset-cn.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "eset-up",
+    "label": "ESET UP",
+    "emoji": "⬆️",
+    "icon": "⬆️",
+    "rule_name": "ESET UP",
+    "group_label": "⬆️ ESET UP",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "eset-up",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up.yaml",
+        "path": "./ruleset/eset-up.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "eset",
+    "label": "ESET",
+    "emoji": "🛡️",
+    "icon": "🛡️",
+    "rule_name": "ESET",
+    "group_label": "🛡️ ESET",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "eset",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
+        "path": "./ruleset/eset.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "ads",
     "label": "广告拦截",
     "emoji": "🛑",
@@ -279,6 +404,27 @@
         "format": "mrs",
         "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
         "path": "./ruleset/microsoft.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "apple-location",
+    "label": "苹果定位服务",
+    "emoji": "📍",
+    "icon": "📍",
+    "rule_name": "苹果定位服务",
+    "group_label": "📍 苹果定位服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "apple-location",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
+        "path": "./ruleset/apple-location.yaml",
         "interval": 86400
       }
     ],

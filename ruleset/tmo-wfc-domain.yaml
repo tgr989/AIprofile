@@ -1,0 +1,6 @@
+# T-Mobile US: MCC 310 / MNC 260.
+payload:
+  # ePDG, ss.ePDG, geo, and other service-name variants.
+  - 'DOMAIN-SUFFIX,mnc260.mcc310.pub.3gppnetwork.org'
+  # Legacy Wi-Fi Calling certificate revocation checks.
+  - 'DOMAIN,crl.t-mobile.com'

@@ -1,0 +1,5 @@
+# O2 ePDG gateway prefixes for real-IP/fallback matches.
+# Referenced through ip_rules, which generates RULE-SET with no-resolve.
+payload:
+  - '87.194.0.0/19'
+  - '87.194.88.0/23'

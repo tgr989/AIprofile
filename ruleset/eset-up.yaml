@@ -1,0 +1,8 @@
+# Match before the general ESET rule set; select the node group for ESET UP.
+payload:
+  - 'DOMAIN-SUFFIX,update.eset.com'
+  - 'DOMAIN,pico.eset.com'
+  - 'DOMAIN-SUFFIX,download.eset.com'
+  - 'DOMAIN,download.liveinstaller.eset.systems'
+  - 'DOMAIN-REGEX,repository.*\.eset\.com'
+  - 'DOMAIN-REGEX,^um\d+\.eset\.com$'

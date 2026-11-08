@@ -1,0 +1,4 @@
+# giffgaff / O2 UK: MCC 234 / MNC 10.
+payload:
+  # PLMN-wide suffix for ePDG and other service-name variants.
+  - 'DOMAIN-SUFFIX,mnc010.mcc234.pub.3gppnetwork.org'

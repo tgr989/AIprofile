@@ -1,0 +1,3 @@
+# Match before the general ESET rule set; select DIRECT for ESET CN.
+payload:
+  - 'DOMAIN-SUFFIX,cn.eset.com'

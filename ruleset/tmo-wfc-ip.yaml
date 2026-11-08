@@ -1,0 +1,7 @@
+# Referenced through ip_rules, which generates RULE-SET with no-resolve.
+payload:
+  # Wi-Fi Calling 2.0 destination prefix.
+  - '208.54.0.0/16'
+  # Legacy Wi-Fi Calling authentication and Visual Voicemail.
+  - '66.94.0.0/19'
+  - '206.29.177.36/32'
