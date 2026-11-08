@@ -3,6 +3,8 @@ AI-generated profile
 
 妙妙屋使用的分组清单位于 [proxy_groups/proxy_groups.json](proxy_groups/proxy_groups.json)，本仓库维护的规则集位于 [ruleset](ruleset/)。
 
+图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️，更新使用 ⬆️。
+
 新增分组均加入 `comprehensive` 预设，也可以单独勾选：
 
 | 分组 | 匹配内容 | 出口选择 |
