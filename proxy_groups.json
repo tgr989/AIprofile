@@ -351,15 +351,6 @@
         "interval": 86400
       },
       {
-        "key": "tiktok",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
-        "path": "./ruleset/tiktok.mrs",
-        "interval": 86400
-      },
-      {
         "key": "linkedin",
         "behavior": "domain",
         "type": "http",
@@ -609,6 +600,27 @@
     "ip_rules": []
   },
   {
+    "name": "crypto",
+    "label": "数字货币",
+    "emoji": "🪙",
+    "icon": "🪙",
+    "rule_name": "Cryptocurrency",
+    "group_label": "🪙 数字货币",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "category-cryptocurrency",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
+        "path": "./ruleset/category-cryptocurrency.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "cloud",
     "label": "云服务",
     "emoji": "☁️",
@@ -840,12 +852,12 @@
     "presets": [],
     "site_rules": [
       {
-        "key": "pttracker",
+        "key": "geolocation-!cn",
         "behavior": "domain",
         "type": "http",
-        "format": "yaml",
+        "format": "mrs",
         "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs",
-        "path": "./ruleset/pttracker.mrs",
+        "path": "./ruleset/geolocation-!cn.mrs",
         "interval": 86400
       }
     ],
