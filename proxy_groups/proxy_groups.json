@@ -185,6 +185,90 @@
     "ip_rules": []
   },
   {
+    "name": "cloud",
+    "label": "云服务",
+    "emoji": "☁️",
+    "icon": "☁️",
+    "rule_name": "Cloud Services",
+    "group_label": "☁️ 云服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "aws",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
+        "path": "./ruleset/aws.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "azure",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
+        "path": "./ruleset/azure.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "digitalocean",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
+        "path": "./ruleset/digitalocean.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "heroku",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
+        "path": "./ruleset/heroku.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "dropbox",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
+        "path": "./ruleset/dropbox.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "cloudflare",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
+        "path": "./ruleset/cloudflare.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "hcaptcha",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hcaptcha.mrs",
+        "path": "./ruleset/hcaptcha.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "onedrive",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
+        "path": "./ruleset/onedrive.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "bilibili",
     "label": "哔哩哔哩",
     "emoji": "📺",
@@ -761,81 +845,6 @@
         "format": "mrs",
         "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
         "path": "./ruleset/category-cryptocurrency.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "cloud",
-    "label": "云服务",
-    "emoji": "☁️",
-    "icon": "☁️",
-    "rule_name": "Cloud Services",
-    "group_label": "☁️ 云服务",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "aws",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
-        "path": "./ruleset/aws.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "azure",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
-        "path": "./ruleset/azure.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "digitalocean",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
-        "path": "./ruleset/digitalocean.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "heroku",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
-        "path": "./ruleset/heroku.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "dropbox",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
-        "path": "./ruleset/dropbox.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "cloudflare",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
-        "path": "./ruleset/cloudflare.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "onedrive",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
-        "path": "./ruleset/onedrive.mrs",
         "interval": 86400
       }
     ],

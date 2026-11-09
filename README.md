@@ -22,4 +22,4 @@ AI-generated profile
 
 发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载地址统一添加 `https://gh-proxy.com/` 前缀，包括本仓库维护的规则集和 MetaCubeX 的 ESET 通用规则集。
 
-规则顺序需保持 **苹果定位服务紧邻苹果服务之前**，以及 **ESET CN → ESET UP → ESET 在通用规则之前**。本清单已按此顺序排列；手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序，避免被较宽泛的规则提前匹配。
+分组顺序保持 **AI 服务 → 云服务**，云服务包含 Cloudflare 和 hCaptcha 等规则。规则顺序需保持 **苹果定位服务紧邻苹果服务之前**，以及 **ESET CN → ESET UP → ESET 在通用规则之前**。本清单已按此顺序排列；手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序，避免被较宽泛的规则提前匹配。
