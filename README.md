@@ -5,6 +5,19 @@ AI-generated profile
 
 图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
+`🚀 AI 选择` 已加入 `balanced`、`comprehensive` 预设，`site_rules` 和 `ip_rules` 为空，表示自身不挂载分流规则。可以在妙妙屋手动调整它的节点与引用关系，也可以使用 [AI 选择覆写脚本](overrides/ai-select.js) 自动处理。
+
+脚本在客户端拉取订阅时创建或更新同名 `select` 分组，使用当前配置的实际节点和代理集合填充候选，不引用其他代理组；配置中有 `🛑 广告拦截` 时，将 AI 选择放到它之前；再将 AI 选择追加到已存在的 `🤖 AI 服务`、`🔍 谷歌服务`、`🍏 苹果服务`、`🌍 非中国`、`🐟 漏网之鱼` 的候选末尾。原有候选顺序保留，是否跟随 AI 选择由客户端手动决定。脚本可重复应用，不会重复添加分组或候选；未启用或不存在的目标分组不会被创建。
+
+启用方式：
+
+1. 在妙妙屋「系统设置」开启「覆写脚本」。
+2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](overrides/ai-select.js) 的全部内容并启用、保存。
+3. 在目标订阅的「覆写配置」中勾选该脚本，再让客户端更新订阅。将脚本放入本仓库或同步分组清单，不会自动启用它。
+4. 在客户端将需要共用出口的服务组选为 `🚀 AI 选择`，再在 AI 选择中选定一个固定节点。
+
+脚本每次都会按当前订阅重新填充 AI 选择，手动缩减的候选列表也会被重建。没有代理组列表，或没有实际节点及代理集合时，脚本直接返回原配置。要让其他服务也能引用它，将该服务的完整分组名称加入脚本的 `targets` 数组。脚本不修改 DNS、分流规则或规则提供方。
+
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
 AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段。[claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 保留为备用，文件中的 NTP UDP 123 规则未注释，WebRTC 端口规则仍已注释，**当前未在分组清单中引用**。已有等效覆盖的规则不重复添加。
@@ -86,7 +99,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
-分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 8 个分组插入相应位置。
+分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 9 个分组插入相应位置。清单开头为 **AI 选择 → 广告拦截 → AI 服务**。
 
 新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络；PT 站点先于 PT Tracker，两者均先于国内服务；ESET 紧邻国内服务之前，也先于云服务。
 
