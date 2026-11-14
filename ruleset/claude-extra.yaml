@@ -1,0 +1,12 @@
+# Claude / Claude Code 补充规则；与上游 claude.yaml 一起挂载到「🤖 AI 服务」。
+# 核对日期：2026-11-14
+# KYC 域名：https://ip.net.coffee/claude/site.html
+# Statsig：https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
+payload:
+  # 上游仅有 statsigapi.net；statsig.com 是独立域名。
+  - 'DOMAIN-SUFFIX,statsig.com'
+  # 网页的 KYC 清单未包含在其可复制的 YAML 中，需额外补充。
+  # 这些服务由多个应用共用；域名规则无法只匹配 Claude 发起的请求。
+  - 'DOMAIN,maps.googleapis.com'
+  - 'DOMAIN-SUFFIX,withpersona.com'
+  - 'DOMAIN-SUFFIX,frompersona.com'
