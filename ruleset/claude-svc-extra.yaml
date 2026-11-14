@@ -1,0 +1,14 @@
+# Claude / Claude Code 服务端口补充规则；挂载到「🤖 AI 服务」。
+# 核对日期：2026-11-14
+# 包含端口与逻辑规则，必须使用 behavior: classical。
+# 规则适用于所有应用；UDP 流量需要客户端接管且节点支持 UDP。
+payload:
+  # 不依赖域名的 NTP 目标端口兜底，适用于所有应用。
+  - 'AND,((NETWORK,udp),(DST-PORT,123))'
+  # 常见 STUN/TURN 目标端口，TCP 和 UDP 均匹配。
+  # https://www.iana.org/assignments/service-names-port-numbers/?search=stun
+  - 'DST-PORT,3478'
+  - 'DST-PORT,5349'
+  # Google WebRTC 音视频常用 UDP 目标端口；端口匹配不限定应用或目标 IP。
+  # https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams
+  - 'AND,((NETWORK,udp),(DST-PORT,19302-19309))'
