@@ -1,8 +1,27 @@
-# Match before the general ESET rule set; select the node group for ESET UP.
+# Source: https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall
+# Reviewed: 2026-11-14. Dedicated update IPs are in eset-up-ip.yaml.
+# Used by the unified ESET group; updates share its outbound policy.
 payload:
+  # Detection engine and pico updates, including regional update endpoints.
   - 'DOMAIN-SUFFIX,update.eset.com'
+  - 'DOMAIN,eu-update.eset.com'
+  - 'DOMAIN,us-update.eset.com'
   - 'DOMAIN,pico.eset.com'
+  - 'DOMAIN-REGEX,^um\d+\.eset\.com$'
+  # Installers and application updates.
   - 'DOMAIN-SUFFIX,download.eset.com'
   - 'DOMAIN,download.liveinstaller.eset.systems'
-  - 'DOMAIN-REGEX,repository.*\.eset\.com'
-  - 'DOMAIN-REGEX,^um\d+\.eset\.com$'
+  # Repository endpoints and backend aliases explicitly listed by ESET.
+  - 'DOMAIN-SUFFIX,repository.eset.com'
+  - 'DOMAIN-SUFFIX,repositorynocdn.eset.com'
+  - 'DOMAIN,repous.wip.eset.com'
+  - 'DOMAIN,us-repository.eset.com'
+  - 'DOMAIN,us-repository.gtm.eset.com'
+  - 'DOMAIN,h5-repository03-v.eset.com'
+  - 'DOMAIN,reponocdn.wip.eset.com'
+  - 'DOMAIN,h1-repo01-v.eset.com'
+  - 'DOMAIN,hp-webs01-s.eset.com'
+  - 'DOMAIN,h1-repository01-v.eset.com'
+  - 'DOMAIN,h3-repository02-v.eset.com'
+  - 'DOMAIN,91-228-167-25.ptr.eset.com'
+  - 'DOMAIN,nocdn-repository.gtm.eset.com'

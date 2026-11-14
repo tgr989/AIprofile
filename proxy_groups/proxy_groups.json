@@ -62,12 +62,12 @@
     ]
   },
   {
-    "name": "eset-cn",
-    "label": "ESET CN",
+    "name": "eset",
+    "label": "ESET",
     "emoji": "🛡️",
     "icon": "🛡️",
-    "rule_name": "ESET CN",
-    "group_label": "🛡️ ESET CN",
+    "rule_name": "ESET",
+    "group_label": "🛡️ ESET",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -78,19 +78,7 @@
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn.yaml",
         "path": "./ruleset/eset-cn.yaml",
         "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "eset-up",
-    "label": "ESET UP",
-    "emoji": "⬆️",
-    "icon": "⬆️",
-    "rule_name": "ESET UP",
-    "group_label": "⬆️ ESET UP",
-    "presets": ["comprehensive"],
-    "site_rules": [
+      },
       {
         "key": "eset-up",
         "behavior": "classical",
@@ -99,19 +87,7 @@
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up.yaml",
         "path": "./ruleset/eset-up.yaml",
         "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "eset",
-    "label": "ESET",
-    "emoji": "🛡️",
-    "icon": "🛡️",
-    "rule_name": "ESET",
-    "group_label": "🛡️ ESET",
-    "presets": ["comprehensive"],
-    "site_rules": [
+      },
       {
         "key": "eset",
         "behavior": "domain",
@@ -120,9 +96,46 @@
         "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
         "path": "./ruleset/eset.mrs",
         "interval": 86400
+      },
+      {
+        "key": "eset-extra",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-extra.yaml",
+        "path": "./ruleset/eset-extra.yaml",
+        "interval": 86400
       }
     ],
-    "ip_rules": []
+    "ip_rules": [
+      {
+        "key": "eset-cn-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn-ip.yaml",
+        "path": "./ruleset/eset-cn-ip.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset-up-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up-ip.yaml",
+        "path": "./ruleset/eset-up-ip.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-ip.yaml",
+        "path": "./ruleset/eset-ip.yaml",
+        "interval": 86400
+      }
+    ]
   },
   {
     "name": "ads",

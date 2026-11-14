@@ -1,0 +1,9 @@
+# Source: https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall
+# Reviewed: 2026-11-14. Exact endpoint addresses; refresh from KB332 when it changes.
+# Chinese endpoint subset of the unified ESET group.
+# Referenced through ip_rules, which generates RULE-SET with no-resolve.
+payload:
+  # Chinese detection-engine/pico update server (um01.cn.eset.com).
+  - '43.154.209.149/32'
+  # Chinese ESET repository server.
+  - '161.189.152.208/32'
