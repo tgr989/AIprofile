@@ -16,7 +16,11 @@ AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源�
 | 补充内容 | 作用与来源 |
 | --- | --- |
 | `statsig.com` | [Claude Code 官方开发容器的网络白名单](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh)；`statsigapi.net` 后缀无法覆盖 |
-| `intercomassets.com`、`accounts.google.com` | [Aiip.si 分流说明](https://aiip.si/routing/)中的客服资源与 Google 登录；前者按后缀匹配，后者精确匹配并优先于 Google 分组，其他 Google 服务的登录也会走 AI 出口 |
+| `intercomassets.com` | [Aiip.si 分流说明](https://aiip.si/routing/)中的客服资源，按后缀匹配并交给 AI 服务 |
+| `accounts.google.com`、`oauth2.googleapis.com`、`openidconnect.googleapis.com`、`www.googleapis.com` | **精确匹配，全部已注释**；原 Google 登录入口参考 [Aiip.si](https://aiip.si/routing/)，依据 [Google 官方 OpenID Connect 发现文档](https://accounts.google.com/.well-known/openid-configuration)补充令牌、用户信息及验签公钥接口。部分请求由网站后端发起，不一定经过本机代理；`www.googleapis.com` 还承载其他 Google API |
+| `accounts.gstatic.com`、`ssl.gstatic.com`、`www.gstatic.com` | **精确匹配，全部已注释**；[Google 官方 ChromeOS 主机白名单](https://support.google.com/chrome/a/answer/6334001?hl=en)列出的账户与静态资源备用主机，后两者明确用于登录页面 JS / CSS；并非 Claude 必需依赖清单 |
+| `apis.google.com` | **精确匹配，已注释**；[Google 官方迁移文档](https://developers.google.com/identity/gsi/web/guides/migration)中的旧版 Sign-In 脚本主机，新版 GIS 脚本已改用 `accounts.google.com` |
+| `appleid.apple.com`、`idmsa.apple.com`、`appleid.cdn-apple.com` | **精确匹配，全部已注释**；参考 [Sign in with Apple 文档](https://developer.apple.com/documentation/signinwithapple/incorporating-sign-in-with-apple-into-other-platforms)和 [Apple 企业网络主机清单](https://support.apple.com/en-us/101555)，保留授权、账户认证与登录资源备用规则 |
 | `maps.googleapis.com`、`withpersona.com`、`frompersona.com` | Net.Coffee 的 KYC 表格列出，但其可复制的 YAML 未包含 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 补齐 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)中的页面资源和 Claude Code 下载域名，优先于 Google 分组匹配 |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
@@ -29,7 +33,9 @@ hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `c
 
 上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
 
-这些第三方服务和 Google 域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
+Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对，当前全部保持注释，由已启用的各自分组处理。推荐在客户端将 **`🔍 谷歌服务`、`🍏 苹果服务` 与 `🤖 AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。以后按需取消注释时，同域名的其他应用请求也会交给 AI 服务。
+
+已启用的第三方服务和 Google 域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
 
 `geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-domain-extra` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。`claude-svc-extra` 中的目标端口规则状态如下，已启用的规则由 `🤖 AI 服务` 处理，并保持广告拦截优先：
 

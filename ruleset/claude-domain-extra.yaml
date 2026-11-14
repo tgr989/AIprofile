@@ -1,17 +1,42 @@
 # Claude / Claude Code 域名补充规则；挂载到「🤖 AI 服务」。
-# 核对日期：2026-11-14
+# 核对日期：2026-11-15
 # KYC、关键词与 NTP 分类：https://ip.net.coffee/claude/site.html
 # Google 资源、下载与 Claude/Anthropic 关键词：https://www.nodeseek.com/post-682343-1
 # 客服资源与 Google 登录：https://aiip.si/routing/
+# Google OAuth / OpenID Connect：https://accounts.google.com/.well-known/openid-configuration
+# Google 静态资源主机白名单：https://support.google.com/chrome/a/answer/6334001?hl=en
+# Google 新旧登录脚本：https://developers.google.com/identity/gsi/web/guides/migration
+# Apple 登录与资源：https://developer.apple.com/documentation/signinwithapple/incorporating-sign-in-with-apple-into-other-platforms
+# Apple 账户认证主机：https://support.apple.com/en-us/101555
 # Statsig：https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
 # MCP、GrowthBook：https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml
 payload:
   # 上游仅有 statsigapi.net；statsig.com 是独立域名。
   - 'DOMAIN-SUFFIX,statsig.com'
   - 'DOMAIN,cdn.growthbook.io'
-  # 客服资源与登录请求统一走 AI；其他 Google 服务的登录也会受影响。
+  # 客服静态资源统一走 AI。
   - 'DOMAIN-SUFFIX,intercomassets.com'
-  - 'DOMAIN,accounts.google.com'
+  # Google / Apple 登录精确匹配备用规则，全部保持注释。
+  # 推荐「🔍 谷歌服务」「🍏 苹果服务」与「🤖 AI 服务」选择同一个固定节点，保持出口 IP 一致。
+  # 当前交由已启用的 Google / Apple 分组处理；按需取消注释后，同域名的其他应用请求也会走 AI。
+  # Google 授权页与新版 GIS 登录脚本。
+  # - 'DOMAIN,accounts.google.com'
+  # OAuth 令牌交换 / 刷新 / 撤销、OpenID 用户信息、验签公钥。
+  # 部分接口由网站后端调用，不一定经过本机代理；www.googleapis.com 也承载其他 Google API。
+  # - 'DOMAIN,oauth2.googleapis.com'
+  # - 'DOMAIN,openidconnect.googleapis.com'
+  # - 'DOMAIN,www.googleapis.com'
+  # Google 账户与静态资源备用主机；参考官方 ChromeOS 白名单，不代表 Claude 必需依赖。
+  # ssl / www.gstatic.com 用于登录页面 JS / CSS，也被其他 Google 服务共用。
+  # - 'DOMAIN,accounts.gstatic.com'
+  # - 'DOMAIN,ssl.gstatic.com'
+  # - 'DOMAIN,www.gstatic.com'
+  # 旧版 Google Sign-In 脚本备用；新版 GIS 已使用 accounts.google.com。
+  # - 'DOMAIN,apis.google.com'
+  # Apple 授权入口、账户认证与登录资源。
+  # - 'DOMAIN,appleid.apple.com'
+  # - 'DOMAIN,idmsa.apple.com'
+  # - 'DOMAIN,appleid.cdn-apple.com'
   # 网页的 KYC 清单未包含在其可复制的 YAML 中，需额外补充。
   # 这些服务由多个应用共用；域名规则无法只匹配 Claude 发起的请求。
   - 'DOMAIN,maps.googleapis.com'
