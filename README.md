@@ -7,9 +7,9 @@ AI-generated profile
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
-AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段，通过 [claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 补充 NTP 服务端口规则，并保留已注释的 WebRTC 端口规则。已有等效覆盖的规则不重复添加。
+AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段。[claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 保留为备用，文件中的 NTP UDP 123 规则未注释，WebRTC 端口规则仍已注释，**当前未在分组清单中引用**。已有等效覆盖的规则不重复添加。
 
-三份补充规则均以 `behavior: classical`、`format: yaml` 挂载在 AI 分组的 `site_rules` 中，按域名、IP、服务端口的顺序排列，保留拆分前的匹配顺序。妙妙屋会把 `ip_rules` 统一排到所有域名规则之后，因此此处保持原位置，确保 NTP 端口规则仍优先于 Google、云服务等后续分组。服务端口文件包含端口与逻辑规则，不能使用仅支持 IP 网段的 `ipcidr` 格式。
+域名和 IP 两份补充规则均以 `behavior: classical`、`format: yaml` 挂载在 AI 分组的 `site_rules` 中，按域名、IP 的顺序排列，保留现有匹配顺序。妙妙屋会把 `ip_rules` 统一排到所有域名规则之后，因此此处保持原位置。以后恢复服务端口规则时，也应使用 `behavior: classical`、`format: yaml`；端口与逻辑规则不能使用仅支持 IP 网段的 `ipcidr` 格式。
 
 进程规则单独保存在 [claude-proc-extra.yaml](ruleset/claude-proc-extra.yaml)，包含此前的 5 条 `PROCESS-NAME` 规则，**当前未在分组清单中引用**。以后启用时使用 `behavior: classical`、`format: yaml`。
 
@@ -40,17 +40,17 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。上�
 
 `geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-domain-extra` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。其中的 `time.google.com`、`time.apple.com` 仍按 NTP 规则处理，不受上述 Google / Apple 精确匹配规则注释影响。
 
-**`GEOSITE,category-ntp` 不能替代 UDP 123 端口兜底。** [Mihomo 的 GEOSITE 规则匹配域名，DST-PORT 规则匹配目标端口](https://wiki.metacubex.one/config/rules/)：纯 IP 连接且内核没有域名信息，或域名未被 NTP 分类收录时，前者不能覆盖，后者仍可匹配 UDP 123。当前保留 `claude-svc-extra`；若仅希望代理已知 NTP 域名，并接受其余 NTP 流量按后续规则处理，才适合移除它的引用。
+**当前仅启用 NTP 域名分类，UDP 123 端口兜底已停用。** [Mihomo 的 GEOSITE 规则匹配域名，DST-PORT 规则匹配目标端口](https://wiki.metacubex.one/config/rules/)，两者并非等效覆盖。`claude-svc-extra` 已取消引用；纯 IP 连接且内核没有域名信息，或域名未被 NTP 分类收录时，流量按后续规则处理。
 
-`claude-svc-extra` 中的目标端口规则状态如下，已启用的规则由 `🤖 AI 服务` 处理，并保持广告拦截优先：
+`claude-svc-extra` 保留一条未注释的 UDP 123 规则，但文件未被引用，因此不参与分流。以后恢复 NTP 端口分流时，将规则提供方加回 AI 分组的 `site_rules`，放在 `claude-ip-extra` 之后、`hcaptcha` 之前，并重新生成订阅以恢复对应的 `RULE-SET` 引用；WebRTC 规则仍需另行取消注释。
 
 | 目标端口 | 传输协议 | 状态 | 作用与来源 |
 | --- | --- | --- | --- |
-| `123` | UDP | 启用 | 参考 [NodeSeek 原帖的 NTP 端口建议](https://www.nodeseek.com/post-682343-1)，直接访问 IP 或未知时间服务器时也匹配；转换为 Mihomo 的 `AND,((NETWORK,udp),(DST-PORT,123))` 语法 |
+| `123` | UDP | 保留，未引用 | 参考 [NodeSeek 原帖的 NTP 端口建议](https://www.nodeseek.com/post-682343-1)，恢复引用后可匹配直接访问 IP 或未知时间服务器的连接；转换为 Mihomo 的 `AND,((NETWORK,udp),(DST-PORT,123))` 语法 |
 | `3478`、`5349` | TCP、UDP | 已注释 | [IANA 登记的 STUN/TURN 及其 TLS/DTLS 端口](https://www.iana.org/assignments/service-names-port-numbers/?search=stun) |
 | `19302–19309` | UDP | 已注释 | [Google 官方列出的 WebRTC 音视频端口](https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams) |
 
-已启用的 NTP 端口规则适用于所有应用及目标 IP；只有流量进入代理内核才会参与匹配。UDP 需要 TUN/透明代理等方式接管，并且所选节点支持 UDP，单独启用 HTTP 系统代理不能接管这些 UDP 请求。WebRTC 的三条端口规则已全部注释，相关域名仍按现有域名规则匹配。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，分流只改变匹配流量的出口，不改变系统时区。
+只有流量进入代理内核才会参与匹配。NTP 的 UDP 流量需要 TUN/透明代理等方式接管，并且所选节点支持 UDP，单独启用 HTTP 系统代理不能接管这些 UDP 请求。NTP 和 WebRTC 端口规则当前均停用，相关域名仍按现有域名规则匹配；以后启用这些端口规则时，会影响所有应用及目标 IP。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，分流只改变匹配流量的出口，不改变系统时区。
 
 新增分组均加入 `comprehensive` 预设，也可以单独勾选：
 
@@ -84,7 +84,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
-Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务`、`RULE-SET,claude-svc-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。规则提供方新增或更名后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
+Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
 分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 8 个分组插入相应位置。
 

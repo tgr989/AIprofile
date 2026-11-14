@@ -75,15 +75,6 @@
         "interval": 86400
       },
       {
-        "key": "claude-svc-extra",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-svc-extra.yaml",
-        "path": "./ruleset/claude-svc-extra.yaml",
-        "interval": 86400
-      },
-      {
         "key": "hcaptcha",
         "behavior": "domain",
         "type": "http",
