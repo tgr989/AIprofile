@@ -39,7 +39,8 @@ payload:
   # - 'DOMAIN,appleid.cdn-apple.com'
   # 网页的 KYC 清单未包含在其可复制的 YAML 中，需额外补充。
   # 这些服务由多个应用共用；域名规则无法只匹配 Claude 发起的请求。
-  - 'DOMAIN,maps.googleapis.com'
+  # Google 地图请求保留为注释，交由「🔍 谷歌服务」分组处理，并与 AI 服务保持相同出口。
+  # - 'DOMAIN,maps.googleapis.com'
   - 'DOMAIN-SUFFIX,withpersona.com'
   - 'DOMAIN-SUFFIX,frompersona.com'
   # 参考项目中的 MCP 域名；不代表覆盖任意第三方 MCP 服务器。
@@ -47,16 +48,18 @@ payload:
   - 'DOMAIN-SUFFIX,modelcontextprotocol.io'
   - 'DOMAIN-SUFFIX,modelcontextprotocol.net'
   - 'DOMAIN-SUFFIX,modelcontextprotocol.org'
-  # 页面资源与 Claude Code 下载；其他应用访问这些共享域名也走 AI 服务。
-  - 'DOMAIN,t0.gstatic.com'
-  - 'DOMAIN,t1.gstatic.com'
-  - 'DOMAIN,t2.gstatic.com'
-  - 'DOMAIN,t3.gstatic.com'
-  - 'DOMAIN,storage.googleapis.com'
+  # Google 页面资源与 Claude Code 下载的备用规则，全部保持注释。
+  # 交由「🔍 谷歌服务」分组处理，并与 AI 服务保持相同出口；启用后会影响同域名的其他应用请求。
+  # - 'DOMAIN,t0.gstatic.com'
+  # - 'DOMAIN,t1.gstatic.com'
+  # - 'DOMAIN,t2.gstatic.com'
+  # - 'DOMAIN,t3.gstatic.com'
+  # - 'DOMAIN,storage.googleapis.com'
   # 匹配其他包含 sentry 的域名；更早命中广告规则的连接仍由广告分组处理。
   - 'DOMAIN-KEYWORD,sentry'
   # 关键词兜底，也会匹配域名中包含这些字符串的无关站点。
   - 'DOMAIN-KEYWORD,claude'
   - 'DOMAIN-KEYWORD,anthropic'
-  # 依赖客户端的 GeoSite 数据库；NTP 流量还需 UDP 接管与节点 UDP 支持。
+  # 仅匹配 GeoSite 分类内且内核能识别的域名；纯 IP 或未收录的 NTP 连接由 claude-svc-extra 的 UDP 123 规则兜底。
+  # 分类中的 time.google.com / time.apple.com 仍按 NTP 处理；需要 UDP 接管与节点 UDP 支持。
   - 'GEOSITE,category-ntp'
