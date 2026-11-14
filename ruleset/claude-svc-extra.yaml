@@ -5,10 +5,11 @@
 payload:
   # 不依赖域名的 NTP 目标端口兜底，适用于所有应用。
   - 'AND,((NETWORK,udp),(DST-PORT,123))'
+  # WebRTC 端口规则暂时停用，以下三条保留为注释。
   # 常见 STUN/TURN 目标端口，TCP 和 UDP 均匹配。
   # https://www.iana.org/assignments/service-names-port-numbers/?search=stun
-  - 'DST-PORT,3478'
-  - 'DST-PORT,5349'
+  # - 'DST-PORT,3478'
+  # - 'DST-PORT,5349'
   # Google WebRTC 音视频常用 UDP 目标端口；端口匹配不限定应用或目标 IP。
   # https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams
-  - 'AND,((NETWORK,udp),(DST-PORT,19302-19309))'
+  # - 'AND,((NETWORK,udp),(DST-PORT,19302-19309))'
