@@ -1,0 +1,12 @@
+# Claude / Claude Code 进程补充规则（备用，当前未挂载到任何策略组）。
+# 核对日期：2026-11-14
+# 来源：https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml
+# 启用时使用 behavior: classical、format: yaml。
+# 需要内核能识别本机进程，且 find-process-mode 不是 off。
+# 进程匹配会接管该进程访问其他站点的连接；node 等独立子进程不自动继承。
+payload:
+  - 'PROCESS-NAME,Claude'
+  - 'PROCESS-NAME,Claude.exe'
+  - 'PROCESS-NAME,claude'
+  - 'PROCESS-NAME,claude.exe'
+  - 'PROCESS-NAME,cowork-svc.exe'

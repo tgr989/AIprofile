@@ -66,12 +66,12 @@
         "interval": 86400
       },
       {
-        "key": "calude-ip-extra",
+        "key": "claude-ip-extra",
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/calude-ip-extra.yaml",
-        "path": "./ruleset/calude-ip-extra.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-ip-extra.yaml",
+        "path": "./ruleset/claude-ip-extra.yaml",
         "interval": 86400
       },
       {
