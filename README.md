@@ -37,6 +37,8 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
-分组按功能归类排列。开头为 **私有网络 → 广告拦截 → TMO-WFC → GG-WFC**，随后为 **PT 站点 → PT Tracker → AI 服务 → ESET → 云服务 → 哔哩哔哩 → 国内服务**；ESET 位于云服务之前，哔哩哔哩位于国内服务之前。
+分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 8 个分组插入相应位置。
 
-保留 **AI 服务 → 云服务**、**苹果定位紧邻苹果服务之前**、**油管视频 → 谷歌服务**的相对顺序。影音区的 **Abema → 流媒体**、**Pixiv → E-Hentai** 分别相邻。代理媒体、代理服务、非中国三个通用分组放在末尾。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络；PT 站点先于 PT Tracker，两者均先于国内服务；ESET 紧邻国内服务之前，也先于云服务。
+
+其他额外分组按 **苹果定位 → 苹果服务**、**金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 插入。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

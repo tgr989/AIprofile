@@ -1,26 +1,5 @@
 [
   {
-    "name": "private",
-    "label": "私有网络",
-    "emoji": "🏠",
-    "icon": "🏠",
-    "rule_name": "Private",
-    "group_label": "🏠 私有网络",
-    "presets": ["minimal", "balanced", "comprehensive"],
-    "site_rules": [],
-    "ip_rules": [
-      {
-        "key": "private",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs",
-        "path": "./ruleset/private.mrs",
-        "interval": 86400
-      }
-    ]
-  },
-  {
     "name": "ads",
     "label": "广告拦截",
     "emoji": "🛑",
@@ -40,6 +19,148 @@
       }
     ],
     "ip_rules": []
+  },
+  {
+    "name": "ai",
+    "label": "AI 服务",
+    "emoji": "🤖",
+    "icon": "🤖",
+    "rule_name": "AI Services",
+    "group_label": "🤖 AI 服务",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "category-ai-!cn",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs",
+        "path": "./ruleset/category-ai-!cn.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "openai",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
+        "path": "./ruleset/openai.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "claude",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml",
+        "path": "./ruleset/claude.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "bilibili",
+    "label": "哔哩哔哩",
+    "emoji": "📺",
+    "icon": "📺",
+    "rule_name": "Bilibili",
+    "group_label": "📺 哔哩哔哩",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "bilibili",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
+        "path": "./ruleset/bilibili.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "biliintl",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
+        "path": "./ruleset/biliintl.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "youtube",
+    "label": "油管视频",
+    "emoji": "📹",
+    "icon": "📹",
+    "rule_name": "Youtube",
+    "group_label": "📹 油管视频",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "youtube",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs",
+        "path": "./ruleset/youtube.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "google",
+    "label": "谷歌服务",
+    "emoji": "🔍",
+    "icon": "🔍",
+    "rule_name": "Google",
+    "group_label": "🔍 谷歌服务",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "google",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs",
+        "path": "./ruleset/google.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "google-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs",
+        "path": "./ruleset/google-ip.mrs",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "private",
+    "label": "私有网络",
+    "emoji": "🏠",
+    "icon": "🏠",
+    "rule_name": "Private",
+    "group_label": "🏠 私有网络",
+    "presets": ["minimal", "balanced", "comprehensive"],
+    "site_rules": [],
+    "ip_rules": [
+      {
+        "key": "private",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs",
+        "path": "./ruleset/private.mrs",
+        "interval": 86400
+      }
+    ]
   },
   {
     "name": "tmo-wfc",
@@ -146,45 +267,6 @@
     "ip_rules": []
   },
   {
-    "name": "ai",
-    "label": "AI 服务",
-    "emoji": "🤖",
-    "icon": "🤖",
-    "rule_name": "AI Services",
-    "group_label": "🤖 AI 服务",
-    "presets": ["balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "category-ai-!cn",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs",
-        "path": "./ruleset/category-ai-!cn.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "openai",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
-        "path": "./ruleset/openai.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "claude",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml",
-        "path": "./ruleset/claude.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "eset",
     "label": "ESET",
     "emoji": "🛡️",
@@ -200,120 +282,6 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
         "path": "./ruleset/eset.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "cloud",
-    "label": "云服务",
-    "emoji": "☁️",
-    "icon": "☁️",
-    "rule_name": "Cloud Services",
-    "group_label": "☁️ 云服务",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "aws",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
-        "path": "./ruleset/aws.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "azure",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
-        "path": "./ruleset/azure.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "digitalocean",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
-        "path": "./ruleset/digitalocean.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "heroku",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
-        "path": "./ruleset/heroku.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "dropbox",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
-        "path": "./ruleset/dropbox.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "cloudflare",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
-        "path": "./ruleset/cloudflare.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "hcaptcha",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hcaptcha.mrs",
-        "path": "./ruleset/hcaptcha.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "onedrive",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
-        "path": "./ruleset/onedrive.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "bilibili",
-    "label": "哔哩哔哩",
-    "emoji": "📺",
-    "icon": "📺",
-    "rule_name": "Bilibili",
-    "group_label": "📺 哔哩哔哩",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "bilibili",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
-        "path": "./ruleset/bilibili.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "biliintl",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
-        "path": "./ruleset/biliintl.mrs",
         "interval": 86400
       }
     ],
@@ -355,6 +323,37 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs",
         "path": "./ruleset/cn.mrs",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "telegram",
+    "label": "电报消息",
+    "emoji": "📲",
+    "icon": "📲",
+    "rule_name": "Telegram",
+    "group_label": "📲 电报消息",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "telegram",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs",
+        "path": "./ruleset/telegram.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "telegram-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs",
+        "path": "./ruleset/telegram-ip.mrs",
         "interval": 86400
       }
     ]
@@ -462,37 +461,6 @@
     "ip_rules": []
   },
   {
-    "name": "telegram",
-    "label": "电报消息",
-    "emoji": "📲",
-    "icon": "📲",
-    "rule_name": "Telegram",
-    "group_label": "📲 电报消息",
-    "presets": ["balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "telegram",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs",
-        "path": "./ruleset/telegram.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "telegram-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs",
-        "path": "./ruleset/telegram-ip.mrs",
-        "interval": 86400
-      }
-    ]
-  },
-  {
     "name": "social",
     "label": "社交媒体",
     "emoji": "🌐",
@@ -535,121 +503,6 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/linkedin.mrs",
         "path": "./ruleset/linkedin.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "youtube",
-    "label": "油管视频",
-    "emoji": "📹",
-    "icon": "📹",
-    "rule_name": "Youtube",
-    "group_label": "📹 油管视频",
-    "presets": ["balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "youtube",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs",
-        "path": "./ruleset/youtube.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "google",
-    "label": "谷歌服务",
-    "emoji": "🔍",
-    "icon": "🔍",
-    "rule_name": "Google",
-    "group_label": "🔍 谷歌服务",
-    "presets": ["balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "google",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs",
-        "path": "./ruleset/google.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "google-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs",
-        "path": "./ruleset/google-ip.mrs",
-        "interval": 86400
-      }
-    ]
-  },
-  {
-    "name": "tiktok",
-    "label": "Tiktok",
-    "emoji": "🎶",
-    "icon": "🎶",
-    "rule_name": "Tiktok",
-    "group_label": "🎶 Tiktok",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "tiktok",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
-        "path": "./ruleset/tiktok.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "spotify",
-    "label": "Spotify",
-    "emoji": "🎵",
-    "icon": "🎵",
-    "rule_name": "Spotify",
-    "group_label": "🎵 Spotify",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "spotify",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
-        "path": "./ruleset/spotify.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "abema",
-    "label": "Abema",
-    "emoji": "📡",
-    "icon": "📡",
-    "rule_name": "Abema",
-    "group_label": "📡 Abema",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "abema",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/abema.mrs",
-        "path": "./ruleset/abema.mrs",
         "interval": 86400
       }
     ],
@@ -716,48 +569,6 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bahamut.mrs",
         "path": "./ruleset/bahamut.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "pixiv",
-    "label": "Pixiv",
-    "emoji": "🎨",
-    "icon": "🎨",
-    "rule_name": "Pixiv",
-    "group_label": "🎨 Pixiv",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "pixiv",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/pixiv.mrs",
-        "path": "./ruleset/pixiv.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "ehentai",
-    "label": "E-Hentai",
-    "emoji": "🔞",
-    "icon": "🔞",
-    "rule_name": "E-Hentai",
-    "group_label": "🔞 E-Hentai",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "ehentai",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
-        "path": "./ruleset/ehentai.mrs",
         "interval": 86400
       }
     ],
@@ -956,6 +767,195 @@
     "ip_rules": []
   },
   {
+    "name": "cloud",
+    "label": "云服务",
+    "emoji": "☁️",
+    "icon": "☁️",
+    "rule_name": "Cloud Services",
+    "group_label": "☁️ 云服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "aws",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
+        "path": "./ruleset/aws.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "azure",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
+        "path": "./ruleset/azure.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "digitalocean",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
+        "path": "./ruleset/digitalocean.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "heroku",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
+        "path": "./ruleset/heroku.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "dropbox",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
+        "path": "./ruleset/dropbox.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "cloudflare",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
+        "path": "./ruleset/cloudflare.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "hcaptcha",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hcaptcha.mrs",
+        "path": "./ruleset/hcaptcha.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "onedrive",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
+        "path": "./ruleset/onedrive.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "tiktok",
+    "label": "Tiktok",
+    "emoji": "🎶",
+    "icon": "🎶",
+    "rule_name": "Tiktok",
+    "group_label": "🎶 Tiktok",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "tiktok",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
+        "path": "./ruleset/tiktok.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "spotify",
+    "label": "Spotify",
+    "emoji": "🎵",
+    "icon": "🎵",
+    "rule_name": "Spotify",
+    "group_label": "🎵 Spotify",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "spotify",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
+        "path": "./ruleset/spotify.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "pixiv",
+    "label": "Pixiv",
+    "emoji": "🎨",
+    "icon": "🎨",
+    "rule_name": "Pixiv",
+    "group_label": "🎨 Pixiv",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "pixiv",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/pixiv.mrs",
+        "path": "./ruleset/pixiv.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "abema",
+    "label": "Abema",
+    "emoji": "📡",
+    "icon": "📡",
+    "rule_name": "Abema",
+    "group_label": "📡 Abema",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "abema",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/abema.mrs",
+        "path": "./ruleset/abema.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "proxy",
+    "label": "代理服务",
+    "emoji": "🔀",
+    "icon": "🔀",
+    "rule_name": "Proxy",
+    "group_label": "🔀 代理服务",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "proxy",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
+        "path": "./ruleset/proxy.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "proxymedia",
     "label": "代理媒体",
     "emoji": "🎭",
@@ -987,21 +987,21 @@
     ]
   },
   {
-    "name": "proxy",
-    "label": "代理服务",
-    "emoji": "🔀",
-    "icon": "🔀",
-    "rule_name": "Proxy",
-    "group_label": "🔀 代理服务",
+    "name": "ehentai",
+    "label": "E-Hentai",
+    "emoji": "🔞",
+    "icon": "🔞",
+    "rule_name": "E-Hentai",
+    "group_label": "🔞 E-Hentai",
     "presets": [],
     "site_rules": [
       {
-        "key": "proxy",
+        "key": "ehentai",
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
-        "path": "./ruleset/proxy.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
+        "path": "./ruleset/ehentai.mrs",
         "interval": 86400
       }
     ],
