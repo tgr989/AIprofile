@@ -7,13 +7,35 @@ AI-generated profile
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)核对。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏；其余服务域名由 AI 规则覆盖。
 
-AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-extra.yaml](ruleset/claude-extra.yaml) 补充 `statsig.com`、`maps.googleapis.com`、`withpersona.com`、`frompersona.com`。后三项在参考网页的 KYC 表格中，但未写入其可复制的 YAML；`statsig.com` 来自 [Claude Code 官方开发容器的网络白名单](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh)，不能由 `statsigapi.net` 后缀覆盖。
+AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-extra.yaml](ruleset/claude-extra.yaml) 补充以下条目。已有等效覆盖的规则不重复添加。
+
+| 补充内容 | 作用与来源 |
+| --- | --- |
+| `statsig.com` | [Claude Code 官方开发容器的网络白名单](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh)；`statsigapi.net` 后缀无法覆盖 |
+| `maps.googleapis.com`、`withpersona.com`、`frompersona.com` | Net.Coffee 的 KYC 表格列出，但其可复制的 YAML 未包含 |
+| `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 补齐所提供 Surge 清单中的页面资源和 Claude Code 下载域名，优先于 Google 分组匹配 |
+| `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
+| `Claude`、`Claude.exe`、`claude`、`claude.exe`、`cowork-svc.exe` | 同一参考清单中的客户端进程兜底 |
+| `sentry`、`claude`、`anthropic` 关键词 | 覆盖包含这些字符串的域名；参考项目的 `anthropic.com.cn` 也由此覆盖 |
+| `153.61.224.0/22` | [Anthropic 官方当前 API 入站网段](https://platform.claude.com/docs/en/api/ip-addresses)，补在上游已有 IP 规则之外 |
+
+参考项目的其他 Anthropic 域名、IP 和 ASN 已由现有规则覆盖；其 OpenAI 清单中的 `chatgpt.livekit.cloud`、`host.livekit.cloud`、`turn.livekit.cloud` 也已由 AI 服务中的 `openai` / `category-ai-!cn` 覆盖。本次按 Claude 与实时通信相关范围合并差异，不整体挂载该项目的 Facebook、X 等规则集。
 
 hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `comprehensive` 预设启用；其他应用使用 hCaptcha 时也按 AI 分组处理。
 
-上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog`、`sift` 关键词和 `sentry.io` 后缀规则保留，`claude-extra` 另补充 `DOMAIN-KEYWORD,sentry`，覆盖域名中含有 `sentry` 的请求。更早命中广告拦截的连接仍由广告分组处理。这些第三方域名与 KYC、Statsig 域名由多个应用共用，其他应用访问相同域名也受这些规则影响。
+上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
 
-`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-extra` 另加入 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务；这需要客户端的 GeoSite 数据库包含 `category-ntp`，实际 NTP 流量还需客户端接管 UDP 且所选节点支持 UDP。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，此规则只改变匹配流量的出口，不改变系统时区。
+这些第三方服务和 Google 域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。进程规则需要客户端能识别本机连接所属进程，并启用 [`find-process-mode: strict` 或 `always`](https://wiki.metacubex.one/config/general/#进程匹配模式)。被识别进程访问其他站点的连接也会命中，但 `node` 等独立子进程不会自动继承父进程的匹配。
+
+`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-extra` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。另加入以下目标端口规则，均由 `🤖 AI 服务` 处理，并保持广告拦截优先：
+
+| 目标端口 | 传输协议 | 作用与来源 |
+| --- | --- | --- |
+| `123` | UDP | NTP 兜底，直接访问 IP 或未知时间服务器时也匹配；使用 Mihomo 的 `AND,((NETWORK,udp),(DST-PORT,123))` 语法 |
+| `3478`、`5349` | TCP、UDP | [IANA 登记的 STUN/TURN 及其 TLS/DTLS 端口](https://www.iana.org/assignments/service-names-port-numbers/?search=stun) |
+| `19302–19309` | UDP | [Google 官方列出的 WebRTC 音视频端口](https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams) |
+
+端口规则适用于所有应用及目标 IP，包括其他应用使用相同端口的连接；只有流量进入代理内核才会参与匹配。UDP 需要 TUN/透明代理等方式接管，并且所选节点支持 UDP，单独启用 HTTP 系统代理不能接管这些 UDP 请求。这些常见端口规则不覆盖所有 WebRTC 媒体连接，也不保证消除所有 WebRTC IP 泄露。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，分流只改变匹配流量的出口，不改变系统时区。
 
 新增分组均加入 `comprehensive` 预设，也可以单独勾选：
 

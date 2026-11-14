@@ -2,15 +2,50 @@
 # 核对日期：2026-11-14
 # KYC、关键词与 NTP 分类：https://ip.net.coffee/claude/site.html
 # Statsig：https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
+# MCP、GrowthBook、客户端进程：https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml
+# API 入站 IP：https://platform.claude.com/docs/en/api/ip-addresses
 payload:
   # 上游仅有 statsigapi.net；statsig.com 是独立域名。
   - 'DOMAIN-SUFFIX,statsig.com'
+  - 'DOMAIN,cdn.growthbook.io'
   # 网页的 KYC 清单未包含在其可复制的 YAML 中，需额外补充。
   # 这些服务由多个应用共用；域名规则无法只匹配 Claude 发起的请求。
   - 'DOMAIN,maps.googleapis.com'
   - 'DOMAIN-SUFFIX,withpersona.com'
   - 'DOMAIN-SUFFIX,frompersona.com'
+  # 参考项目中的 MCP 域名；不代表覆盖任意第三方 MCP 服务器。
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.com'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.io'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.net'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.org'
+  # 页面资源与 Claude Code 下载；其他应用访问这些共享域名也走 AI 服务。
+  - 'DOMAIN,t0.gstatic.com'
+  - 'DOMAIN,t1.gstatic.com'
+  - 'DOMAIN,t2.gstatic.com'
+  - 'DOMAIN,t3.gstatic.com'
+  - 'DOMAIN,storage.googleapis.com'
   # 匹配其他包含 sentry 的域名；更早命中广告规则的连接仍由广告分组处理。
   - 'DOMAIN-KEYWORD,sentry'
+  # 关键词兜底，也会匹配域名中包含这些字符串的无关站点。
+  - 'DOMAIN-KEYWORD,claude'
+  - 'DOMAIN-KEYWORD,anthropic'
+  # 本机客户端进程兜底；需要内核能识别进程，且 find-process-mode 不是 off。
+  # 进程匹配会接管该进程访问其他站点的连接；node 等独立子进程不自动继承。
+  - 'PROCESS-NAME,Claude'
+  - 'PROCESS-NAME,Claude.exe'
+  - 'PROCESS-NAME,claude'
+  - 'PROCESS-NAME,claude.exe'
+  - 'PROCESS-NAME,cowork-svc.exe'
+  # 官方新增 API 入站网段；保留上游已有的 IPv4、IPv6 和 AS399358。
+  - 'IP-CIDR,153.61.224.0/22,no-resolve'
   # 依赖客户端的 GeoSite 数据库；NTP 流量还需 UDP 接管与节点 UDP 支持。
   - 'GEOSITE,category-ntp'
+  # 不依赖域名的 NTP 目标端口兜底，适用于所有应用。
+  - 'AND,((NETWORK,udp),(DST-PORT,123))'
+  # 常见 STUN/TURN 目标端口，TCP 和 UDP 均匹配。
+  # https://www.iana.org/assignments/service-names-port-numbers/?search=stun
+  - 'DST-PORT,3478'
+  - 'DST-PORT,5349'
+  # Google WebRTC 音视频常用 UDP 目标端口；端口匹配不限定应用或目标 IP。
+  # https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams
+  - 'AND,((NETWORK,udp),(DST-PORT,19302-19309))'
