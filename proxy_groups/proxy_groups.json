@@ -537,11 +537,11 @@
   },
   {
     "name": "apple-location",
-    "label": "苹果定位服务",
+    "label": "苹果定位",
     "emoji": "📍",
     "icon": "📍",
-    "rule_name": "苹果定位服务",
-    "group_label": "📍 苹果定位服务",
+    "rule_name": "苹果定位",
+    "group_label": "📍 苹果定位",
     "presets": ["comprehensive"],
     "site_rules": [
       {
