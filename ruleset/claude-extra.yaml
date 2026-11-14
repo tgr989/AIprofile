@@ -1,6 +1,6 @@
 # Claude / Claude Code 补充规则；与上游 claude.yaml 一起挂载到「🤖 AI 服务」。
 # 核对日期：2026-11-14
-# KYC 域名：https://ip.net.coffee/claude/site.html
+# KYC、关键词与 NTP 分类：https://ip.net.coffee/claude/site.html
 # Statsig：https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
 payload:
   # 上游仅有 statsigapi.net；statsig.com 是独立域名。
@@ -10,3 +10,7 @@ payload:
   - 'DOMAIN,maps.googleapis.com'
   - 'DOMAIN-SUFFIX,withpersona.com'
   - 'DOMAIN-SUFFIX,frompersona.com'
+  # 匹配其他包含 sentry 的域名；更早命中广告规则的连接仍由广告分组处理。
+  - 'DOMAIN-KEYWORD,sentry'
+  # 依赖客户端的 GeoSite 数据库；NTP 流量还需 UDP 接管与节点 UDP 支持。
+  - 'GEOSITE,category-ntp'

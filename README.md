@@ -11,9 +11,9 @@ AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源�
 
 hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `comprehensive` 预设启用；其他应用使用 hCaptcha 时也按 AI 分组处理。
 
-上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog`、`sift` 关键词和 `sentry.io` 后缀规则保留。这些第三方域名与新增的 KYC、Statsig 域名由多个应用共用，其他应用访问相同域名也受这些规则影响；没有额外扩大为任意包含 `sentry` 的域名匹配。
+上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog`、`sift` 关键词和 `sentry.io` 后缀规则保留，`claude-extra` 另补充 `DOMAIN-KEYWORD,sentry`，覆盖域名中含有 `sentry` 的请求。更早命中广告拦截的连接仍由广告分组处理。这些第三方域名与 KYC、Statsig 域名由多个应用共用，其他应用访问相同域名也受这些规则影响。
 
-参考网页关于 NTP 返回地区时区的解释不准确：[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，走代理不会改变系统时区。因此不添加全局 `category-ntp` 到 AI 服务，也不因该建议禁用 IPv6。
+`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-extra` 另加入 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务；这需要客户端的 GeoSite 数据库包含 `category-ntp`，实际 NTP 流量还需客户端接管 UDP 且所选节点支持 UDP。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，此规则只改变匹配流量的出口，不改变系统时区。
 
 新增分组均加入 `comprehensive` 预设，也可以单独勾选：
 
