@@ -21,6 +21,17 @@
     "ip_rules": []
   },
   {
+    "name": "ai-select",
+    "label": "AI 选择",
+    "emoji": "🤖",
+    "icon": "🤖",
+    "rule_name": "AI Select",
+    "group_label": "🤖 AI 选择",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [],
+    "ip_rules": []
+  },
+  {
     "name": "ai",
     "label": "AI 服务",
     "emoji": "🤖",
