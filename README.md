@@ -5,7 +5,7 @@ AI-generated profile
 
 图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
-Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)核对。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏；其余服务域名由 AI 规则覆盖。
+Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
 AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段，通过 [claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 补充 NTP 服务端口规则，并保留已注释的 WebRTC 端口规则。已有等效覆盖的规则不重复添加。
 
@@ -16,10 +16,11 @@ AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源�
 | 补充内容 | 作用与来源 |
 | --- | --- |
 | `statsig.com` | [Claude Code 官方开发容器的网络白名单](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh)；`statsigapi.net` 后缀无法覆盖 |
+| `intercomassets.com`、`accounts.google.com` | [Aiip.si 分流说明](https://aiip.si/routing/)中的客服资源与 Google 登录；前者按后缀匹配，后者精确匹配并优先于 Google 分组，其他 Google 服务的登录也会走 AI 出口 |
 | `maps.googleapis.com`、`withpersona.com`、`frompersona.com` | Net.Coffee 的 KYC 表格列出，但其可复制的 YAML 未包含 |
-| `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 补齐所提供 Surge 清单中的页面资源和 Claude Code 下载域名，优先于 Google 分组匹配 |
+| `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 补齐 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)中的页面资源和 Claude Code 下载域名，优先于 Google 分组匹配 |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `sentry`、`claude`、`anthropic` 关键词 | 覆盖包含这些字符串的域名；参考项目的 `anthropic.com.cn` 也由此覆盖 |
+| `sentry`、`claude`、`anthropic` 关键词 | `sentry` 来自 Net.Coffee，`claude` / `anthropic` 兜底参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)；覆盖包含这些字符串的域名，参考项目的 `anthropic.com.cn` 也由此覆盖 |
 | `153.61.224.0/22` | [Anthropic 官方当前 API 入站网段](https://platform.claude.com/docs/en/api/ip-addresses)，补在上游已有 IP 规则之外 |
 
 参考项目的其他 Anthropic 域名、IP 和 ASN 已由现有规则覆盖；其 OpenAI 清单中的 `chatgpt.livekit.cloud`、`host.livekit.cloud`、`turn.livekit.cloud` 也已由 AI 服务中的 `openai` / `category-ai-!cn` 覆盖。本次按 Claude 与实时通信相关范围合并差异，不整体挂载该项目的 Facebook、X 等规则集。
@@ -34,7 +35,7 @@ hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `c
 
 | 目标端口 | 传输协议 | 状态 | 作用与来源 |
 | --- | --- | --- | --- |
-| `123` | UDP | 启用 | NTP 兜底，直接访问 IP 或未知时间服务器时也匹配；使用 Mihomo 的 `AND,((NETWORK,udp),(DST-PORT,123))` 语法 |
+| `123` | UDP | 启用 | 参考 [NodeSeek 原帖的 NTP 端口建议](https://www.nodeseek.com/post-682343-1)，直接访问 IP 或未知时间服务器时也匹配；转换为 Mihomo 的 `AND,((NETWORK,udp),(DST-PORT,123))` 语法 |
 | `3478`、`5349` | TCP、UDP | 已注释 | [IANA 登记的 STUN/TURN 及其 TLS/DTLS 端口](https://www.iana.org/assignments/service-names-port-numbers/?search=stun) |
 | `19302–19309` | UDP | 已注释 | [Google 官方列出的 WebRTC 音视频端口](https://knowledge.workspace.google.com/admin/meet/prepare-your-network-for-meet-meetings-and-live-streams) |
 

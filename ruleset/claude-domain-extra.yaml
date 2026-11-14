@@ -1,12 +1,17 @@
 # Claude / Claude Code 域名补充规则；挂载到「🤖 AI 服务」。
 # 核对日期：2026-11-14
 # KYC、关键词与 NTP 分类：https://ip.net.coffee/claude/site.html
+# Google 资源、下载与 Claude/Anthropic 关键词：https://www.nodeseek.com/post-682343-1
+# 客服资源与 Google 登录：https://aiip.si/routing/
 # Statsig：https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh
 # MCP、GrowthBook：https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml
 payload:
   # 上游仅有 statsigapi.net；statsig.com 是独立域名。
   - 'DOMAIN-SUFFIX,statsig.com'
   - 'DOMAIN,cdn.growthbook.io'
+  # 客服资源与登录请求统一走 AI；其他 Google 服务的登录也会受影响。
+  - 'DOMAIN-SUFFIX,intercomassets.com'
+  - 'DOMAIN,accounts.google.com'
   # 网页的 KYC 清单未包含在其可复制的 YAML 中，需额外补充。
   # 这些服务由多个应用共用；域名规则无法只匹配 Claude 发起的请求。
   - 'DOMAIN,maps.googleapis.com'

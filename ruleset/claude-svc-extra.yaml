@@ -1,5 +1,6 @@
 # Claude / Claude Code 服务端口补充规则；挂载到「🤖 AI 服务」。
 # 核对日期：2026-11-14
+# NTP 端口参考（Surge 语法已转换为 Mihomo）：https://www.nodeseek.com/post-682343-1
 # 包含端口与逻辑规则，必须使用 behavior: classical。
 # 规则适用于所有应用；UDP 流量需要客户端接管且节点支持 UDP。
 payload:
