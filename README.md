@@ -7,7 +7,9 @@ AI-generated profile
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)核对。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏；其余服务域名由 AI 规则覆盖。
 
-AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-extra.yaml](ruleset/claude-extra.yaml) 补充以下条目。已有等效覆盖的规则不重复添加。
+AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [calude-ip-extra.yaml](ruleset/calude-ip-extra.yaml) 补充 IP 与端口规则。已有等效覆盖的规则不重复添加，Claude 客户端进程规则已移除。
+
+两份补充规则均以 `behavior: classical`、`format: yaml` 挂载在 AI 分组的 `site_rules` 中，保留拆分前的匹配位置。妙妙屋会把 `ip_rules` 统一排到所有域名规则之后，因此此处保持原位置，确保 NTP/WebRTC 端口规则仍优先于 Google、云服务等后续分组。IP 文件包含端口与逻辑规则，不能使用仅支持 IP 网段的 `ipcidr` 格式。
 
 | 补充内容 | 作用与来源 |
 | --- | --- |
@@ -15,7 +17,6 @@ AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源�
 | `maps.googleapis.com`、`withpersona.com`、`frompersona.com` | Net.Coffee 的 KYC 表格列出，但其可复制的 YAML 未包含 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 补齐所提供 Surge 清单中的页面资源和 Claude Code 下载域名，优先于 Google 分组匹配 |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `Claude`、`Claude.exe`、`claude`、`claude.exe`、`cowork-svc.exe` | 同一参考清单中的客户端进程兜底 |
 | `sentry`、`claude`、`anthropic` 关键词 | 覆盖包含这些字符串的域名；参考项目的 `anthropic.com.cn` 也由此覆盖 |
 | `153.61.224.0/22` | [Anthropic 官方当前 API 入站网段](https://platform.claude.com/docs/en/api/ip-addresses)，补在上游已有 IP 规则之外 |
 
@@ -25,9 +26,9 @@ hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `c
 
 上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
 
-这些第三方服务和 Google 域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。进程规则需要客户端能识别本机连接所属进程，并启用 [`find-process-mode: strict` 或 `always`](https://wiki.metacubex.one/config/general/#进程匹配模式)。被识别进程访问其他站点的连接也会命中，但 `node` 等独立子进程不会自动继承父进程的匹配。
+这些第三方服务和 Google 域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
 
-`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-extra` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。另加入以下目标端口规则，均由 `🤖 AI 服务` 处理，并保持广告拦截优先：
+`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude-domain-extra` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。`calude-ip-extra` 保留以下目标端口规则，均由 `🤖 AI 服务` 处理，并保持广告拦截优先：
 
 | 目标端口 | 传输协议 | 作用与来源 |
 | --- | --- | --- |
@@ -69,7 +70,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
-Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。只刷新旧规则文件不会添加新的规则提供方，需重新同步分组并生成或更新订阅。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
+Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,calude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。本次拆分替换了旧规则提供方，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
 分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 8 个分组插入相应位置。
 

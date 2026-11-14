@@ -57,12 +57,21 @@
         "interval": 86400
       },
       {
-        "key": "claude-extra",
+        "key": "claude-domain-extra",
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-extra.yaml",
-        "path": "./ruleset/claude-extra.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-domain-extra.yaml",
+        "path": "./ruleset/claude-domain-extra.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "calude-ip-extra",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/calude-ip-extra.yaml",
+        "path": "./ruleset/calude-ip-extra.yaml",
         "interval": 86400
       },
       {
