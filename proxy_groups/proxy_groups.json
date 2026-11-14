@@ -372,6 +372,48 @@
     ]
   },
   {
+    "name": "ptdomain",
+    "label": "PT 站点",
+    "emoji": "🎞️",
+    "icon": "🎞️",
+    "rule_name": "🎞️ 站点",
+    "group_label": "🎞️ PT 站点",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "ptdomain",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/ptdomain.yaml",
+        "path": "./ruleset/ptdomain.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "pttracker",
+    "label": "PT Tracker",
+    "emoji": "🔗",
+    "icon": "🔗",
+    "rule_name": "PT Tracker",
+    "group_label": "🔗 PT Tracker",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "pttracker",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tracker.mrs",
+        "path": "./ruleset/pttracker.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "domestic",
     "label": "国内服务",
     "emoji": "🔒",
@@ -537,7 +579,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/applemusic.mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-music.mrs",
         "path": "./ruleset/applemusic.mrs",
         "interval": 86400
       }
@@ -935,48 +977,6 @@
     "ip_rules": []
   },
   {
-    "name": "proxy",
-    "label": "代理服务",
-    "emoji": "🔀",
-    "icon": "🔀",
-    "rule_name": "Proxy",
-    "group_label": "🔀 代理服务",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "proxy",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/proxy.mrs",
-        "path": "./ruleset/proxy.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "proxymedia",
-    "label": "代理媒体",
-    "emoji": "🎭",
-    "icon": "🎭",
-    "rule_name": "Proxy Media",
-    "group_label": "🎭 代理媒体",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "proxymedia",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/proxymedia.mrs",
-        "path": "./ruleset/proxymedia.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "ehentai",
     "label": "E-Hentai",
     "emoji": "🔞",
@@ -998,6 +998,58 @@
     "ip_rules": []
   },
   {
+    "name": "proxymedia",
+    "label": "代理媒体",
+    "emoji": "🎭",
+    "icon": "🎭",
+    "rule_name": "Proxy Media",
+    "group_label": "🎭 代理媒体",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "proxymedia",
+        "behavior": "domain",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Domain.yaml",
+        "path": "./ruleset/proxymedia.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "proxymedia-ip",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml",
+        "path": "./ruleset/proxymedia-ip.yaml",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "proxy",
+    "label": "代理服务",
+    "emoji": "🔀",
+    "icon": "🔀",
+    "rule_name": "Proxy",
+    "group_label": "🔀 代理服务",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "proxy",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
+        "path": "./ruleset/proxy.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "overseas",
     "label": "非中国",
     "emoji": "🌍",
@@ -1013,48 +1065,6 @@
         "format": "mrs",
         "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs",
         "path": "./ruleset/geolocation-!cn.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "pttracker",
-    "label": "PT Tracker",
-    "emoji": "🔗",
-    "icon": "🔗",
-    "rule_name": "PT Tracker",
-    "group_label": "🔗 PT Tracker",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "pttracker",
-        "behavior": "domain",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/pttracker.yaml",
-        "path": "./ruleset/pttracker.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "ptdomain",
-    "label": "PT 站点",
-    "emoji": "🎞️",
-    "icon": "🎞️",
-    "rule_name": "🎞️ 站点",
-    "group_label": "🎞️ PT 站点",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "ptdomain",
-        "behavior": "domain",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/ptdomain.yaml",
-        "path": "./ruleset/ptdomain.yaml",
         "interval": 86400
       }
     ],
