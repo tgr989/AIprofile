@@ -14,7 +14,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs",
         "path": "./ruleset/private.mrs",
         "interval": 86400
       }
@@ -34,7 +34,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ads-all.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ads-all.mrs",
         "path": "./ruleset/category-ads-all.mrs",
         "interval": 86400
       }
@@ -55,7 +55,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-domain.yaml",
         "path": "./ruleset/tmo-wfc-domain.yaml",
         "interval": 86400
       }
@@ -66,7 +66,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-ip.yaml",
         "path": "./ruleset/tmo-wfc-ip.yaml",
         "interval": 86400
       }
@@ -86,7 +86,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-domain.yaml",
         "path": "./ruleset/gg-wfc-domain.yaml",
         "interval": 86400
       }
@@ -97,7 +97,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-ip.yaml",
         "path": "./ruleset/gg-wfc-ip.yaml",
         "interval": 86400
       }
@@ -117,7 +117,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/ptdomain.yaml",
+        "url": "https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/ptdomain.yaml",
         "path": "./ruleset/ptdomain.yaml",
         "interval": 86400
       }
@@ -138,7 +138,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tracker.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tracker.mrs",
         "path": "./ruleset/pttracker.mrs",
         "interval": 86400
       }
@@ -159,7 +159,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs",
         "path": "./ruleset/category-ai-!cn.mrs",
         "interval": 86400
       },
@@ -168,7 +168,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
         "path": "./ruleset/openai.mrs",
         "interval": 86400
       },
@@ -177,8 +177,29 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml",
+        "url": "https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml",
         "path": "./ruleset/claude.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "eset",
+    "label": "ESET",
+    "emoji": "🛡️",
+    "icon": "🛡️",
+    "rule_name": "ESET",
+    "group_label": "🛡️ ESET",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "eset",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
+        "path": "./ruleset/eset.mrs",
         "interval": 86400
       }
     ],
@@ -198,7 +219,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/aws.mrs",
         "path": "./ruleset/aws.mrs",
         "interval": 86400
       },
@@ -207,7 +228,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/azure.mrs",
         "path": "./ruleset/azure.mrs",
         "interval": 86400
       },
@@ -216,7 +237,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/digitalocean.mrs",
         "path": "./ruleset/digitalocean.mrs",
         "interval": 86400
       },
@@ -225,7 +246,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/heroku.mrs",
         "path": "./ruleset/heroku.mrs",
         "interval": 86400
       },
@@ -234,7 +255,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/dropbox.mrs",
         "path": "./ruleset/dropbox.mrs",
         "interval": 86400
       },
@@ -243,7 +264,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs",
         "path": "./ruleset/cloudflare.mrs",
         "interval": 86400
       },
@@ -252,7 +273,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hcaptcha.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hcaptcha.mrs",
         "path": "./ruleset/hcaptcha.mrs",
         "interval": 86400
       },
@@ -261,8 +282,38 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/onedrive.mrs",
         "path": "./ruleset/onedrive.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "bilibili",
+    "label": "哔哩哔哩",
+    "emoji": "📺",
+    "icon": "📺",
+    "rule_name": "Bilibili",
+    "group_label": "📺 哔哩哔哩",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "bilibili",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
+        "path": "./ruleset/bilibili.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "biliintl",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
+        "path": "./ruleset/biliintl.mrs",
         "interval": 86400
       }
     ],
@@ -282,7 +333,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs",
         "path": "./ruleset/geolocation-cn.mrs",
         "interval": 86400
       },
@@ -291,7 +342,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs",
         "path": "./ruleset/cn-domains.mrs",
         "interval": 86400
       }
@@ -302,84 +353,8 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs",
         "path": "./ruleset/cn.mrs",
-        "interval": 86400
-      }
-    ]
-  },
-  {
-    "name": "eset",
-    "label": "ESET",
-    "emoji": "🛡️",
-    "icon": "🛡️",
-    "rule_name": "ESET",
-    "group_label": "🛡️ ESET",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "eset-cn",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn.yaml",
-        "path": "./ruleset/eset-cn.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-up",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up.yaml",
-        "path": "./ruleset/eset-up.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
-        "path": "./ruleset/eset.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "eset-extra",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-extra.yaml",
-        "path": "./ruleset/eset-extra.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "eset-cn-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn-ip.yaml",
-        "path": "./ruleset/eset-cn-ip.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-up-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up-ip.yaml",
-        "path": "./ruleset/eset-up-ip.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-ip.yaml",
-        "path": "./ruleset/eset-ip.yaml",
         "interval": 86400
       }
     ]
@@ -398,7 +373,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs",
         "path": "./ruleset/github.mrs",
         "interval": 86400
       },
@@ -407,7 +382,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gitlab.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gitlab.mrs",
         "path": "./ruleset/gitlab.mrs",
         "interval": 86400
       }
@@ -428,7 +403,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
         "path": "./ruleset/microsoft.mrs",
         "interval": 86400
       }
@@ -449,7 +424,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
         "path": "./ruleset/apple-location.yaml",
         "interval": 86400
       }
@@ -470,7 +445,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs",
         "path": "./ruleset/apple.mrs",
         "interval": 86400
       },
@@ -479,7 +454,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-music.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-music.mrs",
         "path": "./ruleset/applemusic.mrs",
         "interval": 86400
       }
@@ -500,7 +475,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs",
         "path": "./ruleset/telegram.mrs",
         "interval": 86400
       }
@@ -511,7 +486,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs",
         "path": "./ruleset/telegram-ip.mrs",
         "interval": 86400
       }
@@ -531,7 +506,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/facebook.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/facebook.mrs",
         "path": "./ruleset/facebook.mrs",
         "interval": 86400
       },
@@ -540,7 +515,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/instagram.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/instagram.mrs",
         "path": "./ruleset/instagram.mrs",
         "interval": 86400
       },
@@ -549,7 +524,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/twitter.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/twitter.mrs",
         "path": "./ruleset/twitter.mrs",
         "interval": 86400
       },
@@ -558,38 +533,8 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/linkedin.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/linkedin.mrs",
         "path": "./ruleset/linkedin.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "bilibili",
-    "label": "哔哩哔哩",
-    "emoji": "📺",
-    "icon": "📺",
-    "rule_name": "Bilibili",
-    "group_label": "📺 哔哩哔哩",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "bilibili",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
-        "path": "./ruleset/bilibili.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "biliintl",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
-        "path": "./ruleset/biliintl.mrs",
         "interval": 86400
       }
     ],
@@ -609,7 +554,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs",
         "path": "./ruleset/youtube.mrs",
         "interval": 86400
       }
@@ -630,7 +575,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs",
         "path": "./ruleset/google.mrs",
         "interval": 86400
       }
@@ -641,7 +586,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs",
         "path": "./ruleset/google-ip.mrs",
         "interval": 86400
       }
@@ -661,7 +606,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
         "path": "./ruleset/tiktok.mrs",
         "interval": 86400
       }
@@ -682,29 +627,8 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
         "path": "./ruleset/spotify.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "pixiv",
-    "label": "Pixiv",
-    "emoji": "🎨",
-    "icon": "🎨",
-    "rule_name": "Pixiv",
-    "group_label": "🎨 Pixiv",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "pixiv",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/pixiv.mrs",
-        "path": "./ruleset/pixiv.mrs",
         "interval": 86400
       }
     ],
@@ -724,29 +648,8 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/abema.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/abema.mrs",
         "path": "./ruleset/abema.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "ehentai",
-    "label": "E-Hentai",
-    "emoji": "🔞",
-    "icon": "🔞",
-    "rule_name": "E-Hentai",
-    "group_label": "🔞 E-Hentai",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "ehentai",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
-        "path": "./ruleset/ehentai.mrs",
         "interval": 86400
       }
     ],
@@ -766,7 +669,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs",
         "path": "./ruleset/netflix.mrs",
         "interval": 86400
       },
@@ -775,7 +678,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hulu.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hulu.mrs",
         "path": "./ruleset/hulu.mrs",
         "interval": 86400
       },
@@ -784,7 +687,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs",
         "path": "./ruleset/disney.mrs",
         "interval": 86400
       },
@@ -793,7 +696,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs",
         "path": "./ruleset/hbo.mrs",
         "interval": 86400
       },
@@ -802,7 +705,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/amazon.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/amazon.mrs",
         "path": "./ruleset/amazon.mrs",
         "interval": 86400
       },
@@ -811,8 +714,50 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bahamut.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bahamut.mrs",
         "path": "./ruleset/bahamut.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "pixiv",
+    "label": "Pixiv",
+    "emoji": "🎨",
+    "icon": "🎨",
+    "rule_name": "Pixiv",
+    "group_label": "🎨 Pixiv",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "pixiv",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/pixiv.mrs",
+        "path": "./ruleset/pixiv.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "ehentai",
+    "label": "E-Hentai",
+    "emoji": "🔞",
+    "icon": "🔞",
+    "rule_name": "E-Hentai",
+    "group_label": "🔞 E-Hentai",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "ehentai",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
+        "path": "./ruleset/ehentai.mrs",
         "interval": 86400
       }
     ],
@@ -832,7 +777,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs",
         "path": "./ruleset/steam.mrs",
         "interval": 86400
       },
@@ -841,7 +786,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs",
         "path": "./ruleset/epicgames.mrs",
         "interval": 86400
       },
@@ -850,7 +795,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ea.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ea.mrs",
         "path": "./ruleset/ea.mrs",
         "interval": 86400
       },
@@ -859,7 +804,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs",
         "path": "./ruleset/ubisoft.mrs",
         "interval": 86400
       },
@@ -868,7 +813,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/blizzard.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/blizzard.mrs",
         "path": "./ruleset/blizzard.mrs",
         "interval": 86400
       }
@@ -889,7 +834,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/coursera.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/coursera.mrs",
         "path": "./ruleset/coursera.mrs",
         "interval": 86400
       },
@@ -898,7 +843,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/edx.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/edx.mrs",
         "path": "./ruleset/edx.mrs",
         "interval": 86400
       },
@@ -907,7 +852,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/udemy.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/udemy.mrs",
         "path": "./ruleset/udemy.mrs",
         "interval": 86400
       },
@@ -916,7 +861,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/khanacademy.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/khanacademy.mrs",
         "path": "./ruleset/khanacademy.mrs",
         "interval": 86400
       },
@@ -925,7 +870,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-scholar-!cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-scholar-!cn.mrs",
         "path": "./ruleset/category-scholar-!cn.mrs",
         "interval": 86400
       }
@@ -946,7 +891,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/paypal.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/paypal.mrs",
         "path": "./ruleset/paypal.mrs",
         "interval": 86400
       },
@@ -955,7 +900,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/visa.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/visa.mrs",
         "path": "./ruleset/visa.mrs",
         "interval": 86400
       },
@@ -964,7 +909,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/mastercard.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/mastercard.mrs",
         "path": "./ruleset/mastercard.mrs",
         "interval": 86400
       },
@@ -973,7 +918,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/stripe.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/stripe.mrs",
         "path": "./ruleset/stripe.mrs",
         "interval": 86400
       },
@@ -982,7 +927,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/wise.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/wise.mrs",
         "path": "./ruleset/wise.mrs",
         "interval": 86400
       }
@@ -1003,7 +948,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs",
         "path": "./ruleset/category-cryptocurrency.mrs",
         "interval": 86400
       }
@@ -1024,7 +969,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Domain.yaml",
+        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Domain.yaml",
         "path": "./ruleset/proxymedia.yaml",
         "interval": 86400
       }
@@ -1035,7 +980,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml",
+        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml",
         "path": "./ruleset/proxymedia-ip.yaml",
         "interval": 86400
       }
@@ -1055,7 +1000,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
         "path": "./ruleset/proxy.mrs",
         "interval": 86400
       }
@@ -1076,7 +1021,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs",
         "path": "./ruleset/geolocation-!cn.mrs",
         "interval": 86400
       }

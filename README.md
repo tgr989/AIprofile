@@ -11,16 +11,23 @@ AI-generated profile
 | --- | --- | --- |
 | TMO-WFC | T-Mobile Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
 | GG-WFC | giffgaff / O2 Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
-| ESET | 中国服务、更新下载、激活与云服务的域名/IP | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
+| ESET | MetaCubeX ESET 域名规则集（当前仅使用 MRS） | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 📍 苹果定位服务 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
 
 妙妙屋当前生成器为这些普通分组默认选择 `🚀 节点选择`，分组清单不能指定默认出口。生成后需在客户端为 **ESET** 选择统一出口：中国大陆网络使用 `DIRECT`；境外需要中国出口时选择中国大陆节点。`DIRECT` 使用设备当前网络，并不自动获得中国 IP。
 
-本仓库维护的域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 仅保留一个策略组，统一引用 MetaCubeX 的 `domain` / `mrs` 规则集，以及本地 `eset-cn.yaml`、`eset-up.yaml`、`eset-extra.yaml`；后者补充上游尚未收录的 ESET PROTECT 文件上传域名。IP 规则通过 `ip_rules` 引用，生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。
+本仓库维护的域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 当前仅引用 MetaCubeX 的 `geo/geosite/eset.mrs`（`behavior: domain`、`format: mrs`），`ip_rules` 为空；实际启用的覆盖范围以上游 MRS 为准。
 
-ESET 本地规则按 [官方 KB332 服务清单](https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall) 于 **2026-11-14** 核对。`eset-cn-ip.yaml`、`eset-up-ip.yaml`、`eset-ip.yaml` 按用途维护中国服务、更新下载、其余业务的精确 IPv4/IPv6 地址，全部归入同一个 **ESET** 策略组。更新域名包括欧美区域入口及官方仓库别名；其他规则涵盖激活、LiveGrid、LiveGuard、PROTECT、Inspect、反垃圾、样本提交等服务。[ESET Connect](https://help.eset.com/eset_connect/en-US/prerequisites.html) 的 API 域名已由上游 `eset.systems` 后缀覆盖。
+ESET 自维护规则已整合为两份备用文件，**当前均未挂载到 ESET 分组**：
 
-IP 规则只收录官方列出的客户端出站服务地址，采用 `/32` 或 `/128`，不扩大到整个云厂商网段。`20.224.75.204` 和 `91.228.166.154` 同时用于下载和其他服务，记录在 `eset-ip.yaml` 中，与所有 ESET 域名规则使用同一出口。共享的 Microsoft OAuth 登录、第三方 OCSP，以及入站邮件、Syslog 的源地址不纳入 ESET 专用规则。本地 IP 清单是上述日期的快照，后续需依据官方清单和[变更记录](https://support.eset.com/en/kb8900-changelog-for-kb332)更新。
+| 文件 | 内容 | 恢复引用时的类型 |
+| --- | --- | --- |
+| [eset-domain.yaml](ruleset/eset-domain.yaml) | 26 条域名规则：原中国服务、更新仓库及企业云补充规则 | `site_rules`，`behavior: classical`、`format: yaml` |
+| [eset-ip.yaml](ruleset/eset-ip.yaml) | 436 条精确 IP 规则，其中 19 条 IPv6 | `ip_rules`，`behavior: ipcidr`、`format: yaml` |
+
+两份备用文件保留整合前的全部条目，旧的分类文件已移除。内容按 [官方 KB332 服务清单](https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall) 于 **2026-11-14** 核对，包括中国服务、更新下载、激活、LiveGrid、LiveGuard、PROTECT、Inspect、反垃圾和样本提交等地址。若以后启用 IP 规则，生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。[ESET Connect](https://help.eset.com/eset_connect/en-US/prerequisites.html) 的 API 域名已由上游 `eset.systems` 后缀覆盖。
+
+备用 IP 规则只收录官方列出的客户端出站服务地址，采用 `/32` 或 `/128`，不扩大到整个云厂商网段。共享的 Microsoft OAuth 登录、第三方 OCSP，以及入站邮件、Syslog 的源地址不纳入 ESET 专用规则。本地清单是上述日期的快照，后续需依据官方清单和[变更记录](https://support.eset.com/en/kb8900-changelog-for-kb332)更新。
 
 Apple Music 使用 MetaCubeX 的 `geo/geosite/apple-music.mrs`，通用代理使用 `geo-lite/geosite/proxy.mrs`。代理媒体的同名 MRS 当前为空，改用其上游 blackmatrix7 的 `GlobalMedia_Domain.yaml`，对应 `behavior: domain`、`format: yaml` 和 `./ruleset/proxymedia.yaml` 缓存路径。PT 站点的源文件包含带类型前缀的规则，使用 `behavior: classical`。
 
@@ -28,8 +35,8 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 代理媒体另通过 `ip_rules` 引用同目录的 `GlobalMedia.yaml`（`behavior: classical`），补充 IPv4/IPv6、关键词和进程规则，缓存路径为 `./ruleset/proxymedia-ip.yaml`；生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。
 
-发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载地址统一添加 `https://gh-proxy.com/` 前缀，包括本仓库维护的规则集和 MetaCubeX 的 ESET 通用规则集。
+发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
-分组按功能归类排列。开头为 **私有网络 → 广告拦截 → TMO-WFC → GG-WFC**，随后为 **PT 站点 → PT Tracker → AI 服务 → 云服务 → 国内服务 → ESET**；国内服务与 ESET 紧接云服务之后。
+分组按功能归类排列。开头为 **私有网络 → 广告拦截 → TMO-WFC → GG-WFC**，随后为 **PT 站点 → PT Tracker → AI 服务 → ESET → 云服务 → 哔哩哔哩 → 国内服务**；ESET 位于云服务之前，哔哩哔哩位于国内服务之前。
 
-保留 **AI 服务 → 云服务**、**苹果定位紧邻苹果服务之前**、**油管视频 → 谷歌服务**的相对顺序。代理媒体、代理服务、非中国三个通用分组放在末尾。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+保留 **AI 服务 → 云服务**、**苹果定位紧邻苹果服务之前**、**油管视频 → 谷歌服务**的相对顺序。影音区的 **Abema → 流媒体**、**Pixiv → E-Hentai** 分别相邻。代理媒体、代理服务、非中国三个通用分组放在末尾。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

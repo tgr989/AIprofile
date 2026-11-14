@@ -1,7 +1,10 @@
+# Local ESET domain supplements; behavior: classical, format: yaml.
+# Stored for optional use alongside geosite/eset.mrs; not enabled by the current ESET group.
 # Source: https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall
-# Reviewed: 2026-11-14. Dedicated update IPs are in eset-up-ip.yaml.
-# Used by the unified ESET group; updates share its outbound policy.
+# Reviewed: 2026-11-14. Consolidates the former CN, update and extra domain files.
 payload:
+  # Chinese ESET services.
+  - 'DOMAIN-SUFFIX,cn.eset.com'
   # Detection engine and pico updates, including regional update endpoints.
   - 'DOMAIN-SUFFIX,update.eset.com'
   - 'DOMAIN,eu-update.eset.com'
@@ -25,3 +28,9 @@ payload:
   - 'DOMAIN,h3-repository02-v.eset.com'
   - 'DOMAIN,91-228-167-25.ptr.eset.com'
   - 'DOMAIN,nocdn-repository.gtm.eset.com'
+  # ESET PROTECT file uploads (TCP 444); exact ESET hosts on Azure.
+  - 'DOMAIN,epx-k8s-prod-eu-a.westeurope.cloudapp.azure.com'
+  - 'DOMAIN,epx-k8s-prod-de-a.germanywestcentral.cloudapp.azure.com'
+  - 'DOMAIN,epx-k8s-prod-jp-a.japaneast.cloudapp.azure.com'
+  - 'DOMAIN,epx-k8s-prod-us-a.westus.cloudapp.azure.com'
+  - 'DOMAIN,epx-k8s-prod-ca-a.canadacentral.cloudapp.azure.com'

@@ -1,5 +1,0 @@
-# Source: https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall
-# Reviewed: 2026-11-14. Chinese service IPs are in eset-cn-ip.yaml.
-# Used by the unified ESET group with the same outbound policy as all ESET services.
-payload:
-  - 'DOMAIN-SUFFIX,cn.eset.com'
