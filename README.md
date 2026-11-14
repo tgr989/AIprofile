@@ -30,6 +30,6 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载地址统一添加 `https://gh-proxy.com/` 前缀，包括本仓库维护的规则集和 MetaCubeX 的 ESET 通用规则集。
 
-分组按基础网络、国内与安全、工具与厂商、社交影音、其他服务及通用分流排列。开头为 **私有网络 → 广告拦截 → TMO-WFC → GG-WFC**，随后为 **PT 站点 → PT Tracker → 国内服务 → ESET**；ESET 紧跟国内服务。
+分组按功能归类排列。开头为 **私有网络 → 广告拦截 → TMO-WFC → GG-WFC**，随后为 **PT 站点 → PT Tracker → AI 服务 → 云服务 → 国内服务 → ESET**；国内服务与 ESET 紧接云服务之后。
 
 保留 **AI 服务 → 云服务**、**苹果定位紧邻苹果服务之前**、**油管视频 → 谷歌服务**的相对顺序。代理媒体、代理服务、非中国三个通用分组放在末尾。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

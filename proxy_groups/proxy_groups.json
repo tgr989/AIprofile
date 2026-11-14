@@ -146,122 +146,6 @@
     "ip_rules": []
   },
   {
-    "name": "domestic",
-    "label": "国内服务",
-    "emoji": "🔒",
-    "icon": "🔒",
-    "rule_name": "Location:CN",
-    "group_label": "🔒 国内服务",
-    "presets": ["minimal", "balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "geolocation-cn",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs",
-        "path": "./ruleset/geolocation-cn.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "cn-domains",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs",
-        "path": "./ruleset/cn-domains.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "cn",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs",
-        "path": "./ruleset/cn.mrs",
-        "interval": 86400
-      }
-    ]
-  },
-  {
-    "name": "eset",
-    "label": "ESET",
-    "emoji": "🛡️",
-    "icon": "🛡️",
-    "rule_name": "ESET",
-    "group_label": "🛡️ ESET",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "eset-cn",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn.yaml",
-        "path": "./ruleset/eset-cn.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-up",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up.yaml",
-        "path": "./ruleset/eset-up.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
-        "path": "./ruleset/eset.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "eset-extra",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-extra.yaml",
-        "path": "./ruleset/eset-extra.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "eset-cn-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn-ip.yaml",
-        "path": "./ruleset/eset-cn-ip.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-up-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up-ip.yaml",
-        "path": "./ruleset/eset-up-ip.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "eset-ip",
-        "behavior": "ipcidr",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-ip.yaml",
-        "path": "./ruleset/eset-ip.yaml",
-        "interval": 86400
-      }
-    ]
-  },
-  {
     "name": "ai",
     "label": "AI 服务",
     "emoji": "🤖",
@@ -383,6 +267,122 @@
       }
     ],
     "ip_rules": []
+  },
+  {
+    "name": "domestic",
+    "label": "国内服务",
+    "emoji": "🔒",
+    "icon": "🔒",
+    "rule_name": "Location:CN",
+    "group_label": "🔒 国内服务",
+    "presets": ["minimal", "balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "geolocation-cn",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs",
+        "path": "./ruleset/geolocation-cn.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "cn-domains",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs",
+        "path": "./ruleset/cn-domains.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "cn",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs",
+        "path": "./ruleset/cn.mrs",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "eset",
+    "label": "ESET",
+    "emoji": "🛡️",
+    "icon": "🛡️",
+    "rule_name": "ESET",
+    "group_label": "🛡️ ESET",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "eset-cn",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn.yaml",
+        "path": "./ruleset/eset-cn.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset-up",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up.yaml",
+        "path": "./ruleset/eset-up.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
+        "path": "./ruleset/eset.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "eset-extra",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-extra.yaml",
+        "path": "./ruleset/eset-extra.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "eset-cn-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-cn-ip.yaml",
+        "path": "./ruleset/eset-cn-ip.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset-up-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-up-ip.yaml",
+        "path": "./ruleset/eset-up-ip.yaml",
+        "interval": 86400
+      },
+      {
+        "key": "eset-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/eset-ip.yaml",
+        "path": "./ruleset/eset-ip.yaml",
+        "interval": 86400
+      }
+    ]
   },
   {
     "name": "github",
