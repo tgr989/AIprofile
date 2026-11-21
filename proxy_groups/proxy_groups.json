@@ -107,36 +107,6 @@
     "ip_rules": []
   },
   {
-    "name": "bilibili",
-    "label": "哔哩哔哩",
-    "emoji": "📺",
-    "icon": "📺",
-    "rule_name": "Bilibili",
-    "group_label": "📺 哔哩哔哩",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "bilibili",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
-        "path": "./ruleset/bilibili.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "biliintl",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
-        "path": "./ruleset/biliintl.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "youtube",
     "label": "油管视频",
     "emoji": "📹",
@@ -380,6 +350,36 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/eset.mrs",
         "path": "./ruleset/eset.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "bilibili",
+    "label": "哔哩哔哩",
+    "emoji": "📺",
+    "icon": "📺",
+    "rule_name": "Bilibili",
+    "group_label": "📺 哔哩哔哩",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "bilibili",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs",
+        "path": "./ruleset/bilibili.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "biliintl",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/biliintl.mrs",
+        "path": "./ruleset/biliintl.mrs",
         "interval": 86400
       }
     ],

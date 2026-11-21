@@ -127,6 +127,6 @@ Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 
 
 分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 9 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)
 
-新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络；PT 站点先于 PT Tracker，两者均先于国内服务；ESET 紧邻国内服务之前，也先于云服务。
+新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。ESET 也先于云服务。
 
 两个苹果分组的位置为 **谷歌服务 → 苹果定位 → 苹果服务 → 私有网络**。其他额外分组按 **金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 插入。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
