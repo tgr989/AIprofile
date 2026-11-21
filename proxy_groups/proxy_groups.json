@@ -508,6 +508,58 @@
     "ip_rules": []
   },
   {
+    "name": "meta",
+    "label": "Meta 服务",
+    "emoji": "♾️",
+    "icon": "♾️",
+    "rule_name": "Meta",
+    "group_label": "♾️ Meta 服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "meta",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/meta.mrs",
+        "path": "./ruleset/meta.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "meta-ip",
+        "behavior": "ipcidr",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/facebook.mrs",
+        "path": "./ruleset/meta-ip.mrs",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "line",
+    "label": "Line 服务",
+    "emoji": "💬",
+    "icon": "💬",
+    "rule_name": "Line",
+    "group_label": "💬 Line 服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "line",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/line.mrs",
+        "path": "./ruleset/line.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "social",
     "label": "社交媒体",
     "emoji": "🌐",
