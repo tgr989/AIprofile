@@ -189,6 +189,57 @@
     ]
   },
   {
+    "name": "apple-location",
+    "label": "苹果定位",
+    "emoji": "📍",
+    "icon": "📍",
+    "rule_name": "苹果定位",
+    "group_label": "📍 苹果定位",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "apple-location",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
+        "path": "./ruleset/apple-location.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "apple",
+    "label": "苹果服务",
+    "emoji": "🍏",
+    "icon": "🍏",
+    "rule_name": "Apple",
+    "group_label": "🍏 苹果服务",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "apple",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs",
+        "path": "./ruleset/apple.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "applemusic",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-music.mrs",
+        "path": "./ruleset/applemusic.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "private",
     "label": "私有网络",
     "emoji": "🏠",
@@ -451,57 +502,6 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
         "path": "./ruleset/microsoft.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "apple-location",
-    "label": "苹果定位",
-    "emoji": "📍",
-    "icon": "📍",
-    "rule_name": "苹果定位",
-    "group_label": "📍 苹果定位",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "apple-location",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
-        "path": "./ruleset/apple-location.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "apple",
-    "label": "苹果服务",
-    "emoji": "🍏",
-    "icon": "🍏",
-    "rule_name": "Apple",
-    "group_label": "🍏 苹果服务",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "apple",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs",
-        "path": "./ruleset/apple.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "applemusic",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-music.mrs",
-        "path": "./ruleset/applemusic.mrs",
         "interval": 86400
       }
     ],
