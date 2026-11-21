@@ -5,22 +5,45 @@ AI-generated profile
 
 图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
-`🚀 AI 选择` 已加入 `balanced`、`comprehensive` 预设，`site_rules` 和 `ip_rules` 为空，表示自身不挂载分流规则。可以在妙妙屋手动调整它的节点与引用关系，也可以使用 [AI 选择覆写脚本](overrides/ai-select.js) 自动处理。
+原版妙妙屋通过 `post_fetch` 覆写生成 `🚀 AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`🚀 AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](overrides/ai-select.js)
 
-脚本在客户端拉取订阅时创建或更新同名 `select` 分组，使用当前配置的实际节点和代理集合填充候选，不引用其他代理组；配置中有 `🛑 广告拦截` 时，将 AI 选择放到它之前；再将 AI 选择追加到已存在的 `🤖 AI 服务`、`🔍 谷歌服务`、`🍏 苹果服务`、`🌍 非中国`、`🐟 漏网之鱼` 的候选末尾。原有候选顺序保留，是否跟随 AI 选择由客户端手动决定。脚本可重复应用，不会重复添加分组或候选；未启用或不存在的目标分组不会被创建。
+启用覆写后，预设中的 `🤖 AI 服务`、`☁️ 云服务`、`🐟 漏网之鱼` 等普通手选组会依次列出 `🚀 AI 节点组` 和 `🚀 节点选择` 作为前两个候选。选择前者跟随 AI 出口，选择后者跟随通用出口。脚本会把已有的 AI 候选移到首位并去重。
 
-启用方式：
+广告拦截、私有网络、国内服务、TMO-WFC、GG-WFC、PT 站点、PT Tracker、ESET 和苹果定位均跳过。自动测速、故障转移、负载均衡、按条件筛选节点、仅从订阅动态取节点和仅含内置策略的组也跳过。`🚀 节点选择` 或链式拨号依赖的节点池保留原有候选。要调整跳过的服务组，可编辑脚本的 `excluded`。
+
+**启用覆写**
 
 1. 在妙妙屋「系统设置」开启「覆写脚本」。
 2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](overrides/ai-select.js) 的全部内容并启用、保存。
 3. 在目标订阅的「覆写配置」中勾选该脚本，再让客户端更新订阅。将脚本放入本仓库或同步分组清单，不会自动启用它。
-4. 在客户端将需要共用出口的服务组选为 `🚀 AI 选择`，再在 AI 选择中选定一个固定节点。
+4. 在客户端为 `🚀 AI 节点组` 选定一个固定节点。首次使用且没有已保存选择时，普通手选组默认使用它。客户端若恢复了此前保存的选择，可在相应分组中切换。
 
-脚本每次都会按当前订阅重新填充 AI 选择，手动缩减的候选列表也会被重建。没有代理组列表，或没有实际节点及代理集合时，脚本直接返回原配置。要让其他服务也能引用它，将该服务的完整分组名称加入脚本的 `targets` 数组。脚本不修改 DNS、分流规则或规则提供方。
+已启用覆写的订阅可在妙妙屋保存新版脚本后刷新。AI 节点组可在客户端的代理组面板选择。原版网页编辑器的「特殊节点」栏固定显示内置选项。如果保存的订阅本身已定义 AI 组，桌面端也可以拖动组名左侧的手柄，把它加入其他组。
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
 AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段。[claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 保留为备用，文件中的 NTP UDP 123 规则未注释，WebRTC 端口规则仍已注释，**当前未在分组清单中引用**。已有等效覆盖的规则不重复添加。
+
+`balanced`、`comprehensive` 两个预设还在 `openai` 后挂载了 ChatGPT 域名补充规则。该规则匹配以 `chatgpt-async-webps-prod-` 开头的主机名，适用于任意域名后缀。例如，发往 `chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com` 的 TCP 443 会命中此规则并交给 `🤖 AI 服务`。[chatgpt-domian-extra.yaml](ruleset/chatgpt-domian-extra.yaml)
+
+**拒绝 AI 的 UDP 443** 使用独立的 `classical` 规则集。每条规则都限定 UDP 和目标端口 443，目标命中 GeoSite 分类 `category-ai-!cn`、Anthropic 固定网段或 `AS399358` 中的任一项即拒绝。ASN 由客户端的 `ASN.mmdb` 识别。[ai-svc-extra.yaml](ruleset/ai-svc-extra.yaml) · [ARIN 的 AS399358 登记](https://rdap.arin.net/registry/autnum/399358)
+
+截至 2026-11-21，Anthropic 公布的 API 入站地址为 `160.79.104.0/23`、`153.61.224.0/22` 和 `2607:6bc0::/48`，工具调用等出站请求使用 `160.79.104.0/21` 和 `153.61.208.0/20`。本规则将两类网段都作为目标地址匹配，其中 `/21` 已覆盖第一条入站 `/23`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses)
+
+在启用 AI 服务的订阅模板中，将下面的提供方声明并入现有的 `rule-providers`，把 `RULE-SET,ai-svc-extra,REJECT` 插到第一条 AI 放行规则之前。已有的广告拦截和更高优先级的自定义规则排在它前面。
+
+```yaml
+rule-providers:
+  ai-svc-extra:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/ai-svc-extra.yaml
+    path: ./ruleset/ai-svc-extra.yaml
+    interval: 86400
+```
+
+妙妙屋的分组清单会将规则指向所属代理组，此处由模板直接指定 `REJECT`。保存模板后重新生成并更新订阅。若部署过带 UDP 443 拦截的旧版 `ai-select.js`，请同步更新该脚本以移除重复规则。
 
 域名和 IP 两份补充规则均以 `behavior: classical`、`format: yaml` 挂载在 AI 分组的 `site_rules` 中，按域名、IP 的顺序排列，保留现有匹配顺序。妙妙屋会把 `ip_rules` 统一排到所有域名规则之后，因此此处保持原位置。以后恢复服务端口规则时，也应使用 `behavior: classical`、`format: yaml`；端口与逻辑规则不能使用仅支持 IP 网段的 `ipcidr` 格式。
 
@@ -39,13 +62,16 @@ AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源�
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | **精确匹配，全部已注释**；保留 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)中的页面资源和 Claude Code 下载备用规则，当前交由 Google 分组处理 |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
 | `sentry`、`claude`、`anthropic` 关键词 | `sentry` 来自 Net.Coffee，`claude` / `anthropic` 兜底参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)；覆盖包含这些字符串的域名，参考项目的 `anthropic.com.cn` 也由此覆盖 |
-| `153.61.224.0/22` | [Anthropic 官方当前 API 入站网段](https://platform.claude.com/docs/en/api/ip-addresses)，补在上游已有 IP 规则之外 |
+| `153.61.224.0/22` | Claude API 的入站网段，由 `claude-ip-extra` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
+| `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `🤖 AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
 参考项目的其他 Anthropic 域名、IP 和 ASN 已由现有规则覆盖；其 OpenAI 清单中的 `chatgpt.livekit.cloud`、`host.livekit.cloud`、`turn.livekit.cloud` 也已由 AI 服务中的 `openai` / `category-ai-!cn` 覆盖。本次按 Claude 与实时通信相关范围合并差异，不整体挂载该项目的 Facebook、X 等规则集。
 
 hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `comprehensive` 预设启用；其他应用使用 hCaptcha 时也按 AI 分组处理。
 
-上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名，以及 IPv4、IPv6 和 ASN 规则；因此 AI 分组的 `ip_rules` 为空并不代表缺少 IP 兜底。现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
+上游 `claude` 使用 `behavior: classical`，已包含网页列出的核心、CDN、认证、监控、客服域名。它的 `160.79.104.0/21` 覆盖官方入站 `160.79.104.0/23`，`2607:6bc0::/32` 覆盖官方入站 `2607:6bc0::/48`，并已有 `IP-ASN,399358,no-resolve`。上游和本地 IP 补充集都通过 AI 分组的 `site_rules` 加载。[上游 Claude 规则](https://github.com/iluobei/clash-pt-rules/blob/main/claude.yaml#L26-L29)
+
+现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
 
 Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。上述登录规则及 Google 地图、页面资源、下载的精确匹配规则当前全部保持注释，由已启用的各自分组处理。推荐在客户端将 **`🔍 谷歌服务`、`🍏 苹果服务` 与 `🤖 AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。以后按需取消注释时，同域名的其他应用请求也会交给 AI 服务。
 
@@ -99,7 +125,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
-分组顺序以[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)为基准，保留其中 24 个现有分组的相对顺序，将本仓库额外的 9 个分组插入相应位置。清单开头为 **AI 选择 → 广告拦截 → AI 服务**。
+分组顺序保留妙妙屋默认清单中 24 个现有分组的相对顺序，将本仓库额外的 9 个分组插入相应位置。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)
 
 新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络；PT 站点先于 PT Tracker，两者均先于国内服务；ESET 紧邻国内服务之前，也先于云服务。
 

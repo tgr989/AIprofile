@@ -1,12 +1,12 @@
 [
   {
     "name": "ai-select",
-    "label": "AI 选择",
+    "label": "AI 节点组",
     "emoji": "🚀",
     "icon": "🚀",
     "rule_name": "AI Select",
-    "group_label": "🚀 AI 选择",
-    "presets": ["balanced", "comprehensive"],
+    "group_label": "🚀 AI 节点组",
+    "presets": ["minimal", "balanced", "comprehensive"],
     "site_rules": [],
     "ip_rules": []
   },
@@ -56,6 +56,15 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
         "path": "./ruleset/openai.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "chatgpt-domian-extra",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/chatgpt-domian-extra.yaml",
+        "path": "./ruleset/chatgpt-domian-extra.yaml",
         "interval": 86400
       },
       {

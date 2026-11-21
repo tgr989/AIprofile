@@ -1,0 +1,3 @@
+# ChatGPT Web PubSub 动态主机，按域名开头匹配。
+payload:
+  - 'DOMAIN-REGEX,^chatgpt-async-webps-prod-'
