@@ -552,8 +552,8 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/line.mrs",
-        "path": "./ruleset/seednet-line.mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/line.mrs",
+        "path": "./ruleset/line.mrs",
         "interval": 86400
       },
       {
@@ -1121,7 +1121,7 @@
         "type": "http",
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/yahoo.mrs",
-        "path": "./ruleset/seednet-yahoo.mrs",
+        "path": "./ruleset/yahoo.mrs",
         "interval": 86400
       }
     ],
@@ -1142,7 +1142,7 @@
         "type": "http",
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/shopee.mrs",
-        "path": "./ruleset/seednet-shopee.mrs",
+        "path": "./ruleset/shopee.mrs",
         "interval": 86400
       },
       {
