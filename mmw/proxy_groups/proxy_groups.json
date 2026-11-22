@@ -1158,12 +1158,12 @@
     "ip_rules": []
   },
   {
-    "name": "seednet-avoid",
-    "label": "SeedNet 绕行",
+    "name": "tcscloud-avoid",
+    "label": "TCSCloud 分流",
     "emoji": "🔀",
     "icon": "🔀",
-    "rule_name": "SeedNet Avoid",
-    "group_label": "🔀 SeedNet 绕行",
+    "rule_name": "TCSCloud Avoid",
+    "group_label": "🔀 TCSCloud 分流",
     "presets": [],
     "site_rules": [
       {
