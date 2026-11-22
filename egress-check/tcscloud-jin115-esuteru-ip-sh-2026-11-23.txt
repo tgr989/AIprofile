@@ -1,0 +1,47 @@
+blog.esuteru.com 与 jin115.com 的 ip.sh 双 VPS 实测
+时间采用 UTC+08:00，SeedNet 为 TCSCloud SeedNet，Datawave 为 Datawave TW。
+
+规则归类  blog.esuteru.com 和 jin115.com 均按未分流处理。
+
+使用仓库的 Egress-Check v2.19.6。Windows 检出的脚本转为 LF 后在两台 VPS 执行。
+两端执行脚本 SHA-256  c4fa609e366714d30b9ae7cfb79972d80a688c42ce3ac86ad9f2c53e4810ecba
+两端规则文件 SHA-256  ffb5ec00156d54d629b3b7d6afcc6e7a8de7753f1aba967d3ad5e9cee886cabd
+bash ./ip.sh --rules ./two-sites.rules --json
+规则文件内容
+JP|blog.esuteru.com|||Hachima
+JP|jin115.com|||JIN
+Datawave 初次缺少 jq，重跑在测试临时目录使用校验过 SHA-256 的 jq 1.8.2 官方二进制。
+SeedNet 复测启用脚本自带的 EGRESS_DEBUG_MTR=1。
+
+ip.sh JSON 输出摘录
+SeedNet 首轮  2026-11-23 03:38:07 至 2026-11-23 03:39:00  exit=0
+  IPv4 summary={"total":2,"ok":0,"hidden":2,"down":0,"unknown":2} split_routing_detected=null
+    {"domain":"blog.esuteru.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":5,"note":"Hachima 路径隐藏 / 仅目标可见"}
+    {"domain":"jin115.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":5.2,"note":"JIN 路径隐藏 / 仅目标可见"}
+  IPv6 跳过，IPv6 出口不可用或已禁用
+
+Datawave  2026-11-23 03:38:39 至 2026-11-23 03:40:15  exit=0
+  IPv4 summary={"total":2,"ok":2,"hidden":0,"down":0,"unknown":0} split_routing_detected=false
+    {"domain":"blog.esuteru.com","status":"ok","split":false,"comparison":"baseline_match","comparison_scope":"asn","first_hop":"[已隐藏]","first_hop_ttl":1,"asn":"AS142433","latency_ms":31.8,"reason":"可见首跳 ASN 与基准一致","note":"Hachima"}
+    {"domain":"jin115.com","status":"ok","split":false,"comparison":"baseline_match","comparison_scope":"asn","first_hop":"[已隐藏]","first_hop_ttl":1,"asn":"AS142433","latency_ms":31.9,"reason":"可见首跳 ASN 与基准一致","note":"JIN"}
+  IPv6 summary={"total":2,"ok":0,"hidden":2,"down":0,"unknown":2} split_routing_detected=null
+    {"domain":"blog.esuteru.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":31.6,"note":"Hachima 路径隐藏 / 仅目标可见"}
+    {"domain":"jin115.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":31.7,"note":"JIN 路径隐藏 / 仅目标可见"}
+
+SeedNet MTR 调试复测  2026-11-23 03:39:43 至 2026-11-23 03:40:37  exit=0
+  IPv4 summary={"total":2,"ok":0,"hidden":2,"down":0,"unknown":2} split_routing_detected=null
+    {"domain":"blog.esuteru.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":4,"note":"Hachima 路径隐藏 / 仅目标可见"}
+    {"domain":"jin115.com","status":"hidden","split":null,"first_hop":null,"asn":null,"latency_ms":18.3,"note":"JIN 路径隐藏 / 仅目标可见"}
+  IPv6 跳过，IPv6 出口不可用或已禁用
+
+SeedNet IPv4 MTR 调试记录摘录
+域名 | 协议 | 第 1 跳 | 第 2 跳 | 目标回应
+blog.esuteru.com | ICMP | [非公网地址] | 104.28.0.0 | 未见目标回应
+blog.esuteru.com | TCP/443 | [非公网地址] | 147.92.146.242 | TTL 2，3/3 回应
+jin115.com | ICMP | [非公网地址] | 104.28.0.0 | 未见目标回应
+jin115.com | TCP/443 | ???（无回应） | 147.92.146.242 | TTL 2，3/3 回应
+两站 ICMP 的第 2 跳都有回应，MTR 报告中未见目标回应，脚本随后使用 TCP/443。
+TCP/443 在第 2 跳收到目标回应，目标之前没有可用于 ASN 比较的公网跳，脚本返回 hidden。
+
+SeedNet 两站 IPv4 两轮均为 hidden / split=null，ip.sh 无法判定。Datawave 两站 IPv4 首跳 ASN 为 AS142433，与基准一致，split=false。Datawave 两站 IPv6 均为 hidden / split=null。
+此前固定目标的低 TTL GET 对照见 tcscloud-jin115-esuteru-proof-2026-11-23.txt。

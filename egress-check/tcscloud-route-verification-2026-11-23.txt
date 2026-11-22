@@ -1,0 +1,59 @@
+TCSCloud SeedNet 与 Datawave 疑似路径分流复测
+
+范围包括全球续榜的 9 个疑似站点，以及 instagr.am 和 www.shopeefood.com.my。同时复核 cision.com 的 CDN 回显和 ruten.com.tw 的公网出口。台大裸域与 www 入口均查询。
+固定目标包括两端本次返回的公网 IPv4 和上轮测试地址。cision.com 固定到上轮地址。
+A 为 TCSCloud SeedNet，B 为 Datawave TW。每场实验均使用同一主机名、SNI 和目标地址。
+主复测第 1 轮 2026-11-23 03:15:04 至 03:15:17（UTC+08:00）
+主复测第 2 轮 2026-11-23 03:15:19 至 03:15:32（UTC+08:00）
+延长超时补测第 1 轮 2026-11-23 03:16:24 至 03:16:47（UTC+08:00）
+延长超时补测第 2 轮 2026-11-23 03:16:48 至 03:17:10（UTC+08:00）
+
+主复测覆盖 24 组主机名与 IPv4。端口 443 的常规、TTL 1 和 TTL 2 测试均设置在实际 TCP 连接上，两轮重复。补测 3 组，连接与握手超时从 3.8 秒加至 7 秒。
+证书正常时随后发送 HTTPS HEAD，4xx 也记录为应用层响应。证书校验失败时另起一条只进行 TLS 握手的连接采集指纹，并与 B 的常规连接比对。
+对原疑似样本，短路径确认要求两轮重现 A 的 ICMP TTL 2 为 104.28.0.0、TCP 443 TTL 2 显示目标，且 B 两轮见基准首跳。A 的 TTL 2 实际完成 TLS，TTL 1 和 B 的 TTL 2 连不上 TCP。若 A 的证书无法通过校验，则要求与 B 常规 TLS 获得的证书指纹相同。
+公网出口按可归属到 VPS 的目标端直接回显复核。ruten.com.tw 的 A 侧 ICMP 和 TCP 示踪均在 TTL 2 直接回到目标，实际 HTTPS 与公网回显也同时确认。AWS CloudFront 源站连接地址单列。
+
+11/11 个待查站点在至少一个主复测地址上确认短路径 TLS。其中 10 个站点的主复测地址有两轮 HTTPS HEAD 响应。
+已确认短路径的站点  esuteru.com、instagr.am、jin115.com、meta.ai、ntu.edu.tw、oculus.com、shopee.co.th、shopee.com.my、shopee.ph、shopee.tw、www.shopeefood.com.my
+确认 SeedNet 公网出口变化的站点  ruten.com.tw
+CDN 中间回显  cision.com
+规则归类  blog.esuteru.com 和 jin115.com 按未分流处理，详见 tcscloud-jin115-esuteru-ip-sh-2026-11-23.txt。
+
+主复测逐地址结果
+主机名 | 目标 IPv4 | A TTL 2 | B 常规 | B TTL 2 | 路径 | 公网回显
+cision.com | 65.9.180.101 | */* | 301/301 | */* | 符合基准路径 | CDN 中间回显
+esuteru.com | 147.92.146.242 | TLS[证书未通过]/TLS[证书未通过] | TLS[证书未通过]/TLS[证书未通过] | */* | 已确认短路径 TLS | 缺少可判定公网回显
+instagr.am | 31.13.65.174 | TCP/TCP | */* | */* | 已确认短路径 TCP | 缺少可判定公网回显
+instagr.am | 31.13.71.174 | 302/302 | 302/302 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+instagr.am | 31.13.87.174 | 302/302 | 302/302 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+instagr.am | 157.240.229.174 | TCP/TCP | */* | */* | 已确认短路径 TCP | 缺少可判定公网回显
+jin115.com | 147.92.146.242 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+meta.ai | 31.13.87.1 | 403/403 | 403/403 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+meta.ai | 57.144.92.141 | 403/403 | 403/403 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+meta.ai | 57.144.144.141 | 403/403 | 403/403 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+ntu.edu.tw | 没有可测公网 IPv4
+oculus.com | 31.13.87.49 | 301/301 | 301/301 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+oculus.com | 57.144.93.141 | 301/301 | 301/301 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+oculus.com | 57.145.13.141 | 301/301 | 301/301 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+ruten.com.tw | 104.18.10.27 | 302/302 | 302/302 | */* | 已确认短路径并收到 HTTPS | 确认 SeedNet 公网出口变化
+ruten.com.tw | 104.18.11.27 | 302/302 | 302/302 | */* | 已确认短路径并收到 HTTPS | 确认 SeedNet 公网出口变化
+shopee.co.th | 134.65.71.183 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.co.th | 147.136.172.180 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.com.my | 134.65.77.134 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.com.my | 147.136.175.194 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.ph | 134.65.77.133 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.tw | 134.65.77.130 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+shopee.tw | 147.136.172.131 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+www.ntu.edu.tw | 140.112.8.116 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+www.shopeefood.com.my | 147.136.145.210 | 200/200 | 200/200 | */* | 已确认短路径并收到 HTTPS | 缺少可判定公网回显
+
+延长超时补测逐地址结果
+主机名 | 目标 IPv4 | A TTL 2 | B 常规 | B TTL 2 | 路径 | 公网回显
+instagr.am | 31.13.65.174 | TCP/TCP | */* | */* | 已确认短路径 TCP | 缺少可判定公网回显
+instagr.am | 157.240.229.174 | TCP/TCP | */* | */* | 已确认短路径 TCP | 缺少可判定公网回显
+blog.esuteru.com | 147.92.146.242 | TLS[证书未通过]/TLS[证书未通过] | TLS[证书未通过]/TLS[证书未通过] | */* | 已确认短路径 TLS | 缺少可判定公网回显
+
+* 表示该连接未完成 TCP。TCP 表示 TCP 已建立。TLS 表示握手完成但本次没有成功读取 HTTPS 状态码。
+两台 VPS 的基准公网 IP 已脱敏。原站回显地址用基准、变化或中间节点标记。
+Cloudflare 官方 IPv4 范围 https://www.cloudflare.com/ips-v4
+AWS CloudFront 地址范围 https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/LocationsOfEdgeServers.html

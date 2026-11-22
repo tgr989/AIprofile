@@ -1,0 +1,57 @@
+EgressRule,Domain,Sources,SourceRules
+Shopee|help.shopee.cl|,help.shopee.cl,Public service entry points,
+Shopee|help.shopee.co.id|,help.shopee.co.id,Public service entry points,
+Shopee|help.shopee.co.th|,help.shopee.co.th,Public service entry points,
+Shopee|help.shopee.com.br|,help.shopee.com.br,Public service entry points,
+Shopee|help.shopee.com.co|,help.shopee.com.co,Public service entry points,
+Shopee|help.shopee.com.mx|,help.shopee.com.mx,Public service entry points,
+Shopee|help.shopee.com.my|,help.shopee.com.my,Public service entry points,
+Shopee|help.shopee.ph|,help.shopee.ph,Public service entry points,
+Shopee|help.shopee.sg|,help.shopee.sg,Public service entry points,
+Shopee|help.shopee.tw|,help.shopee.tw,Public service entry points,
+Shopee|help.shopee.vn|,help.shopee.vn,Public service entry points,
+Shopee|open.shopee.com|,open.shopee.com,Public service entry points,
+Shopee|partner.shopeemobile.com|,partner.shopeemobile.com,Public service entry points,
+Shopee|seller.shopee.cl|,seller.shopee.cl,Public service entry points,
+Shopee|seller.shopee.co.id|,seller.shopee.co.id,Public service entry points,
+Shopee|seller.shopee.co.th|,seller.shopee.co.th,Public service entry points,
+Shopee|seller.shopee.com.br|,seller.shopee.com.br,Public service entry points,
+Shopee|seller.shopee.com.co|,seller.shopee.com.co,Public service entry points,
+Shopee|seller.shopee.com.mx|,seller.shopee.com.mx,Public service entry points,
+Shopee|seller.shopee.com.my|,seller.shopee.com.my,Public service entry points,
+Shopee|seller.shopee.ph|,seller.shopee.ph,Public service entry points,
+Shopee|seller.shopee.sg|,seller.shopee.sg,Public service entry points,
+Shopee|seller.shopee.tw|,seller.shopee.tw,Public service entry points,
+Shopee|seller.shopee.vn|,seller.shopee.vn,Public service entry points,
+Shopee|shopee.cl|,shopee.cl,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.cl
+Shopee|shopee.cn|,shopee.cn,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.cn
+Shopee|shopee.co.id|,shopee.co.id,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.co.id
+Shopee|shopee.co.th|,shopee.co.th,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.co.th
+Shopee|shopee.com|,shopee.com,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.com
+Shopee|shopee.com.br|,shopee.com.br,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.com.br
+Shopee|shopee.com.co|,shopee.com.co,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.com.co
+Shopee|shopee.com.hk|,shopee.com.hk,AIprofile supplemental rules / Previous A/B input,+.shopee.com.hk
+Shopee|shopee.com.mx|,shopee.com.mx,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.com.mx
+Shopee|shopee.com.my|,shopee.com.my,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.com.my
+Shopee|shopee.es|,shopee.es,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.es
+Shopee|shopee.fr|,shopee.fr,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.fr
+Shopee|shopee.id|,shopee.id,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.id
+Shopee|shopee.in|,shopee.in,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.in
+Shopee|shopee.io|,shopee.io,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.io
+Shopee|shopee.ph|,shopee.ph,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.ph
+Shopee|shopee.sg|,shopee.sg,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.sg
+Shopee|shopee.tw|,shopee.tw,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.tw
+Shopee|shopee.vn|,shopee.vn,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopee.vn
+Shopee|shopeefood.com.my|,shopeefood.com.my,Previous A/B input / Previous family rule inventory,+.shopeefood.com.my
+Shopee|shopeefood.vn|,shopeefood.vn,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeefood.vn
+Shopee|shopeemobile.com|,shopeemobile.com,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopeemobile.com
+Shopee|shopeepay.co.id|,shopeepay.co.id,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.co.id
+Shopee|shopeepay.co.th|,shopeepay.co.th,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.co.th
+Shopee|shopeepay.com|,shopeepay.com,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.com
+Shopee|shopeepay.com.br|,shopeepay.com.br,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.com.br
+Shopee|shopeepay.com.my|,shopeepay.com.my,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.com.my
+Shopee|shopeepay.ph|,shopeepay.ph,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.ph
+Shopee|shopeepay.sg|,shopeepay.sg,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.sg
+Shopee|shopeepay.vn|,shopeepay.vn,AIprofile supplemental rules / Previous A/B input / Previous family rule inventory,+.shopeepay.vn
+Shopee|shopeesz.com|,shopeesz.com,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shopeesz.com
+Shopee|shp.ee|,shp.ee,MetaCubeX pinned / MetaCubeX snapshot / Previous A/B input / Previous family rule inventory,+.shp.ee

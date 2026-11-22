@@ -17,6 +17,13 @@ bash <(curl -Ls https://raw.githubusercontent.com/AIFansX/egress-check/main/ip.s
 ## TCSCloud SeedNet
 
 - [TW Top 1000 分流与待判定报告](tcscloud-tw-top1000-review.txt)
+- [全球 Top 2000 A/B 报告](tcscloud-global-top2000-review.txt)
+- [全球第 2001–7000 名 A/B 报告](tcscloud-global-top2001-7000-review.txt)
+- [Meta、LINE、Yahoo、Shopee A/B 报告](service-families-2026-11-23/report.txt)
+- [疑似短路径的 A/B 复测](tcscloud-route-verification-2026-11-23.txt)
+- [blog.esuteru.com 与 jin115.com 的 ip.sh 复测](tcscloud-jin115-esuteru-ip-sh-2026-11-23.txt)
+
+CSV 中的 `[redacted]` 标记已脱敏的 VPS 出口地址和私网地址。
 
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |

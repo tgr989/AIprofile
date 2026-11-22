@@ -1,0 +1,48 @@
+JIN、台大与はちま起稿的前缀复测
+
+公开入口为 jin115.com、www.ntu.edu.tw 和 blog.esuteru.com。同时查询裸域、www、www2、blog 和台大主页空间的候选前缀。
+JIN 首页 https://jin115.com/
+国立台湾大学首页 https://www.ntu.edu.tw/
+はちま起稿 https://blog.esuteru.com/
+
+规则核对
+按工作区配置获取 71 个站点规则提供器，检查编译域名集合和 YAML 里的直接域名条件。TCSCloud 分流的本地 MRS 与配置引用的线上文件 SHA-256 一致，与本地 11 条源规则一致。
+规则顺序以配置清单为准。+.edu.tw 对本次台大四个前缀均成立。
+  jin115.com | 未命中已检查的直接域名条件
+  www.jin115.com | 未命中已检查的直接域名条件
+  blog.jin115.com | 未命中已检查的直接域名条件
+  www.ntu.edu.tw | tcscloud-avoid/category-tcscloud-seednet-avoid +.edu.tw
+  ntu.edu.tw | tcscloud-avoid/category-tcscloud-seednet-avoid +.edu.tw
+  www2.ntu.edu.tw | tcscloud-avoid/category-tcscloud-seednet-avoid +.edu.tw
+  homepage.ntu.edu.tw | tcscloud-avoid/category-tcscloud-seednet-avoid +.edu.tw
+  esuteru.com | 未命中已检查的直接域名条件
+  www.esuteru.com | 未命中已检查的直接域名条件
+  blog.esuteru.com | 未命中已检查的直接域名条件
+
+两轮实测
+A 为 SeedNet，B 为 Datawave。固定每个前缀真实解析到的同一目标 IPv4，保留此前使用过的地址。分别发送正常和 TTL 1、TTL 2 的 HTTP HEAD 和 HTTPS HEAD，记录跳转目标。证书校验失败时只追加 TLS 指纹检查。示踪口径与上一轮一致。
+第 1 轮 2026-11-23 03:23:40 至 03:24:05（UTC+08:00）
+第 2 轮 2026-11-23 03:24:07 至 03:24:33（UTC+08:00）
+
+主机名 | 公网 IPv4 | SeedNet HTTP 常规 / TTL 2 | Datawave HTTP 常规 / TTL 2 | SeedNet HTTPS 常规 / TTL 2 | Datawave HTTPS 常规 / TTL 2 | 判定
+jin115.com | 147.92.146.242 | 301/301 / 301/301 | 301/301 / */* | 200/200 / 200/200 | 200/200 / */* | 已确认 HTTP 和 HTTPS 均经短路径
+  根路径跳转  https://jin115.com/
+www.jin115.com | 203.104.103.23 | */* / */* | */* / */* | */* / */* | */* / */* | 两端常规连接均未建立 TCP
+  常规连接诊断  timed out
+blog.jin115.com | 203.104.103.23 | */* / */* | */* / */* | */* / */* | */* / */* | 两端常规连接均未建立 TCP
+  常规连接诊断  timed out
+www.ntu.edu.tw | 140.112.8.116 | 302/302 / 302/302 | 302/302 / */* | 200/200 / 200/200 | 200/200 / */* | 已确认 HTTP 和 HTTPS 均经短路径
+  根路径跳转  https://www.ntu.edu.tw/
+ntu.edu.tw | 两台 VPS 的本次查询均无可测公网 IPv4
+www2.ntu.edu.tw | 两台 VPS 的本次查询均无可测公网 IPv4
+homepage.ntu.edu.tw | 140.112.2.140 | TCP/TCP / TCP/TCP | 200/200 / */* | TCP/TCP / TCP/TCP | 200/200 / */* | 确认短路径 TCP，A 侧应用层未响应
+  常规连接诊断  _ssl.c:1012: The handshake operation timed out、timed out
+esuteru.com | 147.92.146.242 | 301/301 / 301/301 | 301/301 / */* | TLS（证书未通过）/TLS（证书未通过） / TLS（证书未通过）/TLS（证书未通过） | TLS（证书未通过）/TLS（证书未通过） / */* | 已确认 HTTP 短路径，TLS 握手也复现
+  根路径跳转  http://blog.esuteru.com/
+  常规连接诊断  self-signed certificate
+www.esuteru.com | 两台 VPS 的本次查询均无可测公网 IPv4
+blog.esuteru.com | 147.92.146.242 | 200/200 / 200/200 | 200/200 / */* | TLS（证书未通过）/TLS（证书未通过） / TLS（证书未通过）/TLS（证书未通过） | TLS（证书未通过）/TLS（证书未通过） / */* | 已确认 HTTP 短路径，TLS 握手也复现
+  常规连接诊断  self-signed certificate
+
+* 表示该连接未建立 TCP。TCP 表示只完成 TCP 连接。TLS 表示握手完成但没有 HTTPS 状态码。
+两台 VPS 的公网基准地址已脱敏。本次判断来自实际连接和路径复测。
