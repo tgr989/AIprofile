@@ -107,6 +107,27 @@
     "ip_rules": []
   },
   {
+    "name": "seednet-avoid",
+    "label": "SeedNet 绕行",
+    "emoji": "🔀",
+    "icon": "🔀",
+    "rule_name": "SeedNet Avoid",
+    "group_label": "🔀 SeedNet 绕行",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "category-tcscloud-seednet-avoid",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/category-tcscloud-seednet-avoid.mrs",
+        "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "youtube",
     "label": "油管视频",
     "emoji": "📹",
@@ -548,12 +569,21 @@
     "presets": ["comprehensive"],
     "site_rules": [
       {
-        "key": "line",
+        "key": "seednet-line",
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/line.mrs",
-        "path": "./ruleset/line.mrs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/line.mrs",
+        "path": "./ruleset/seednet-line.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "line-tcscloud-seednet-avoid",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/line-tcscloud-seednet-avoid.mrs",
+        "path": "./ruleset/line-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
     ],
@@ -1092,6 +1122,57 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
         "path": "./ruleset/ehentai.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "yahoo",
+    "label": "Yahoo 服务",
+    "emoji": "🟣",
+    "icon": "🟣",
+    "rule_name": "Yahoo",
+    "group_label": "🟣 Yahoo 服务",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "seednet-yahoo",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/yahoo.mrs",
+        "path": "./ruleset/seednet-yahoo.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "shopee",
+    "label": "Shopee 服务",
+    "emoji": "🛍️",
+    "icon": "🛍️",
+    "rule_name": "Shopee",
+    "group_label": "🛍️ Shopee 服务",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "seednet-shopee",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/ca7d9d641cf31a25d465861d8af0352e6721b6e0/geo/geosite/shopee.mrs",
+        "path": "./ruleset/seednet-shopee.mrs",
+        "interval": 86400
+      },
+      {
+        "key": "shopee-tcscloud-seednet-avoid",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/shopee-tcscloud-seednet-avoid.mrs",
+        "path": "./ruleset/shopee-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
     ],

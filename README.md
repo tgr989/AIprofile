@@ -3,6 +3,8 @@ AI-generated profile
 
 妙妙屋使用的分组清单位于 [mmw/proxy_groups/proxy_groups.json](mmw/proxy_groups/proxy_groups.json)，本仓库维护的规则集位于 [mmw/ruleset](mmw/ruleset/)。
 
+[TCSCloud SeedNet 实测与 Mihomo 规则](egress-check/README.md#tcscloud-seednet)收录 TW Top 1000 实测报告，以及 SeedNet 绕行、Line 和 Shopee 使用的自维护域名规则。
+
 图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
 原版妙妙屋通过 `post_fetch` 覆写生成 `🚀 AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`🚀 AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
@@ -91,7 +93,7 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。上�
 
 只有流量进入代理内核才会参与匹配。NTP 的 UDP 流量需要 TUN/透明代理等方式接管，并且所选节点支持 UDP，单独启用 HTTP 系统代理不能接管这些 UDP 请求。NTP 和 WebRTC 端口规则当前均停用，相关域名仍按现有域名规则匹配；以后启用这些端口规则时，会影响所有应用及目标 IP。[NTP 同步的是 UTC 时间](https://www.rfc-editor.org/rfc/rfc5905.html#section-4)，分流只改变匹配流量的出口，不改变系统时区。
 
-新增分组均加入 `comprehensive` 预设，也可以单独勾选：
+下表分组均加入 `comprehensive` 预设，也可单独勾选。
 
 | 分组 | 匹配内容 | 出口选择 |
 | --- | --- | --- |
@@ -100,13 +102,13 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。上�
 | ESET | MetaCubeX ESET 域名规则集（当前仅使用 MRS） | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 📍 苹果定位服务 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
 | ♾️ Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads 等域名，以及 Facebook IP 网段。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
-| 💬 Line 服务 | LINE 域名，包括 `line.me`、短链接 `lin.ee` 和内容分发域名 `line-scdn.net`。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.list) | 按需选择 |
+| 💬 Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
 
-Meta 服务和 Line 服务均排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。
+Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`🛍️ Shopee 服务` 和 `🟣 Yahoo 服务` 可以单独勾选，各自选择出口。
 
 妙妙屋当前生成器为这些普通分组默认选择 `🚀 节点选择`，分组清单不能指定默认出口。生成后需在客户端为 **ESET** 选择统一出口：中国大陆网络使用 `DIRECT`；境外需要中国出口时选择中国大陆节点。`DIRECT` 使用设备当前网络，并不自动获得中国 IP。
 
-本仓库维护的域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 当前仅引用 MetaCubeX 的 `geo/geosite/eset.mrs`（`behavior: domain`、`format: mrs`），`ip_rules` 为空；实际启用的覆盖范围以上游 MRS 为准。
+妙妙屋分组引用的本地补充域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 当前仅引用 MetaCubeX 的 `geo/geosite/eset.mrs`（`behavior: domain`、`format: mrs`），`ip_rules` 为空；实际启用的覆盖范围以上游 MRS 为准。
 
 ESET 自维护规则已整合为两份备用文件，**当前均未挂载到 ESET 分组**：
 
@@ -131,8 +133,8 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
-分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 11 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/configs/proxy-groups-lite.json)
+分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 14 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务 → SeedNet 绕行**。`🔀 SeedNet 绕行` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
 新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。ESET 也先于云服务。
 
-两个苹果分组的位置为 **谷歌服务 → 苹果定位 → 苹果服务 → 私有网络**。其他额外分组按 **金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 插入。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+Yahoo 服务和 Shopee 服务依次排在非中国分组之前。其他额外分组按 **金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 排列。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

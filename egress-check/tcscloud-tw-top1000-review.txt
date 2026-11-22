@@ -1,0 +1,382 @@
+TCSCloud SeedNet · TW Top 1000 最终分流与待判定清单
+
+IPv4 A/B 复测  2026-11-22 15:52:57 至 2026-11-22 15:59:19（UTC+08:00）
+IPv4 域名补测  2026-11-22 16:48:20 至 16:49:24（UTC+08:00）  结果见 Shopee、LINE、Yahoo 补测分组。
+IPv4 默认清单复测  2026-11-22 16:55:51 至 16:58:27（UTC+08:00）  结果见 Egress-Check 补测分组。
+SeedNet 默认公网 IPv4 [已脱敏] AS4780，Datawave 默认公网 IPv4 [已脱敏] AS142433。
+原始 1,000 项中手动排除 9 项。纳入汇总的 991 个站点中，907 个已移出待查清单，其中 883 个可见首跳符合 AS4780，24 个目标回显的公网 IPv4 与 SeedNet 默认出口一致。
+原批次覆盖原待查的 172 项。84 个原入口在 SeedNet 上解析为 0.0.0.0，固定公网 IPv4 的双端实测覆盖 171 项。
+榜单主清单记录 84 个站点、84 条入口。行首为原 TW Top 1000 序号。域名省略 WWW 前缀，入口类型在行末标注。
+判定口径（适用主清单与补测）
+两台 VPS 固定同一目标 IPv4。SeedNet 在相同跳位复现异常路径且 Datawave 可见基准首跳的条目，记为疑似路径分流。
+本报告以目标端重复回显非默认公网 IPv4 确认出口变化。TCP 443 示踪与 TTL 2 HTTPS 实连分别记录。
+原榜单逐站 A/B 完整跳点和 HTTPS 回显详见 tcscloud-seednet-ab-172.txt。
+
+路径分流结果（60 项）
+59 项为疑似路径分流。所列 65 组目标两轮均复现同一 SeedNet ICMP 跳点，TCP 443 示踪也均在 TTL 2 可见目标地址回应。
+另 ruten.com.tw 已通过目标端回显确认公网出口变化。
+  140  ⊘  line.biz                    SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.243.14（裸域 A/B 复测，双端 HTTPS 204）
+  210  ⊘  ptt.cc                      SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.112.172.4
+    2  ⊘  facebook.com                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.64.1
+  736  ⊘  gamesofa.com                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 112.121.80.43
+   13  ⊘  instagram.com               SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.92.34
+  930  ⊘  messenger.com               SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.92.141
+  770  ⊘  whatsapp.com                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.65.32
+    3  ⊘  yahoo.com                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 74.6.231.20、74.6.143.25、74.6.143.26、98.137.11.164、98.137.11.163、74.6.231.21（裸域 A/B 复测）
+  351  ⊘  8591.com.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 203.69.66.10（固定 B 解析地址）
+  442  ⊘  chahwa.com.tw               SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 223.27.43.20
+  651  ⊘  e-fpg.com.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 202.173.51.17（WWW 入口）
+  730  ⊘  ebus.com.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 202.173.39.90（WWW 入口）
+  610  ⊘  p9.com.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 112.121.106.207（WWW 入口）
+  121  ⊘  ruten.com.tw                SeedNet HTTPS 公网出口回显 104.28.198.10 AS13335  |  目标 104.18.10.27、104.18.11.27（固定 Datawave 解析地址）  |  SeedNet 默认 DNS A 记录 0.0.0.0
+   50  ⊘  edu.tw                      SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.111.14.180（WWW 入口）
+  155  ⊘  ccu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.123.13.215（WWW 入口）
+  170  ⊘  cmu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.128.66.157（WWW 入口）
+  405  ⊘  csmu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.128.146.23（WWW 入口）
+  364  ⊘  csu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.118.228.176（WWW 入口）
+  194  ⊘  cycu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.135.201.3（WWW 入口）
+  157  ⊘  fju.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.136.200.88
+  406  ⊘  fy.edu.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.127.86.110（WWW 入口）
+  967  ⊘  inservice.edu.tw            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.127.49.154（WWW 入口）
+  139  ⊘  kh.edu.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 163.31.250.11（WWW 入口）
+   98  ⊘  nccu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.119.166.199
+  125  ⊘  nchu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.120.1.20（WWW 入口）
+   46  ⊘  ncku.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.116.229.1
+  176  ⊘  ncl.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.98.80.228（WWW 入口）
+  212  ⊘  ncnu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 163.22.12.5（WWW 入口）
+  116  ⊘  ncu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.115.197.226（WWW 入口）
+  976  ⊘  ncue.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.107.186.201（WWW 入口）
+  198  ⊘  ndhu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.208.14.219（WWW 入口）
+  921  ⊘  nfu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.130.1.18（WWW 入口）
+  266  ⊘  nptu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.118.118.222（WWW 入口）
+  231  ⊘  npust.edu.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.127.4.113（WWW 入口）
+   72  ⊘  nthu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.114.69.135（WWW 入口）
+   68  ⊘  ntnu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.122.65.193（WWW 入口）
+  953  ⊘  ntou.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.121.99.151（WWW 入口）
+   34  ⊘  ntu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.112.8.116（WWW 入口）
+  152  ⊘  ntust.edu.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.118.31.124（WWW 入口）
+  910  ⊘  ntut.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.124.13.105（WWW 入口）
+  984  ⊘  nutn.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.133.2.16（WWW 入口）
+  463  ⊘  ouk.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 163.15.183.28（WWW 入口）
+  885  ⊘  pccu.edu.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.137.1.17
+  947  ⊘  scu.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 163.14.2.16（WWW 入口）
+  758  ⊘  set.edu.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 210.240.198.64（WWW 入口）
+  241  ⊘  stust.edu.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.117.3.68（WWW 入口）
+  129  ⊘  tc.edu.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.128.53.66（WWW 入口）
+   83  ⊘  tn.edu.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 120.116.3.214（WWW 入口）
+  824  ⊘  tp.edu.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 163.21.249.220（WWW 入口）
+  403  ⊘  utaipei.edu.tw              SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 210.71.24.25（WWW 入口）
+  724  ⊘  cp.gov.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 223.200.178.91（WWW 补测，固定 B 解析地址）
+  168  ⊘  dgpa.gov.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 223.200.154.212（固定 B 解析地址）
+  102  ⊘  k12ea.gov.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 210.240.198.34（WWW 补测，固定 B 解析地址）
+   94  ⊘  kcg.gov.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 223.200.91.227（WWW 补测，固定 B 解析地址）
+  839  ⊘  moe.gov.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.111.14.50（WWW 补测，固定 B 解析地址）
+  197  ⊘  ntuh.gov.tw                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.112.125.210（WWW 补测，固定 B 解析地址）
+  253  ⊘  pcc.gov.tw                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 223.200.177.8（WWW 补测，固定 B 解析地址）
+  191  ⊘  vghtc.gov.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 140.128.153.1（固定 B 解析地址）
+   93  ⊘  shopee.tw                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 103.117.4.75、134.65.77.130（裸域 A/B 复测，双端 HTTPS 200）
+
+仍无法判定（24）
+   64  ⊘  gov.taipei                  目标 163.29.207.130   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 入口）
+  112  ⊘  ntpc.edu.tw                 目标 61.60.98.242     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 入口）
+  290  ⊘  afa.gov.tw                  目标 210.69.71.45     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  256  ⊘  bli.gov.tw                  目标 211.79.135.22    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  990  ⊘  boca.gov.tw                 目标 210.69.144.84    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  843  ⊘  cdc.gov.tw                  目标 61.57.41.148     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  965  ⊘  e-land.gov.tw               目标 210.69.148.33    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  847  ⊘  fda.gov.tw                  目标 210.69.111.1     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  849  ⊘  hpa.gov.tw                  目标 210.241.78.16    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（固定 B 解析地址）
+  172  ⊘  judicial.gov.tw             目标 210.69.124.205   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+   40  ⊘  mohw.gov.tw                 目标 203.65.99.200    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（固定 B 解析地址）
+  108  ⊘  moj.gov.tw                  目标 163.29.130.159   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（WWW 补测，固定 B 解析地址）
+   32  ⊘  nat.gov.tw                  目标 211.79.170.9     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（WWW 补测，固定 B 解析地址）
+  124  ⊘  nhi.gov.tw                  目标 210.69.215.131   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  204  ⊘  nlma.gov.tw                 目标 210.69.84.18     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  869  ⊘  npa.gov.tw                  目标 210.69.154.130   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  917  ⊘  pthg.gov.tw                 目标 210.69.151.195   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  872  ⊘  sfaa.gov.tw                 目标 210.241.100.220  |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（固定 B 解析地址）
+  893  ⊘  taitung.gov.tw              目标 163.29.101.12    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  179  ⊘  taiwanjobs.gov.tw           目标 124.199.93.131   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  457  ⊘  tfd.gov.tw                  目标 210.69.42.21     |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  477  ⊘  tpech.gov.tw                目标 163.29.207.130   |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应（WWW 补测，固定 B 解析地址）
+   92  ⊘  wda.gov.tw                  目标 117.56.83.114    |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 有回应（WWW 补测，固定 B 解析地址）
+  398  ⊘  taiwanbus.tw                目标 117.56.7.35      |  TCP 未见公网中间跳，SeedNet ICMP 未见公网中间跳  |  HTTPS A 未获回应 / B 未获回应
+
+手动排除（9）
+  935  sina.cn
+   18  bilibili.com
+  249  dm5.com
+  837  zhihu.com
+  804  azurewebsites.net
+  586  jav.sb
+  629  88zhibo.tv
+  662  hsex.tv
+  520  yfsp.tv
+
+Shopee、LINE、Yahoo 补测疑似路径分流（34 个主机名）
+IPv4 A/B 两轮复测  2026-11-22 16:48:20 至 16:49:24（UTC+08:00）。两台 VPS 使用相同的固定目标 IPv4。
+下列 51 组目标两轮均复现所列 ICMP 跳点，SeedNet TCP 443 示踪在 TTL 2 可见目标地址回应。
+Datawave 对相同目标可见的首跳为 78.105.182.254（AS142433）。HTTPS 结果来自使用表列主机名并校验证书的 HEAD 请求。
+其中 9 组地址另做了 TTL 2 HTTPS 实连抽测。行内记录 SeedNet 的响应，Datawave 建连均返回 No route to host。
+本组均缺少目标端的客户端公网 IPv4 回显，HTTPS 实际公网出口待确认。榜单序号对应上方主清单。
+
+Shopee（26）
+  ⊘  shopee.com.br            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 202.181.93.18  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200
+  ⊘  shopeepay.com.br         SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 143.92.93.33、143.92.93.34  |  HTTPS 双端 200
+  ⊘  shopee.cl                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.187.22  |  HTTPS 双端 200
+  ⊘  shopee.com.co            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.187.22  |  HTTPS 双端 200
+  ⊘  shopee.com               SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 202.181.93.9  |  HTTPS 双端 302  |  TTL 2 HTTPS SeedNet 302
+  ⊘  shopeemobile.com         SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.141.130  |  HTTPS 双端 超时
+  ⊘  shopeepay.com            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.145.195  |  HTTPS 双端 200
+  ⊘  shp.ee                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.146.192  |  HTTPS 双端 404
+  ⊘  shopee.es                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 143.92.75.92  |  HTTPS 双端 307
+  ⊘  shopee.fr                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 143.92.75.92  |  HTTPS 双端 307
+  ⊘  shopee.com.hk            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.146.192  |  HTTPS 双端 200
+  ⊘  shopee.co.id             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.140、147.136.168.96  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200
+  ⊘  shopeepay.co.id          SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.145.195  |  HTTPS 双端 200
+  ⊘  shopee.in                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 143.92.75.92  |  HTTPS 双端 307
+  ⊘  shopee.com.mx            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.187.22  |  HTTPS 双端 200
+  ⊘  shopee.com.my            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.134  |  HTTPS 双端 200
+  ⊘  shopeepay.com.my         SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 103.120.231.57、103.120.231.58  |  HTTPS 双端 301
+  ⊘  shopee.ph                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.133、147.136.172.150  |  HTTPS 双端 200
+  ⊘  shopeepay.ph             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.145.195  |  HTTPS 双端 200
+  ⊘  shopee.sg                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.162、147.136.172.151  |  HTTPS 双端 200  |  TTL 2 HTTPS（134.65.77.162） SeedNet 200
+  ⊘  shopeepay.sg             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 143.92.67.167  |  HTTPS 双端 200
+  ⊘  shopee.co.th             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.71.183  |  HTTPS SeedNet 200，Datawave 第 1 轮 200、第 2 轮 超时
+                              SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.153、147.136.172.180  |  HTTPS 双端 200
+  ⊘  shopeepay.co.th          SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.145.195  |  HTTPS 双端 200
+  ⊘  shopee.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 103.117.4.75、134.65.77.130  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200  |  榜单序号 93
+  ⊘  shopeefood.vn            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 103.115.76.22  |  HTTPS 双端 200
+  ⊘  shopeepay.vn             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.145.195  |  HTTPS 双端 200
+
+LINE（6 个实测主机名）
+  ⊘  line.biz                 SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.243.14  |  HTTPS 双端 204  |  TTL 2 HTTPS SeedNet 204  |  榜单序号 140
+    ⊘  account.line.biz         SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.243.14  |  HTTPS 双端 404
+    ⊘  developers.line.biz      SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.184.65  |  HTTPS 双端 200
+  ⊘  tw.linebiz.com           SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.184.103  |  HTTPS 双端 200
+  ⊘  lin.ee                   SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.240.249、147.92.242.107  |  HTTPS 双端 404
+  ⊘  line.me                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.243.206  |  HTTPS 双端 302
+
+Yahoo（2 个实测主机名）
+  ⊘  yahoo.com                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 74.6.143.25、74.6.143.26  |  HTTPS 双端 301  |  榜单序号 3
+                              SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 74.6.231.20、74.6.231.21、98.137.11.163、98.137.11.164  |  HTTPS 双端 404  |  TTL 2 HTTPS（74.6.231.20） SeedNet 404
+    ⊘  tw.yahoo.com             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 180.222.109.251、180.222.109.252、180.222.116.11、180.222.116.12  |  HTTPS 双端 429
+
+Egress-Check 默认清单 IPv4 A/B 补测（测试 115 个，疑似 11 个）
+复测时间  2026-11-22 16:55:51 至 16:58:27（UTC+08:00）。范围为 2026-11-19 的 Egress-Check v2.19.6 输出中逐行列出的 115 个域名。
+全部取得可用的 IPv4。SeedNet 和 Datawave 对 281 组固定的主机名与目标 IPv4 做了两轮 ICMP、TCP 443 和 HTTPS 对照。
+104 个域名符合默认首跳或目标回显符合默认公网出口。其中 24 个域名取得过默认公网 IPv4 的目标端回显。
+11 个域名的 23 组地址复现疑似分流路径。清单内确认公网出口变化和仍缺路径证据的域名各为 0 个。
+
+疑似路径分流（11）
+下列 23 组目标两轮均复现所列 ICMP 跳点，SeedNet TCP 443 示踪在 TTL 2 可见目标地址回应。
+Datawave 对相同目标可见的首跳为 78.105.182.254（AS142433）。逐项 HTTPS 结果为固定地址、校验证书的 HEAD 请求。
+另将 IPv4 TTL 设为 2 发起 HTTPS，23 组地址均可在 SeedNet 完成 TLS。Datawave 同条件建连均返回 No route to host，TTL 64 时均获得 HTTP 响应。
+这些站点的实际 HTTPS 公网出口缺少目标端回显。
+
+社交（5）
+  ⊘  facebook.com             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.92.1、57.144.144.1  |  HTTPS 双端 301  |  TTL 2 HTTPS SeedNet 301  |  榜单序号 2
+  ⊘  instagram.com            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 31.13.87.174、57.144.92.34、57.145.12.34  |  HTTPS 双端 301  |  TTL 2 HTTPS SeedNet 301  |  榜单序号 13
+  ⊘  whatsapp.com             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.65.32、57.145.13.32  |  HTTPS 双端 302  |  TTL 2 HTTPS SeedNet 302  |  榜单序号 770
+  ⊘  line.me                  SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.92.243.206  |  HTTPS 双端 302  |  TTL 2 HTTPS SeedNet 302
+  ⊘  threads.net              SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 57.144.92.192、57.144.144.192  |  HTTPS 双端 301  |  TTL 2 HTTPS SeedNet 301
+
+搜索（1）
+  ⊘  yahoo.com                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 74.6.143.25、74.6.143.26  |  HTTPS 双端 301  |  TTL 2 HTTPS SeedNet 301  |  榜单序号 3
+                              SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 74.6.231.20、74.6.231.21、98.137.11.163、98.137.11.164  |  HTTPS 双端 404  |  TTL 2 HTTPS SeedNet 404
+
+电商（5）
+  ⊘  shopee.com.br            SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.189.3、202.181.93.18  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200
+  ⊘  shopee.com               SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.187.0、202.181.93.9  |  HTTPS 双端 302  |  TTL 2 HTTPS SeedNet 302
+  ⊘  shopee.co.id             SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 134.65.77.140  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200
+  ⊘  shopee.sg                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 147.136.172.151  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200
+  ⊘  shopee.tw                SeedNet ICMP TTL2 104.28.0.0      AS13335  |  目标 103.117.4.75  |  HTTPS 双端 200  |  TTL 2 HTTPS SeedNet 200  |  榜单序号 93
+
+网址前缀汇总（实测入口）
+这里列出实际用于测试的完整主机名。WWW 补测标记对应当时的实测入口，部分入口通过固定 Datawave 解析的 IPv4 完成对照。
+
+加 www. 前缀（170 个入口）
+本清单对应的 WWW 实测入口（55）
+  www.gov.taipei                        WWW 实测入口（榜单序号 64）
+  www.e-fpg.com.tw                      WWW 实测入口（榜单序号 651）
+  www.ebus.com.tw                       WWW 实测入口（榜单序号 730）
+  www.p9.com.tw                         WWW 实测入口（榜单序号 610）
+  www.ccu.edu.tw                        WWW 实测入口（榜单序号 155）
+  www.cmu.edu.tw                        WWW 实测入口（榜单序号 170）
+  www.csmu.edu.tw                       WWW 实测入口（榜单序号 405）
+  www.csu.edu.tw                        WWW 实测入口（榜单序号 364）
+  www.cycu.edu.tw                       WWW 实测入口（榜单序号 194）
+  www.fy.edu.tw                         WWW 实测入口（榜单序号 406）
+  www.inservice.edu.tw                  WWW 实测入口（榜单序号 967）
+  www.kh.edu.tw                         WWW 实测入口（榜单序号 139）
+  www.nchu.edu.tw                       WWW 实测入口（榜单序号 125）
+  www.ncl.edu.tw                        WWW 实测入口（榜单序号 176）
+  www.ncnu.edu.tw                       WWW 实测入口（榜单序号 212）
+  www.ncu.edu.tw                        WWW 实测入口（榜单序号 116）
+  www.ncue.edu.tw                       WWW 实测入口（榜单序号 976）
+  www.ndhu.edu.tw                       WWW 实测入口（榜单序号 198）
+  www.nfu.edu.tw                        WWW 实测入口（榜单序号 921）
+  www.nptu.edu.tw                       WWW 实测入口（榜单序号 266）
+  www.npust.edu.tw                      WWW 实测入口（榜单序号 231）
+  www.nthu.edu.tw                       WWW 实测入口（榜单序号 72）
+  www.ntnu.edu.tw                       WWW 实测入口（榜单序号 68）
+  www.ntou.edu.tw                       WWW 实测入口（榜单序号 953）
+  www.ntpc.edu.tw                       WWW 实测入口（榜单序号 112）
+  www.ntu.edu.tw                        WWW 实测入口（榜单序号 34）
+  www.ntust.edu.tw                      WWW 实测入口（榜单序号 152）
+  www.ntut.edu.tw                       WWW 实测入口（榜单序号 910）
+  www.nutn.edu.tw                       WWW 实测入口（榜单序号 984）
+  www.ouk.edu.tw                        WWW 实测入口（榜单序号 463）
+  www.scu.edu.tw                        WWW 实测入口（榜单序号 947）
+  www.set.edu.tw                        WWW 实测入口（榜单序号 758）
+  www.stust.edu.tw                      WWW 实测入口（榜单序号 241）
+  www.tc.edu.tw                         WWW 实测入口（榜单序号 129）
+  www.tn.edu.tw                         WWW 实测入口（榜单序号 83）
+  www.tp.edu.tw                         WWW 实测入口（榜单序号 824）
+  www.utaipei.edu.tw                    WWW 实测入口（榜单序号 403）
+  www.edu.tw                            WWW 实测入口（榜单序号 50），替换为教育部入口
+  www.afa.gov.tw                        WWW 补测（榜单序号 290）
+  www.bli.gov.tw                        WWW 补测（榜单序号 256）
+  www.cp.gov.tw                         WWW 补测（榜单序号 724）
+  www.e-land.gov.tw                     WWW 补测（榜单序号 965）
+  www.k12ea.gov.tw                      WWW 补测（榜单序号 102）
+  www.kcg.gov.tw                        WWW 补测（榜单序号 94）
+  www.moe.gov.tw                        WWW 补测（榜单序号 839）
+  www.moj.gov.tw                        WWW 补测（榜单序号 108）
+  www.nat.gov.tw                        WWW 补测（榜单序号 32）
+  www.ntuh.gov.tw                       WWW 补测（榜单序号 197）
+  www.pcc.gov.tw                        WWW 补测（榜单序号 253）
+  www.pthg.gov.tw                       WWW 补测（榜单序号 917）
+  www.taitung.gov.tw                    WWW 补测（榜单序号 893）
+  www.taiwanjobs.gov.tw                 WWW 补测（榜单序号 179）
+  www.tfd.gov.tw                        WWW 补测（榜单序号 457）
+  www.tpech.gov.tw                      WWW 补测（榜单序号 477）
+  www.wda.gov.tw                        WWW 补测（榜单序号 92）
+
+此前和后续已验证的其他 WWW 入口（115）
+  www.airitilibrary.com                 原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.beanfun.com                       固定地址后 HTTPS A/B 301，SeedNet DNS 返回 0.0.0.0
+  www.china-airlines.com                原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ctbcbank.com                      原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.dailymotion.com                   用户已实测 WWW 可访问
+  www.dudooeat.com                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.evaair.com                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.kerrytj.com                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.mandarin-airlines.com             原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.quanben5.com                      用户已实测 WWW 可访问
+  www.realtek.com                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.sinopac.com                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.starlux-airlines.com              原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.sym-global.com                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.taiwanlottery.com                 原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.thanju.com                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tk3c.com                          原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.jma.go.jp                         原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.line.me                           WWW 复测取得可见路径
+  www.tibiu.net                         原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.amego.tw                          用户已实测 WWW 可访问
+  www.cloudop.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.0800076666.com.tw                 原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.530520.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.5music.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.blueco.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.books.com.tw                      用户已实测 WWW 可访问
+  www.bot.com.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.cathay-cube.com.tw                原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.cathaylife.com.tw                 用户已实测 WWW 可访问
+  www.chb.com.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.cht.com.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.easycard.com.tw                   原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.elifemall.com.tw                  原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.esis.com.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ezmoney.com.tw                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.fbs.com.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.feastogether.com.tw               原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ffxiv.com.tw                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.fubonlife.com.tw                  原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.hct.com.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.hncb.com.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.ibon.com.tw                       用户已实测 WWW 可访问
+  www.kfcclub.com.tw                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.mercedes-benz.com.tw              原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.poyabuy.com.tw                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.shalom.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.sinotrade.com.tw                  原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.sofun.com.tw                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.starbucks.com.tw                  原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.sum.com.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.suntory.com.tw                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.taipower.com.tw                   原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tbb.com.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.thsrc.com.tw                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.trc.com.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.trplus.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.twport.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.twse.com.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tzuchi.com.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ubot.com.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.unipcsc.com.tw                    原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.vscinemas.com.tw                  原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ycut.com.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ymmis.com.tw                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.yuanta.com.tw                     原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.chc.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.coolenglish.edu.tw                原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.fcu.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.nsysu.edu.tw                      原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.ntunhs.edu.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.nycu.edu.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.thu.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tku.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tmu.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.tyc.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.yuntech.edu.tw                    WWW 复测取得可见路径
+  www.yzu.edu.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.boca.gov.tw                       原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 200
+  www.cdc.gov.tw                        原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 200
+  www.cip.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.cwa.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.forest.gov.tw                     原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.hrd.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.immigration.gov.tw                原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.mnd.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moa.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moc.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moeaea.gov.tw                     原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moenv.gov.tw                      原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moex.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.moi.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.mol.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.nfa.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.nhi.gov.tw                        原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 403
+  www.nlma.gov.tw                       原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 200
+  www.npa.gov.tw                        原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 301
+  www.nstc.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.ntpc.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.osha.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.post.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.railway.gov.tw                    原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.tad.gov.tw                        原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.taichung.gov.tw                   原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.tainan.gov.tw                     原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.tycg.gov.tw                       原入口无可用 IPv4，WWW 补测取得固定目标地址
+  www.houseprice.tw                     原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.muji.tw                           原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.cgh.org.tw                        用户已实测 WWW 可访问
+  www.cgmh.org.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.femh.org.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.kmuh.org.tw                       原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.mmh.org.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.pts.org.tw                        原入口 DNS 无可用 IPv4，WWW 补测取得地址
+  www.taiwanbus.tw                      原入口复测未接通，WWW 固定地址获 SeedNet HTTPS 301
+
+加非 www. 的特殊前缀（8 个入口）
+  前缀          实测主机名                         实测说明
+  b2c.          b2c.518fb.com                       用户 IPv4 实测首跳符合 AS4780
+  tw.           tw.beanfun.com                      固定地址 HTTPS A/B 200，可见首跳符合 SeedNet，SeedNet DNS 返回 0.0.0.0
+  game.         game.csiebr-rebirth.com             用户 IPv4 实测首跳符合 AS4780
+  tix.          tix.ctbcsports.com                  用户 IPv4 实测首跳符合 AS4780
+  aamidp.       aamidp.azurewebsites.net            Azure 应用入口，IPv4 A/B HTTPS 200，可见首跳符合 SeedNet
+  tpech.        tpech.gov.taipei                    台北市立联合医院的另一域名，Datawave HTTPS 200，SeedNet 未接通
+  ebank.        ebank.taipeifubon.com.tw            富邦网银入口，固定地址 HTTPS A/B 200，可见首跳符合 SeedNet，SeedNet DNS 返回 0.0.0.0
+  oidc.         oidc.tanet.edu.tw                   用户 IPv4 实测首跳符合 AS4780
