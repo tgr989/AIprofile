@@ -1,11 +1,11 @@
 # AIprofile
 AI-generated profile
 
-妙妙屋使用的分组清单位于 [proxy_groups/proxy_groups.json](proxy_groups/proxy_groups.json)，本仓库维护的规则集位于 [ruleset](ruleset/)。
+妙妙屋使用的分组清单位于 [mmw/proxy_groups/proxy_groups.json](mmw/proxy_groups/proxy_groups.json)，本仓库维护的规则集位于 [mmw/ruleset](mmw/ruleset/)。
 
 图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
-原版妙妙屋通过 `post_fetch` 覆写生成 `🚀 AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`🚀 AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](overrides/ai-select.js)
+原版妙妙屋通过 `post_fetch` 覆写生成 `🚀 AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`🚀 AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
 
 启用覆写后，预设中的 `🤖 AI 服务`、`☁️ 云服务`、`🐟 漏网之鱼` 等普通手选组会依次列出 `🚀 AI 节点组` 和 `🚀 节点选择` 作为前两个候选。选择前者跟随 AI 出口，选择后者跟随通用出口。脚本会把已有的 AI 候选移到首位并去重。
 
@@ -14,7 +14,7 @@ AI-generated profile
 **启用覆写**
 
 1. 在妙妙屋「系统设置」开启「覆写脚本」。
-2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](overrides/ai-select.js) 的全部内容并启用、保存。
+2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](mmw/overrides/ai-select.js) 的全部内容并启用、保存。
 3. 在目标订阅的「覆写配置」中勾选该脚本，再让客户端更新订阅。将脚本放入本仓库或同步分组清单，不会自动启用它。
 4. 在客户端为 `🚀 AI 节点组` 选定一个固定节点。首次使用且没有已保存选择时，普通手选组默认使用它。客户端若恢复了此前保存的选择，可在相应分组中切换。
 
@@ -22,11 +22,11 @@ AI-generated profile
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
-AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](ruleset/claude-ip-extra.yaml) 补充 IP 网段。[claude-svc-extra.yaml](ruleset/claude-svc-extra.yaml) 保留为备用，文件中的 NTP UDP 123 规则未注释，WebRTC 端口规则仍已注释，**当前未在分组清单中引用**。已有等效覆盖的规则不重复添加。
+AI 服务保留 `category-ai-!cn`、`openai` 和上游 `claude` 三个规则源，并通过 [claude-domain-extra.yaml](mmw/ruleset/claude-domain-extra.yaml) 补充域名、关键词与 GEOSITE 规则，通过 [claude-ip-extra.yaml](mmw/ruleset/claude-ip-extra.yaml) 补充 IP 网段。[claude-svc-extra.yaml](mmw/ruleset/claude-svc-extra.yaml) 保留为备用，文件中的 NTP UDP 123 规则未注释，WebRTC 端口规则仍已注释，**当前未在分组清单中引用**。已有等效覆盖的规则不重复添加。
 
-`balanced`、`comprehensive` 两个预设还在 `openai` 后挂载了 ChatGPT 域名补充规则。该规则匹配以 `chatgpt-async-webps-prod-` 开头的主机名，适用于任意域名后缀。例如，发往 `chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com` 的 TCP 443 会命中此规则并交给 `🤖 AI 服务`。[chatgpt-domian-extra.yaml](ruleset/chatgpt-domian-extra.yaml)
+`balanced`、`comprehensive` 两个预设还在 `openai` 后挂载了 ChatGPT 域名补充规则。该规则匹配以 `chatgpt-async-webps-prod-` 开头的主机名，适用于任意域名后缀。例如，发往 `chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com` 的 TCP 443 会命中此规则并交给 `🤖 AI 服务`。[chatgpt-domian-extra.yaml](mmw/ruleset/chatgpt-domian-extra.yaml)
 
-**拒绝 AI 的 UDP 443** 使用独立的 `classical` 规则集。每条规则都限定 UDP 和目标端口 443，目标命中 GeoSite 分类 `category-ai-!cn`、Anthropic 固定网段或 `AS399358` 中的任一项即拒绝。ASN 由客户端的 `ASN.mmdb` 识别。[ai-svc-extra.yaml](ruleset/ai-svc-extra.yaml) · [ARIN 的 AS399358 登记](https://rdap.arin.net/registry/autnum/399358)
+**拒绝 AI 的 UDP 443** 使用独立的 `classical` 规则集。每条规则都限定 UDP 和目标端口 443，目标命中 GeoSite 分类 `category-ai-!cn`、Anthropic 固定网段或 `AS399358` 中的任一项即拒绝。ASN 由客户端的 `ASN.mmdb` 识别。[ai-svc-extra.yaml](mmw/ruleset/ai-svc-extra.yaml) · [ARIN 的 AS399358 登记](https://rdap.arin.net/registry/autnum/399358)
 
 截至 2026-11-21，Anthropic 公布的 API 入站地址为 `160.79.104.0/23`、`153.61.224.0/22` 和 `2607:6bc0::/48`，工具调用等出站请求使用 `160.79.104.0/21` 和 `153.61.208.0/20`。本规则将两类网段都作为目标地址匹配，其中 `/21` 已覆盖第一条入站 `/23`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses)
 
@@ -38,7 +38,7 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/ai-svc-extra.yaml
+    url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/ai-svc-extra.yaml
     path: ./ruleset/ai-svc-extra.yaml
     interval: 86400
 ```
@@ -47,7 +47,7 @@ rule-providers:
 
 域名和 IP 两份补充规则均以 `behavior: classical`、`format: yaml` 挂载在 AI 分组的 `site_rules` 中，按域名、IP 的顺序排列，保留现有匹配顺序。妙妙屋会把 `ip_rules` 统一排到所有域名规则之后，因此此处保持原位置。以后恢复服务端口规则时，也应使用 `behavior: classical`、`format: yaml`；端口与逻辑规则不能使用仅支持 IP 网段的 `ipcidr` 格式。
 
-进程规则单独保存在 [claude-proc-extra.yaml](ruleset/claude-proc-extra.yaml)，包含此前的 5 条 `PROCESS-NAME` 规则，**当前未在分组清单中引用**。以后启用时使用 `behavior: classical`、`format: yaml`。
+进程规则单独保存在 [claude-proc-extra.yaml](mmw/ruleset/claude-proc-extra.yaml)，包含此前的 5 条 `PROCESS-NAME` 规则，**当前未在分组清单中引用**。以后启用时使用 `behavior: classical`、`format: yaml`。
 
 | 补充内容 | 作用与来源 |
 | --- | --- |
@@ -112,8 +112,8 @@ ESET 自维护规则已整合为两份备用文件，**当前均未挂载到 ESE
 
 | 文件 | 内容 | 恢复引用时的类型 |
 | --- | --- | --- |
-| [eset-domain.yaml](ruleset/eset-domain.yaml) | 26 条域名规则：原中国服务、更新仓库及企业云补充规则 | `site_rules`，`behavior: classical`、`format: yaml` |
-| [eset-ip.yaml](ruleset/eset-ip.yaml) | 436 条精确 IP 规则，其中 19 条 IPv6 | `ip_rules`，`behavior: ipcidr`、`format: yaml` |
+| [eset-domain.yaml](mmw/ruleset/eset-domain.yaml) | 26 条域名规则：原中国服务、更新仓库及企业云补充规则 | `site_rules`，`behavior: classical`、`format: yaml` |
+| [eset-ip.yaml](mmw/ruleset/eset-ip.yaml) | 436 条精确 IP 规则，其中 19 条 IPv6 | `ip_rules`，`behavior: ipcidr`、`format: yaml` |
 
 两份备用文件保留整合前的全部条目，旧的分类文件已移除。内容按 [官方 KB332 服务清单](https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall) 于 **2026-11-14** 核对，包括中国服务、更新下载、激活、LiveGrid、LiveGuard、PROTECT、Inspect、反垃圾和样本提交等地址。若以后启用 IP 规则，生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。[ESET Connect](https://help.eset.com/eset_connect/en-US/prerequisites.html) 的 API 域名已由上游 `eset.systems` 后缀覆盖。
 
@@ -125,7 +125,9 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 代理媒体另通过 `ip_rules` 引用同目录的 `GlobalMedia.yaml`（`behavior: classical`），补充 IPv4/IPv6、关键词和进程规则，缓存路径为 `./ruleset/proxymedia-ip.yaml`；生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。
 
-发布时将 `proxy_groups/proxy_groups.json` 与 `ruleset/` 一起推送到 GitHub 的 `main` 分支，再让妙妙屋重新同步分组清单并生成或更新订阅。妙妙屋的分组清单源地址需使用新的 `proxy_groups/proxy_groups.json` 路径。所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
+发布时将 `mmw/` 推送到 GitHub 的 `main` 分支。目录迁移后，在妙妙屋更新分组清单源地址，再重新同步清单并生成或更新订阅。手动配置了 `ai-svc-extra` 的模板也需改用上文的下载地址。[分组清单源地址](https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/proxy_groups/proxy_groups.json)
+
+所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
 Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 

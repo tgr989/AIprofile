@@ -63,7 +63,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/chatgpt-domian-extra.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/chatgpt-domian-extra.yaml",
         "path": "./ruleset/chatgpt-domian-extra.yaml",
         "interval": 86400
       },
@@ -81,7 +81,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-domain-extra.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude-domain-extra.yaml",
         "path": "./ruleset/claude-domain-extra.yaml",
         "interval": 86400
       },
@@ -90,7 +90,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/claude-ip-extra.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude-ip-extra.yaml",
         "path": "./ruleset/claude-ip-extra.yaml",
         "interval": 86400
       },
@@ -172,7 +172,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/apple-location.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/apple-location.yaml",
         "path": "./ruleset/apple-location.yaml",
         "interval": 86400
       }
@@ -244,7 +244,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tmo-wfc-domain.yaml",
         "path": "./ruleset/tmo-wfc-domain.yaml",
         "interval": 86400
       }
@@ -255,7 +255,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/tmo-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tmo-wfc-ip.yaml",
         "path": "./ruleset/tmo-wfc-ip.yaml",
         "interval": 86400
       }
@@ -275,7 +275,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gg-wfc-domain.yaml",
         "path": "./ruleset/gg-wfc-domain.yaml",
         "interval": 86400
       }
@@ -286,7 +286,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/ruleset/gg-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gg-wfc-ip.yaml",
         "path": "./ruleset/gg-wfc-ip.yaml",
         "interval": 86400
       }
