@@ -1,0 +1,125 @@
+# Claude、Claude Code 与 Cowork 分流规则。规则提供方使用 behavior: classical、format: yaml。
+# 2026-11-22 对照下列资料整理。
+# https://ip.net.coffee/claude/site.html
+# https://www.nodeseek.com/post-682343-1
+# https://aiip.si/routing
+# https://github.com/jinxinkai/clash-ai-rules/blob/master/Anthropic.yaml
+# https://linux.do/t/topic/2292545
+# https://x.com/qwerty__cs/status/2124502685210804571
+
+# 将这条规则并入订阅的 rules，紧跟 ai-routing.yaml 中的 UDP 443 拦截。
+# 保留行内列表格式，供 HTTP 规则提供方从下方 payload 加载。
+rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(OR,((IP-CIDR,160.79.104.0/21,no-resolve),(IP-CIDR,153.61.224.0/22,no-resolve),(IP-CIDR6,2607:6bc0::/48,no-resolve),(IP-CIDR,153.61.208.0/20,no-resolve),(IP-ASN,399358,no-resolve)))),REJECT']
+
+payload:
+  # Claude 站点、API 与登录域名。
+  - 'DOMAIN-SUFFIX,anthropic.com'
+  - 'DOMAIN-SUFFIX,claude.ai'
+  - 'DOMAIN-SUFFIX,claude.com'
+  - 'DOMAIN-SUFFIX,clau.de'
+  - 'DOMAIN-SUFFIX,anthropic.team'
+  - 'DOMAIN-SUFFIX,ant.dev'
+  - 'DOMAIN-SUFFIX,antspace.dev'
+  - 'DOMAIN-SUFFIX,chatbotclaude.com'
+  - 'DOMAIN-SUFFIX,claude.app'
+  - 'DOMAIN-SUFFIX,claude.dev'
+  - 'DOMAIN-SUFFIX,claude.new'
+  - 'DOMAIN-SUFFIX,claude.site'
+  - 'DOMAIN-SUFFIX,claudeacademy.com'
+  - 'DOMAIN-SUFFIX,claudepages.dev'
+  - 'DOMAIN-SUFFIX,claudestudio.com'
+
+  # 用户内容、Artifacts、Claude in Chrome 和 MCP 文档及连接器。
+  - 'DOMAIN-SUFFIX,claudeusercontent.com'
+  - 'DOMAIN-SUFFIX,claudemcpclient.com'
+  - 'DOMAIN-SUFFIX,claudemcpcontent.com'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.com'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.io'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.net'
+  - 'DOMAIN-SUFFIX,modelcontextprotocol.org'
+
+  # 外部 CDN、认证与内容站点。
+  - 'DOMAIN,servd-anthropic-website.b-cdn.net'
+  - 'DOMAIN,anthropic.com.cdn.cloudflare.net'
+  - 'DOMAIN,anthropic.auth0.com'
+  - 'DOMAIN,anthropic-com.ghost.io'
+
+  # Linux DO 社区清单收录的域名后缀。
+  - 'DOMAIN-SUFFIX,anthropiccdn.com'
+  - 'DOMAIN-SUFFIX,anthropic-cdn.com'
+  - 'DOMAIN-SUFFIX,anthropicsystem.com'
+  - 'DOMAIN-SUFFIX,anthropic.cloud'
+
+  # Persona 身份核验和邮件，以及 Intercom 客服。
+  - 'DOMAIN-SUFFIX,withpersona.com'
+  - 'DOMAIN-SUFFIX,frompersona.com'
+  - 'DOMAIN-SUFFIX,intercom.io'
+  - 'DOMAIN-SUFFIX,intercomcdn.com'
+  - 'DOMAIN-SUFFIX,intercomassets.com'
+  - 'DOMAIN-SUFFIX,intercom-messenger.com'
+
+  # 错误报告、运行指标、功能开关与访问统计。
+  - 'DOMAIN-SUFFIX,sentry.io'
+  - 'DOMAIN-SUFFIX,statsigapi.net'
+  - 'DOMAIN-SUFFIX,statsig.com'
+  - 'DOMAIN-SUFFIX,us5.datadoghq.com'
+  - 'DOMAIN,browser-intake-us5-datadoghq.com'
+  - 'DOMAIN,cdn.growthbook.io'
+  - 'DOMAIN,cdn.usefathom.com'
+
+  # 风控服务。
+  - 'DOMAIN-SUFFIX,siftscience.com'
+
+  # Stripe.js 遥测与 Firebase 推送注册的共用端点，按需启用。
+  # - 'DOMAIN,r.stripe.com'
+  # - 'DOMAIN,fcmtoken.googleapis.com'
+
+  # hCaptcha 由 AI 分组的独立规则集 hcaptcha.mrs 覆盖。
+  # X 分流清单列出的共用人机验证与身份核验服务，按需启用。
+  # - 'DOMAIN,challenges.cloudflare.com'
+  # - 'DOMAIN-SUFFIX,yoti.com'
+
+  # 共用认证域名按需启用。Google 登录及 OAuth / OpenID Connect。
+  # - 'DOMAIN,accounts.google.com'
+  # - 'DOMAIN,oauth2.googleapis.com'
+  # - 'DOMAIN,openidconnect.googleapis.com'
+
+  # Apple 授权及账户认证。
+  # - 'DOMAIN,appleid.apple.com'
+  # - 'DOMAIN,idmsa.apple.com'
+
+  # Google 地图 API 用于身份核验相关请求。
+  # - 'DOMAIN,maps.googleapis.com'
+
+  # NodeSeek 列出的页面静态资源和 Claude Code 下载域名。
+  # - 'DOMAIN,t0.gstatic.com'
+  # - 'DOMAIN,t1.gstatic.com'
+  # - 'DOMAIN,t2.gstatic.com'
+  # - 'DOMAIN,t3.gstatic.com'
+  # - 'DOMAIN,storage.googleapis.com'
+
+  # 关键词也会匹配其他站点。
+  - 'DOMAIN-KEYWORD,datadog'
+  - 'DOMAIN-KEYWORD,sift'
+  - 'DOMAIN-KEYWORD,sentry'
+  - 'DOMAIN-KEYWORD,claude'
+  - 'DOMAIN-KEYWORD,anthropic'
+
+  # Net.Coffee 的 NTP 域名分类。
+  - 'GEOSITE,category-ntp'
+  # 匹配所有发往 UDP 123 的 NTP 连接。
+  # - 'AND,((NETWORK,UDP),(DST-PORT,123))'
+
+  # Aiip.si 的 DNS 测试探针，按需用于该站检测。
+  # - 'DOMAIN-SUFFIX,d.aiip.si'
+
+  # Anthropic 固定网段，按连接的目标 IP 匹配。
+  # https://platform.claude.com/docs/en/api/ip-addresses
+  - 'IP-CIDR,160.79.104.0/21,no-resolve'
+  - 'IP-CIDR6,2607:6bc0::/48,no-resolve'
+  # Claude API 的另一个入站网段。
+  - 'IP-CIDR,153.61.224.0/22,no-resolve'
+  # Anthropic 发起工具调用时使用的出站网段。
+  - 'IP-CIDR,153.61.208.0/20,no-resolve'
+  # 按目标地址所属 ASN 兜底，按需启用。
+  # - 'IP-ASN,399358,no-resolve'

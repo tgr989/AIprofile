@@ -51,20 +51,11 @@
       },
       {
         "key": "openai",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs",
-        "path": "./ruleset/openai.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "chatgpt-domian-extra",
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/chatgpt-domian-extra.yaml",
-        "path": "./ruleset/chatgpt-domian-extra.yaml",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/classical/openai.yaml",
+        "path": "./ruleset/openai.yaml",
         "interval": 86400
       },
       {
@@ -72,26 +63,8 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude.yaml",
         "path": "./ruleset/claude.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "claude-domain-extra",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude-domain-extra.yaml",
-        "path": "./ruleset/claude-domain-extra.yaml",
-        "interval": 86400
-      },
-      {
-        "key": "claude-ip-extra",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude-ip-extra.yaml",
-        "path": "./ruleset/claude-ip-extra.yaml",
         "interval": 86400
       },
       {

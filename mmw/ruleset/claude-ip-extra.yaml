@@ -1,8 +1,0 @@
-# Claude / Claude Code 目标 IP 补充规则，挂载到「🤖 AI 服务」。
-# Anthropic 固定入站和出站地址（2026-11-21 核对）：https://platform.claude.com/docs/en/api/ip-addresses
-# 上游 claude 已含 160.79.104.0/21（含入站 /23）、2607:6bc0::/32（含入站 /48）和 AS399358。
-payload:
-  # Claude API 的另一个入站网段。
-  - 'IP-CIDR,153.61.224.0/22,no-resolve'
-  # Anthropic 发起工具调用时使用的出站网段，此处按客户端连接的目标 IP 匹配。
-  - 'IP-CIDR,153.61.208.0/20,no-resolve'
