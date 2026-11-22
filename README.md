@@ -133,8 +133,8 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置包含 `RULE-SET,claude-domain-extra,🤖 AI 服务`、`RULE-SET,claude-ip-extra,🤖 AI 服务` 和对应的规则提供方，且 AI 规则保持在 Google、云服务和通用代理规则之前；广告拦截继续优先。当前不应再包含 `claude-svc-extra` 的规则引用或规则提供方。规则提供方新增、更名或移除后，需在妙妙屋重新同步分组清单并生成或更新订阅，仅刷新旧规则文件无法完成引用迁移。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
-分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 14 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务 → SeedNet 绕行**。`🔀 SeedNet 绕行` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
+分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 14 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。`🔀 SeedNet 绕行` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
 新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。ESET 也先于云服务。
 
-Yahoo 服务和 Shopee 服务依次排在非中国分组之前。其他额外分组按 **金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 排列。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+清单末尾为 **Yahoo 服务 → Shopee 服务 → SeedNet 绕行 → 非中国**。其他额外分组按 **金融服务 → 数字货币 → 云服务 → Tiktok → Spotify** 排列。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

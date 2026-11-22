@@ -107,27 +107,6 @@
     "ip_rules": []
   },
   {
-    "name": "seednet-avoid",
-    "label": "SeedNet 绕行",
-    "emoji": "🔀",
-    "icon": "🔀",
-    "rule_name": "SeedNet Avoid",
-    "group_label": "🔀 SeedNet 绕行",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "category-tcscloud-seednet-avoid",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/category-tcscloud-seednet-avoid.mrs",
-        "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "youtube",
     "label": "油管视频",
     "emoji": "📹",
@@ -1173,6 +1152,27 @@
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/shopee-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/shopee-tcscloud-seednet-avoid.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "seednet-avoid",
+    "label": "SeedNet 绕行",
+    "emoji": "🔀",
+    "icon": "🔀",
+    "rule_name": "SeedNet Avoid",
+    "group_label": "🔀 SeedNet 绕行",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "category-tcscloud-seednet-avoid",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/category-tcscloud-seednet-avoid.mrs",
+        "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
     ],
