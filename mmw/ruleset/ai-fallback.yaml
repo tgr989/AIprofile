@@ -20,6 +20,7 @@
 # 3. 拒绝目标 IP 命中 ChatGPT Voice 官方网段或 OpenAI ASN 的 UDP 3478 和 UDP 443（需同时并入下方 chatgpt-voice 提供方）：
 # rules: ['AND,((NETWORK,UDP),(DST-PORT,3478/443),(OR,((RULE-SET,chatgpt-voice,no-resolve),(IP-ASN,232,no-resolve),(IP-ASN,401518,no-resolve),(IP-ASN,401864,no-resolve)))),REJECT']
 #
+# 在覆写设置中添加到规则集, 方式: 添加至头部
 # rule-providers:
 #   chatgpt-voice:
 #     type: http
@@ -49,9 +50,9 @@ payload:
   # ── 3. 关键词兜底（也会匹配包含相同字符串的其他站点） ──────────────────────
   - 'DOMAIN-KEYWORD,claude'
   - 'DOMAIN-KEYWORD,anthropic'
-  - 'DOMAIN-KEYWORD,openai'
-  - 'DOMAIN-KEYWORD,chatgpt'
-  - 'DOMAIN-KEYWORD,codex'
+  # - 'DOMAIN-KEYWORD,openai'
+  # - 'DOMAIN-KEYWORD,chatgpt'
+  # - 'DOMAIN-KEYWORD,codex'
   - 'DOMAIN-KEYWORD,intercom'
   - 'DOMAIN-KEYWORD,statsig'
   - 'DOMAIN-KEYWORD,fathom'

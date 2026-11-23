@@ -84,7 +84,7 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充�
 | `withpersona.com`、`frompersona.com`、`yoti.com` | Net.Coffee 的 KYC 表格及 Claude 身份/年龄核验使用的 Persona 与 Yoti 域名，按后缀匹配并交给 AI 服务 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 页面静态资源和 Claude Code 下载的精确匹配备用规则，均以注释保留。参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1) |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `claude`、`anthropic`、`openai`、`chatgpt`、`codex` 及遥测风控关键词 | 收敛于 [ai-fallback.yaml](mmw/ruleset/ai-fallback.yaml) 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)），覆盖各区域变体及 `anthropic.com.cn` 等包含对应字符串的域名 |
+| `claude`、`anthropic` 及遥测风控关键词 | 收敛于 [ai-fallback.yaml](mmw/ruleset/ai-fallback.yaml) 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)，覆盖各区域变体及 `anthropic.com.cn`）；`openai`、`chatgpt`、`codex` 关键词以注释保留 |
 | `153.61.224.0/22` | Claude API 的入站网段，由 `claude-ip` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 | `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
