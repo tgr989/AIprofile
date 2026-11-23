@@ -1,11 +1,11 @@
 [
   {
     "name": "ai-select",
-    "label": "AI 节点组",
-    "emoji": "🎛️",
-    "icon": "🎛️",
+    "label": "AI 节点",
+    "emoji": "⚡",
+    "icon": "⚡",
     "rule_name": "AI Select",
-    "group_label": "AI 节点组",
+    "group_label": "⚡ AI 节点",
     "presets": ["minimal", "balanced", "comprehensive"],
     "site_rules": [],
     "ip_rules": []

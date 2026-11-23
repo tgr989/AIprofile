@@ -5,26 +5,22 @@ AI-generated profile
 
 TCSCloud SeedNet 的 TW Top 1000 和 A/B 实测报告收录在 `egress-check`。TCSCloud 分流、Meta、Line 和 Shopee 的自维护域名规则集中在 `mmw/ruleset/tcscloud-seednet`。 [实测报告](egress-check/README.md#tcscloud-seednet) · [域名规则](mmw/ruleset/tcscloud-seednet/)
 
-分组名 `group_label` 使用纯文字。每组的 `emoji` 和 `icon` 使用同一个图标。两个 Wi-Fi Calling 组共用 🛜，ESET 安全服务使用 🛡️。
+AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI 节点`。每组的 `emoji` 和 `icon` 使用同一个图标。两个 Wi-Fi Calling 组共用 🛜，ESET 安全服务使用 🛡️。
 
-原版妙妙屋通过 `post_fetch` 覆写生成 `AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
+妙妙屋在 `post_fetch` 阶段应用覆写。订阅同时定义 `⚡ AI 节点` 和 `🚀 节点选择` 时，脚本把 AI 组移到 `🚀 节点选择` 的紧前一位。 [AI 节点覆写脚本](mmw/overrides/ai-select.js)
 
-启用覆写后，预设中的 `AI 服务`、`云服务`、`🐟 漏网之鱼` 等普通手选组会依次列出 `AI 节点组` 和 `🚀 节点选择` 作为前两个候选。选择前者跟随 AI 出口，选择后者跟随通用出口。脚本会把已有的 AI 候选移到首位并去重。`广告拦截` 的 `default-selected` 设为 `REJECT`，`国内服务` 和 `私有网络` 设为 `DIRECT`。这三个组同时将默认策略排在首位，其他候选保留原有顺序。
+其他策略组的 `proxies` 含有 `🚀 节点选择` 时，脚本把 `⚡ AI 节点` 放在它的紧前一位并去重。
 
-广告拦截、私有网络、国内服务、TMO-WFC、GG-WFC、PT 站点、PT Tracker、ESET 和苹果定位均跳过 AI 候选插入。自动测速、故障转移、负载均衡、按条件筛选节点、仅从订阅动态取节点和仅含内置策略的组也跳过。`🚀 节点选择` 或链式拨号依赖的节点池保留原有候选。可在脚本的 `defaultPolicies` 中调整专用分组的首选策略，在 `excluded` 中调整其他跳过的服务组。
-
-覆写会沿 `proxies`、`use` 和 `include-all` 系列设置追踪拨号路径，将能回到 `AI 节点组` 的节点或集合排除出候选。若所有节点和集合都依赖 AI，已有 AI 组会保留原来可用的候选，只剩循环路径时使用 `REJECT`。
-
-动态筛选的节点池按可能引入的全部成员检查。脚本读取集合的 `override.dialer-proxy` 和订阅内可见的 `payload`。`override-expr` 在固定字段之后按顺序生效。脚本能识别 `dialer-proxy` 的直接赋值（如 `.dialer-proxy = "中转组"`）、空字符串和 `del(.dialer-proxy)`。最终上游无法确定时，AI 节点组会排除该集合及依赖它的链式节点。远端集合的节点内容由客户端拉取，使用统一上游时可在订阅中显式指定 `override.dialer-proxy`。 [Mihomo 代理组](https://wiki.metacubex.one/config/proxy-groups/) · [代理集合](https://wiki.metacubex.one/config/proxy-providers/)
+`广告拦截`、`国内服务` 和 `私有网络` 同样按候选中是否含有 `🚀 节点选择` 应用上述规则，并将 `DIRECT` 置顶、去重，设为 `default-selected`。
 
 **启用覆写**
 
 1. 在妙妙屋「系统设置」开启「覆写脚本」。
 2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](mmw/overrides/ai-select.js) 的全部内容并启用、保存。
 3. 在目标订阅的「覆写配置」中勾选该脚本，再让客户端更新订阅。将脚本放入本仓库或同步分组清单，不会自动启用它。
-4. 在客户端为 `AI 节点组` 选定一个固定节点。普通手选组未指定 `default-selected` 且没有已保存选择时，默认使用它。客户端若恢复了此前为 `广告拦截` 保存的其他选择，可在该组手动切回 `REJECT`。
+4. 要让业务组跟随 AI 出口，在业务组内选择 `⚡ AI 节点`，再为 AI 组选定节点。客户端若为三个直连组记住了其他出口，可在相应的组手动切回 `DIRECT`。
 
-覆写脚本按当前清单中的纯文字名称识别本仓的专用分组。更新已有订阅时，在妙妙屋保存新版脚本、同步分组清单并重新生成订阅，再在客户端刷新。AI 节点组可在客户端的代理组面板选择。原版网页编辑器的「特殊节点」栏固定显示内置选项。如果保存的订阅本身已定义 AI 组，桌面端也可以拖动组名左侧的手柄，把它加入其他组。
+更新已有订阅的覆写时，在妙妙屋保存新版脚本，再在客户端刷新订阅。修改分组清单后，可在妙妙屋同步清单并重新生成订阅。原版网页编辑器的「特殊节点」栏固定显示内置选项。如果保存的订阅本身已定义 AI 组，桌面端也可以拖动组名左侧的手柄，把它加入其他组。
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
@@ -158,7 +154,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 确认最终配置包含 `claude-domain`、`claude`、`claude-ip` 三个提供方及各自的 `RULE-SET`，其中 `claude-ip` 带 `no-resolve`。AI 域名规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。在客户端为 `AI 服务` 选择固定节点，并通过连接记录确认 Claude Code 的实际出口。
 
-分组清单包含 37 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
+分组清单包含 37 个分组。清单开头为 **⚡ AI 节点 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
 **苹果服务 → 微软服务 → 云服务** 三组相邻，随后是 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务 → 电报消息**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。
 
