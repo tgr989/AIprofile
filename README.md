@@ -77,26 +77,26 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充�
 | `anthropiccdn.com`、`anthropic-cdn.com`、`anthropicsystem.com`、`anthropic.cloud` | 为社区清单的四个域名配置显式后缀匹配。 [Linux DO 规则帖](https://linux.do/t/topic/2292545/4) |
 | `intercom-messenger.com`、`us5.datadoghq.com`、`siftscience.com` | 补充客服、遥测和风控。共用的 `r.stripe.com`、`fcmtoken.googleapis.com` 和 Cloudflare 验证以注释形式保留，按需启用。 [X 分流帖](https://x.com/qwerty__cs/status/2124495008070091159) · [作者更正](https://x.com/qwerty__cs/status/2124502685210804571) |
 | `statsig.com` | [Claude Code 官方开发容器的网络白名单](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh)；`statsigapi.net` 后缀无法覆盖 |
-| `intercomassets.com` | [Aiip.si 分流说明](https://aiip.si/routing/)中的客服资源，按后缀匹配并交给 AI 服务 |
+| `intercomassets.com` | 已注释并改由云服务的 `intercom.mrs` 统一覆盖（上游未收录的 `intercom-messenger.com` 继续保留在 `claude-domain`）；参考 [Aiip.si 分流说明](https://aiip.si/routing/) |
 | `accounts.google.com`、`oauth2.googleapis.com`、`openidconnect.googleapis.com` | Google 登录授权、令牌交换和用户信息接口，均以精确匹配的注释备用规则保留。参考 [Aiip.si](https://aiip.si/routing/)和 [Google 官方 OpenID Connect 发现文档](https://accounts.google.com/.well-known/openid-configuration) |
 | `appleid.apple.com`、`idmsa.apple.com` | Apple 授权和账户认证的精确匹配备用规则，均以注释保留。参考 [Sign in with Apple 文档](https://developer.apple.com/documentation/signinwithapple/incorporating-sign-in-with-apple-into-other-platforms)和 [Apple 企业网络主机清单](https://support.apple.com/en-us/101555) |
 | `maps.googleapis.com` | **精确匹配，已注释**；保留 Net.Coffee KYC 表格中的 Google 地图备用规则，当前交由 Google 分组处理 |
 | `withpersona.com`、`frompersona.com`、`yoti.com` | Net.Coffee 的 KYC 表格及 Claude 身份/年龄核验使用的 Persona 与 Yoti 域名，按后缀匹配并交给 AI 服务 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 页面静态资源和 Claude Code 下载的精确匹配备用规则，均以注释保留。参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1) |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `claude`、`anthropic` 关键词 | 兜底参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)，覆盖包含这些字符串的域名（含 `anthropic.com.cn`）；`sentry` 关键词已注释并交由云服务的 `sentry.mrs` 覆盖 |
+| `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry`、`claude`、`anthropic` 关键词 | `claude.yaml` 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)），覆盖各区域变体及 `anthropic.com.cn` 等包含对应字符串的域名 |
 | `153.61.224.0/22` | Claude API 的入站网段，由 `claude-ip` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 | `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
 参考项目的其他 Anthropic 域名、IP 和 ASN 已由现有规则覆盖；其 OpenAI 清单中的 `chatgpt.livekit.cloud`、`host.livekit.cloud`、`turn.livekit.cloud` 也已由 AI 服务中的 `openai` / `category-ai-!cn` 覆盖。本次按 Claude 与实时通信相关范围合并差异，不整体挂载该项目的 Facebook、X 等规则集。
 
-云服务的 `site_rules` 以 hCaptcha、WorkOS、Sentry、GitHub、GitLab 开头，其中 `workos` 由本仓维护的 MRS 统一覆盖 WorkOS / AuthKit 域名，`sentry` 引用 MetaCubeX 的 `geo/geosite/sentry.mrs`。OneDrive 由「微软服务」的 `microsoft` 提供方匹配，上游清单覆盖 OneDrive 和 SharePoint 域名。云服务和微软服务随 `balanced` 和 `comprehensive` 预设启用。 [WorkOS MRS](mmw/ruleset/workos.mrs) · [WorkOS 明文清单](mmw/ruleset/workos.list) · [Sentry 域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sentry.list) · [微软域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list)
+云服务的 `site_rules` 以 hCaptcha、WorkOS、Sentry、Intercom、GitHub、GitLab 开头，其中 `workos` 由本仓维护的 MRS 统一覆盖 WorkOS / AuthKit 域名，`sentry` 与 `intercom` 分别引用 MetaCubeX 的 `geo/geosite/sentry.mrs` 和 `geo/geosite/intercom.mrs`。OneDrive 由「微软服务」的 `microsoft` 提供方匹配，上游清单覆盖 OneDrive 和 SharePoint 域名。云服务和微软服务随 `balanced` 和 `comprehensive` 预设启用。 [WorkOS MRS](mmw/ruleset/workos.mrs) · [WorkOS 明文清单](mmw/ruleset/workos.list) · [Sentry 域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sentry.list) · [Intercom 域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/intercom.list) · [微软域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list)
 
-`claude-domain` 收录 7 条精确域名、37 条域名后缀和 1 条 AWS 区域通配规则。更新时编辑明文清单，再运行 `mihomo convert-ruleset domain text mmw/ruleset/claude/domain-claude.list mmw/ruleset/claude/domain-claude.mrs`。 [MRS](mmw/ruleset/claude/domain-claude.mrs) · [明文清单](mmw/ruleset/claude/domain-claude.list)
+`claude-domain` 收录 7 条精确域名、34 条域名后缀和 1 条 AWS 区域通配规则。更新时编辑明文清单，再运行 `mihomo convert-ruleset domain text mmw/ruleset/claude/domain-claude.list mmw/ruleset/claude/domain-claude.mrs`。 [MRS](mmw/ruleset/claude/domain-claude.mrs) · [明文清单](mmw/ruleset/claude/domain-claude.list)
 
 `claude-ip` 收录 41 条 CIDR，涵盖 Anthropic 登记网段、运营商转分配、BGP 公告及 Claude 官方 IP 清单。更新地址时编辑明文清单，再运行 `mihomo convert-ruleset ipcidr text mmw/ruleset/claude/ipcidr-claude.list mmw/ruleset/claude/ipcidr-claude.mrs`。 [MRS](mmw/ruleset/claude/ipcidr-claude.mrs) · [明文清单](mmw/ruleset/claude/ipcidr-claude.list)
 
-现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词继续保留；Sentry 域名改由云服务分组的 `sentry.mrs` 统一覆盖。更早命中广告拦截的连接仍由广告分组处理。
+`claude.yaml` 保留 `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry` 等关键词兜底（覆盖 `browser-intake-us5-datadoghq.com` 等变体）；`domain-claude.list` 中重复的 `sentry.io` 与三条 Intercom 后缀已注释并交由云服务的 `sentry.mrs` 和 `intercom.mrs` 维护。更早命中广告拦截的连接仍由广告分组处理。
 
 Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登录、Google 地图、页面静态资源和下载域名在 `domain-claude.list` 中以注释形式保留，默认交由订阅的其他规则匹配。推荐在客户端将 **`谷歌服务`、`苹果服务` 与 `AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。按需取消注释并重新编译 MRS 后，同域名的其他应用请求也会交给 AI 服务。
 

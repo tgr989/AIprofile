@@ -44,9 +44,10 @@ anthropic-com.ghost.io
 +.withpersona.com
 +.frompersona.com
 +.yoti.com
-+.intercom.io
-+.intercomcdn.com
-+.intercomassets.com
+# Intercom 其余后缀已由云服务分组的 intercom.mrs 统一覆盖，此处仅保留上游未收录的 intercom-messenger.com。
+# +.intercom.io
+# +.intercomcdn.com
+# +.intercomassets.com
 +.intercom-messenger.com
 
 # 错误报告、运行指标、功能开关与访问统计。

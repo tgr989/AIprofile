@@ -11,6 +11,6 @@ gemini-api-docs-mcp.dev
 # +.api.statsig.com
 # +.events.statsigapi.net
 +.featuregates.org
-# claude-domain 已包含相同的 Intercom 域名后缀。
+# Intercom 已由云服务分组的 intercom.mrs 统一覆盖。
 # +.intercom.io
 # +.intercomcdn.com

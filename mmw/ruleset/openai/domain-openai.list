@@ -28,8 +28,8 @@ rum.browser-intake-datadoghq.com
 # register.appattest.apple.com
 # js.stripe.com
 
-# claude-domain 已包含相同的 Intercom 后缀（含 js.intercomcdn.com）；
-# Sentry 已由云服务分组的 sentry.mrs 统一覆盖（o33249.ingest.sentry.io 另由上游 openai.yaml 和 category-ai-!cn.mrs 精确收录）。
+# Intercom 与 Sentry 已由云服务分组的 intercom.mrs（含 js.intercomcdn.com）与 sentry.mrs 统一覆盖；
+# o33249.ingest.sentry.io 另由上游 openai.yaml 和 category-ai-!cn.mrs 精确收录。
 # +.intercom.io
 # +.intercomcdn.com
 # o207216.ingest.sentry.io

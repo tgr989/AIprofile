@@ -13,6 +13,10 @@
 
 payload:
   # 关键词也会匹配其他站点。
+  - 'DOMAIN-KEYWORD,intercom'
+  - 'DOMAIN-KEYWORD,statsig'
+  - 'DOMAIN-KEYWORD,fathom'
+  - 'DOMAIN-KEYWORD,growthbook'
   - 'DOMAIN-KEYWORD,datadog'
   - 'DOMAIN-KEYWORD,sift'
   - 'DOMAIN-KEYWORD,sentry'
