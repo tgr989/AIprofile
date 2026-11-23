@@ -40,16 +40,18 @@ anthropic-com.ghost.io
 +.anthropicsystem.com
 +.anthropic.cloud
 
-# Persona 身份核验和邮件，以及 Intercom 客服。
+# Persona 与 Yoti 身份及年龄核验、邮件，以及 Intercom 客服。
 +.withpersona.com
 +.frompersona.com
++.yoti.com
 +.intercom.io
 +.intercomcdn.com
 +.intercomassets.com
 +.intercom-messenger.com
 
 # 错误报告、运行指标、功能开关与访问统计。
-+.sentry.io
+# Sentry 已由云服务分组的 sentry.mrs 统一覆盖。
+# +.sentry.io
 +.statsigapi.net
 +.statsig.com
 +.us5.datadoghq.com
@@ -65,9 +67,8 @@ cdn.usefathom.com
 # fcmtoken.googleapis.com
 
 # hCaptcha 由云服务分组的 hcaptcha.mrs 覆盖。
-# X 分流清单列出的共用人机验证与身份核验服务，按需启用。
+# X 分流清单列出的共用 Cloudflare 人机验证域名，按需启用。
 # challenges.cloudflare.com
-# +.yoti.com
 
 # 共用认证域名按需启用。Google 登录及 OAuth / OpenID Connect。
 # accounts.google.com

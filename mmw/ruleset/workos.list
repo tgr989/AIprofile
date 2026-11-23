@@ -1,0 +1,9 @@
+# WorkOS 与 AuthKit 企业认证、SSO 及静态资源域名，供云服务分组挂载。
+# https://workos.com/docs/authkit
++.workos.com
++.workos.dev
++.workoscdn.com
++.authkit.app
++.authkit.com
+workos.imgix.net
+workos.statuspage.io

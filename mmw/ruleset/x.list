@@ -34,7 +34,8 @@
 +.twttr.net
 +.twvid.com
 +.vine.co
-+.workos.com
+# WorkOS 已由云服务分组的 workos 规则集统一覆盖。
+# +.workos.com
 +.x.ai
 +.x.com
 agent-stores.s3.amazonaws.com
