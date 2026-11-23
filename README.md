@@ -26,15 +26,15 @@ AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
-`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `claude` → `openai` → `openai-domain` → `gemini` → `category-ai-!cn` → `ai-fallback`。`claude` 匹配 NTP GeoSite 和 Anthropic ASN，`claude-ip` 匹配 IPv4 和 IPv6 CIDR。 [Claude 补充规则](mmw/ruleset/claude.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
+`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `openai` → `openai-domain` → `category-ai-!cn` → `ai-fallback`。`ai-fallback` 集中承载 Gemini 补充域名、NTP GeoSite、关键词兜底、诊断探针和各厂商 ASN，`claude-ip` 与 `openai-ip` 匹配 IPv4 和 IPv6 CIDR。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
 
 上游 `openai` 提供方使用 MetaCubeX 的 `classical` YAML，包含 ChatGPT 的 Azure Web PubSub 动态域名规则。`openai-domain` 收录 OpenAI、ChatGPT 和 Codex 的补充域名，包括这些客户端使用的第三方服务端点。 [OpenAI 上游规则](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml) · [补充域名清单](mmw/ruleset/openai/domain-openai.list) · [MRS](mmw/ruleset/openai/domain-openai.mrs)
 
-Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `openai-ip` 和 `openai-asn`。`openai-ip` 匹配 OpenAI 汇总 CIDR，`openai-asn` 指向本仓的 `openai.yaml`，其中的 ASN `payload` 目前以注释保留。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [OpenAI 补充规则](mmw/ruleset/openai.yaml)
+Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `claude-ip` 和 `openai-ip`。`openai-ip` 匹配 OpenAI 汇总 CIDR，OpenAI ASN 备用规则以注释保留在 `ai-fallback.yaml`。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 **启用 AI 拦截**
 
-共用 AI 和 Claude 的 UDP 443 拦截默认关闭。两个源文件中的 `# rules:` 都是注释。同步分组清单会加载分流规则，启用拦截还要把选中的 `REJECT` 规则加入最终订阅。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml) · [Claude 规则](mmw/ruleset/claude.yaml)
+共用 AI、Claude 和 ChatGPT Voice 的 UDP 拦截默认关闭，`ai-fallback.yaml` 顶部的 `# rules:` 与 `# rule-providers:` 均为注释模板。同步分组清单会加载分流规则，启用拦截还要把选中的 `REJECT` 规则加入最终订阅。 [AI 兜底与拦截模板](mmw/ruleset/ai-fallback.yaml)
 
 1. 按需准备依赖。共用 AI 规则需要客户端的 GeoSite 数据库含 `category-ai-!cn`。Claude 规则需要 `ASN.mmdb` 和顶层 `rule-providers` 中的 `claude-ip`。`balanced` 和 `comprehensive` 预设会随 AI 服务生成该提供方。手动维护订阅时，用 `claude-ip` 作为 YAML 键，复制分组清单中该条目除 `key` 外的字段。 [分组清单](mmw/proxy_groups/proxy_groups.json)
 2. 从下例复制所需的 `-` 列表项，插入订阅已有的顶层 `rules`，放在广告拦截和高优先级自定义规则之后、常规 AI 分流之前。从源文件复制时，取 `# rules:` 中引号内的完整规则，写成同样的列表项。迁移已有的 `RULE-SET,ai-routing-reject,REJECT` 时，用选中的列表项替换它。
@@ -47,7 +47,7 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
      - 'AND,((NETWORK,UDP),(DST-PORT,443),(OR,((RULE-SET,claude-ip,no-resolve),(IP-ASN,399358,no-resolve),(IP-ASN,60808,no-resolve),(IP-ASN,4167,no-resolve),(IP-ASN,400243,no-resolve),(IP-ASN,401551,no-resolve)))),REJECT'
    ```
 
-3. 若还需启用 ChatGPT Voice 拦截，从 `openai.yaml` 的注释示例复制 `chatgpt-voice` 定义到订阅的 `rule-providers`，去掉复制行开头的 `# ` 并保留缩进。将同文件的拦截规则按上例加入 `rules`。它依赖 `ASN.mmdb`，拒绝目标 IP 命中 Voice 官方网段或 OpenAI ASN 的 UDP 3478 和 UDP 443。TCP 443 继续按后续规则分流。 [Voice 配置示例](mmw/ruleset/openai.yaml)
+3. 若还需启用 ChatGPT Voice 拦截，从 `ai-fallback.yaml` 的注释示例复制 `chatgpt-voice` 定义到订阅的 `rule-providers`，去掉复制行开头的 `# ` 并保留缩进。将同文件的拦截规则按上例加入 `rules`。它依赖 `ASN.mmdb`，拒绝目标 IP 命中 Voice 官方网段或 OpenAI ASN 的 UDP 3478 和 UDP 443。TCP 443 继续按后续规则分流。 [Voice 配置示例](mmw/ruleset/ai-fallback.yaml)
 4. 合并后运行 `mihomo -t -d <客户端配置目录> -f <订阅配置.yaml>` 检查配置。刷新订阅后，可在客户端连接日志中核对 UDP 443 的命中规则和 `REJECT` 动作。
 
 截至 2026-11-22，已将 OpenAI 的七份官方 CIDR 清单分别编译为 Mihomo `ipcidr` MRS。
@@ -64,13 +64,13 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
 
 截至 2026-11-23，七份服务清单均只包含 IPv4。汇总库包含七份清单合并后的 2,936 条 IPv4 CIDR，以及 ARIN 分配给 OpenAI OpCo, LLC 的 IPv6 网段 `2604:f20::/28`。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [ARIN IPv6 登记](https://rdap.arin.net/registry/ip/2604:f20::/28)
 
-AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名和 6 个 ASN 作为备用规则供后续单独挂载，`facebook`、`fbcdn` 关键词以注释形式保留在 `ai-fallback.yaml`。ASN 对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [ASN 备用规则](mmw/ruleset/meta.yaml)
+AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名作为备用 MRS 保留，`facebook`、`fbcdn` 关键词与 6 个 ASN（对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐）均以注释形式统一保留在 `ai-fallback.yaml`。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
-`gemini` 以 `classical` YAML 收录 Gemini CLI 站点和 Gemini Docs MCP 域名；`ai-fallback` 排在末尾加载 `ai-fallback.yaml` 中的关键词兜底与诊断探针规则。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用 `common-ai` 或 `ai-routing` 的订阅应重新同步分组清单并生成，以加载拆分后的各提供方。 [Gemini 补充规则](mmw/ruleset/gemini.yaml) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
+`ai-fallback` 排在 AI 服务 `site_rules` 末尾，以 `classical` YAML 统一加载 Gemini CLI / Docs MCP 域名、NTP 分类、关键词兜底、诊断探针及 Anthropic ASN。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用旧提供方（如 `common-ai`、`ai-routing`、`claude`、`gemini`、`openai-asn`）的订阅应重新同步分组清单并生成。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 截至 2026-11-21，Anthropic 公布的 API 入站地址为 `160.79.104.0/23`、`153.61.224.0/22` 和 `2607:6bc0::/48`，工具调用等出站请求使用 `160.79.104.0/21` 和 `153.61.208.0/20`。本规则将两类网段都作为目标地址匹配，其中 `/21` 已覆盖第一条入站 `/23`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses)
 
-`claude-domain` 和 `claude` 依次挂载在 AI 分组的 `site_rules` 中，分别使用 `domain` MRS 和 `classical` YAML。`claude-ip` 以 `behavior: ipcidr`、`format: mrs` 挂载在 `ip_rules` 中。妙妙屋会把 `ip_rules` 排到域名规则之后，并加上 `no-resolve`。以后恢复服务端口规则时，也应使用 `behavior: classical`、`format: yaml` 以支持端口和逻辑匹配。
+`claude-domain` 和 `ai-fallback` 挂载在 AI 分组的 `site_rules` 中，分别使用 `domain` MRS 和 `classical` YAML。`claude-ip` 以 `behavior: ipcidr`、`format: mrs` 挂载在 `ip_rules` 中。妙妙屋会把 `ip_rules` 排到域名规则之后，并加上 `no-resolve`。以后恢复服务端口规则时，也应使用 `behavior: classical`、`format: yaml` 以支持端口和逻辑匹配。
 
 | 补充内容 | 作用与来源 |
 | --- | --- |
@@ -102,11 +102,11 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 
 已启用的第三方服务域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
 
-`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`claude.yaml` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。其中的 `time.google.com`、`time.apple.com` 仍按 NTP 规则处理，不受上述 Google / Apple 精确匹配规则注释影响。
+`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`ai-fallback.yaml` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。其中的 `time.google.com`、`time.apple.com` 仍按 NTP 规则处理，不受上述 Google / Apple 精确匹配规则注释影响。
 
-**当前启用 NTP 域名分类。** `claude.yaml` 中的 UDP 123 端口兜底以注释形式保留。纯 IP 连接且内核未识别到域名，或域名未被 NTP 分类收录时，流量按后续规则处理。 [Mihomo 的域名与端口匹配说明](https://wiki.metacubex.one/config/rules/)
+**当前启用 NTP 域名分类。** `ai-fallback.yaml` 中的 UDP 123 端口兜底以注释形式保留。纯 IP 连接且内核未识别到域名，或域名未被 NTP 分类收录时，流量按后续规则处理。 [Mihomo 的域名与端口匹配说明](https://wiki.metacubex.one/config/rules/)
 
-需要启用 NTP 端口兜底时，在 `claude.yaml` 中取消对应规则的注释，发布后在客户端刷新 `claude` 规则提供方。
+需要启用 NTP 端口兜底时，在 `ai-fallback.yaml` 中取消对应规则的注释，发布后在客户端刷新 `ai-fallback` 规则提供方。
 
 | 目标端口 | 传输协议 | 状态 | 作用与来源 |
 | --- | --- | --- | --- |
@@ -120,7 +120,7 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 | --- | --- | --- |
 | TMO-WFC | T-Mobile Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
 | GG-WFC | giffgaff / O2 Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
-| ESET | MetaCubeX ESET 域名规则集（当前仅使用 MRS） | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
+| ESET | MetaCubeX ESET 域名规则集。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/eset.list) | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 苹果定位 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
 | Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads 等域名，以及 Facebook IP 网段。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
 | Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
@@ -129,18 +129,7 @@ Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时
 
 妙妙屋当前生成器为这些普通分组默认选择 `🚀 节点选择`，分组清单不能指定默认出口。生成后需在客户端为 **ESET** 选择统一出口：中国大陆网络使用 `DIRECT`；境外需要中国出口时选择中国大陆节点。`DIRECT` 使用设备当前网络，并不自动获得中国 IP。
 
-妙妙屋分组引用的本地补充域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 当前仅引用 MetaCubeX 的 `geo/geosite/eset.mrs`（`behavior: domain`、`format: mrs`），`ip_rules` 为空；实际启用的覆盖范围以上游 MRS 为准。
-
-ESET 自维护规则已整合为两份备用文件，**当前均未挂载到 ESET 分组**：
-
-| 文件 | 内容 | 恢复引用时的类型 |
-| --- | --- | --- |
-| [eset-domain.yaml](mmw/ruleset/eset-domain.yaml) | 26 条域名规则：原中国服务、更新仓库及企业云补充规则 | `site_rules`，`behavior: classical`、`format: yaml` |
-| [eset-ip.yaml](mmw/ruleset/eset-ip.yaml) | 436 条精确 IP 规则，其中 19 条 IPv6 | `ip_rules`，`behavior: ipcidr`、`format: yaml` |
-
-两份备用文件保留整合前的全部条目，旧的分类文件已移除。内容按 [官方 KB332 服务清单](https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall) 于 **2026-11-14** 核对，包括中国服务、更新下载、激活、LiveGrid、LiveGuard、PROTECT、Inspect、反垃圾和样本提交等地址。若以后启用 IP 规则，生成器会在对应的 `RULE-SET` 后添加 `no-resolve`。[ESET Connect](https://help.eset.com/eset_connect/en-US/prerequisites.html) 的 API 域名已由上游 `eset.systems` 后缀覆盖。
-
-备用 IP 规则只收录官方列出的客户端出站服务地址，采用 `/32` 或 `/128`，不扩大到整个云厂商网段。共享的 Microsoft OAuth 登录、第三方 OCSP，以及入站邮件、Syslog 的源地址不纳入 ESET 专用规则。本地清单是上述日期的快照，后续需依据官方清单和[变更记录](https://support.eset.com/en/kb8900-changelog-for-kb332)更新。
+妙妙屋分组引用的本地补充域名规则使用 `classical` YAML，保留精确匹配、后缀匹配和正则匹配。ESET 引用 MetaCubeX 的 `geo/geosite/eset.mrs`（`behavior: domain`、`format: mrs`），`ip_rules` 为空。
 
 Apple Music 使用 MetaCubeX 的 `geo/geosite/apple-music.mrs`，通用代理使用 `geo-lite/geosite/proxy.mrs`。代理媒体的同名 MRS 当前为空，改用其上游 blackmatrix7 的 `GlobalMedia_Domain.yaml`，对应 `behavior: domain`、`format: yaml` 和 `./ruleset/proxymedia.yaml` 缓存路径。PT 站点的源文件包含带类型前缀的规则，使用 `behavior: classical`。
 
@@ -154,7 +143,7 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 在妙妙屋重新同步分组清单并生成订阅，再在客户端更新订阅和规则提供方。`withpersona.com`、`frompersona.com`、`yoti.com` 及其子域由 `RULE-SET,claude-domain,AI 服务` 匹配。 [Claude 域名清单](mmw/ruleset/claude/domain-claude.list)
 
-确认最终配置包含 `claude-domain`、`claude`、`claude-ip` 三个提供方及各自的 `RULE-SET`，其中 `claude-ip` 带 `no-resolve`。AI 域名规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。在客户端为 `AI 服务` 选择固定节点，并通过连接记录确认 Claude Code 的实际出口。
+确认最终配置包含 `claude-domain`、`ai-fallback`、`claude-ip` 等提供方及各自的 `RULE-SET`，其中 `claude-ip` 带 `no-resolve`。AI 域名规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。在客户端为 `AI 服务` 选择固定节点，并通过连接记录确认 Claude Code 的实际出口。
 
 分组清单包含 37 个分组。清单开头为 **⚡ AI 节点 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 

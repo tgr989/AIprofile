@@ -1,6 +1,0 @@
-# Gemini CLI 站点与 Gemini Docs MCP 的补充分流规则。规则提供方使用 behavior: classical、format: yaml。
-# https://geminicli.com/docs/get-started/installation/
-# https://aistudio.google.com/docs/coding-agents
-payload:
-  - 'DOMAIN,gemini-api-docs-mcp.dev'
-  - 'DOMAIN-SUFFIX,geminicli.com'

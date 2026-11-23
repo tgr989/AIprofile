@@ -1,5 +1,5 @@
 # Claude、Claude Code 与 Cowork 的域名规则。+. 匹配域名及其各级子域。
-# 来源见 ../claude.yaml。
+# 来源见 ../ai-fallback.yaml。
 
 # Claude 站点、API 与登录域名。
 +.anthropic.com

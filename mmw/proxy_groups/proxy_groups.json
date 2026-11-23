@@ -50,15 +50,6 @@
         "interval": 86400
       },
       {
-        "key": "claude",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude.yaml",
-        "path": "./ruleset/claude.yaml",
-        "interval": 86400
-      },
-      {
         "key": "openai",
         "behavior": "classical",
         "type": "http",
@@ -74,15 +65,6 @@
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/domain-openai.mrs",
         "path": "./ruleset/domain-openai.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "gemini",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gemini.yaml",
-        "path": "./ruleset/gemini.yaml",
         "interval": 86400
       },
       {
@@ -116,20 +98,11 @@
       },
       {
         "key": "openai-ip",
-        "type": "http",
         "behavior": "ipcidr",
+        "type": "http",
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai.mrs",
         "path": "./ruleset/ipcidr-openai.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "openai-asn",
-        "type": "http",
-        "behavior": "classical",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai.yaml",
-        "path": "./ruleset/openai-asn.yaml",
         "interval": 86400
       }
     ]

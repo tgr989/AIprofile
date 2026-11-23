@@ -1,9 +1,52 @@
-# 共用 AI 拦截、关键词兜底与诊断规则。
-# category-ai-!cn 的 UDP 443 拦截默认关闭。启用时，将引号内的整条规则作为一项加入最终订阅的 rules。
+# AI 补充分流、关键词兜底、ASN 与可选 UDP 拦截规则。规则提供方使用 behavior: classical、format: yaml。
+# 2026-11-22 对照下列资料整理，Claude 为"一等公民"：
+# https://ip.net.coffee/claude/site.html
+# https://www.nodeseek.com/post-682343-1
+# https://aiip.si/routing
+# https://github.com/jinxinkai/clash-ai-rules/blob/master/Anthropic.yaml
+# https://linux.do/t/topic/2292545
+# https://x.com/qwerty__cs/status/2124502685210804571
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 可选 UDP 拦截与附加规则集（默认关闭；按需将 rules / rule-providers 并入最终订阅同名配置段）
+# HTTP 规则提供方仅读取下方的 payload。
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. 拒绝共用 AI 域名（category-ai-!cn）的 UDP 443：
 # rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,category-ai-!cn)),REJECT']
+#
+# 2. 拒绝命中 claude-ip 或任一 Anthropic ASN 的 UDP 443：
+# rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(OR,((RULE-SET,claude-ip,no-resolve),(IP-ASN,399358,no-resolve),(IP-ASN,60808,no-resolve),(IP-ASN,4167,no-resolve),(IP-ASN,400243,no-resolve),(IP-ASN,401551,no-resolve)))),REJECT']
+#
+# 3. 拒绝目标 IP 命中 ChatGPT Voice 官方网段或 OpenAI ASN 的 UDP 3478 和 UDP 443（需同时并入下方 chatgpt-voice 提供方）：
+# rules: ['AND,((NETWORK,UDP),(DST-PORT,3478/443),(OR,((RULE-SET,chatgpt-voice,no-resolve),(IP-ASN,232,no-resolve),(IP-ASN,401518,no-resolve),(IP-ASN,401864,no-resolve)))),REJECT']
+#
+# rule-providers:
+#   chatgpt-voice:
+#     type: http
+#     behavior: ipcidr
+#     format: mrs
+#     url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.mrs
+#     path: ./ruleset/ipcidr-openai-chatgpt-voice.mrs
+#     interval: 86400
 
 payload:
-  # 关键词兜底（也会匹配包含相同字符串的其他站点）。
+  # ── 1. 补充域名与诊断探针 ──────────────────────────────────────────────────
+  # Gemini CLI 站点与 Gemini Docs MCP。
+  # https://geminicli.com/docs/get-started/installation/
+  # https://aistudio.google.com/docs/coding-agents
+  - 'DOMAIN,gemini-api-docs-mcp.dev'
+  - 'DOMAIN-SUFFIX,geminicli.com'
+
+  # Aiip.si 的 DNS 测试探针，按需用于该站检测。
+  - 'DOMAIN-SUFFIX,d.aiip.si'
+
+  # ── 2. 时间同步（NTP） ─────────────────────────────────────────────────────
+  # Net.Coffee 的 NTP 域名分类。
+  - 'GEOSITE,category-ntp'
+  # 匹配所有发往 UDP 123 的 NTP 连接，按需启用。
+  # - 'AND,((NETWORK,UDP),(DST-PORT,123))'
+
+  # ── 3. 关键词兜底（也会匹配包含相同字符串的其他站点） ──────────────────────
   - 'DOMAIN-KEYWORD,claude'
   - 'DOMAIN-KEYWORD,anthropic'
   - 'DOMAIN-KEYWORD,openai'
@@ -20,5 +63,29 @@ payload:
   # - 'DOMAIN-KEYWORD,facebook'
   # - 'DOMAIN-KEYWORD,fbcdn'
 
-  # Aiip.si 的 DNS 测试探针，按需用于该站检测。
-  - 'DOMAIN-SUFFIX,d.aiip.si'
+  # ── 4. ASN 兜底（均附 no-resolve） ─────────────────────────────────────────
+  # ARIN 登记给 Anthropic 的 ASN（启用）。
+  # https://whois.arin.net/rest/org/AP-2440/asns
+  - 'IP-ASN,399358,no-resolve'
+  - 'IP-ASN,60808,no-resolve'
+  - 'IP-ASN,4167,no-resolve'
+  - 'IP-ASN,400243,no-resolve'
+  - 'IP-ASN,401551,no-resolve'
+
+  # ARIN 登记给 OpenAI OpCo, LLC 的 ASN（备用，按需启用）。
+  # ChatGPT Connectors 网段（含 199.47.142.0/23）已由 openai-ip 覆盖；或单独使用
+  # mmw/ruleset/openai/ipcidr-openai-chatgpt-connectors.mrs（behavior: ipcidr, format: mrs）。
+  # https://whois.arin.net/rest/org/OOL-15/asns
+  # - 'IP-ASN,232,no-resolve'
+  # - 'IP-ASN,401518,no-resolve'
+  # - 'IP-ASN,401864,no-resolve'
+
+  # Meta 对等网络集合及 APNIC 登记的 Facebook Singapore ASN（备用，按需启用）。
+  # https://www.radb.net/query/?keywords=AS-FACEBOOK
+  # https://rdap.apnic.net/autnum/149642
+  # - 'IP-ASN,11917,no-resolve'
+  # - 'IP-ASN,32934,no-resolve'
+  # - 'IP-ASN,34825,no-resolve'
+  # - 'IP-ASN,54115,no-resolve'
+  # - 'IP-ASN,63293,no-resolve'
+  # - 'IP-ASN,149642,no-resolve'
