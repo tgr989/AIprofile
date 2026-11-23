@@ -158,4 +158,4 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 **苹果服务 → 微软服务 → 云服务** 三组相邻，随后是 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务 → 电报消息**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。
 
-社交媒体之后依次是 **Tiktok → Spotify → 流媒体**。清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud 分流 → 非中国**。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+社交媒体之后依次是 **Tiktok → Spotify → 流媒体**。清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud 分流 → 代理媒体 → 代理服务 → 非中国**。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

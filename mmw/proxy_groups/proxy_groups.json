@@ -1071,58 +1071,6 @@
     "ip_rules": []
   },
   {
-    "name": "proxy",
-    "label": "代理服务",
-    "emoji": "🔀",
-    "icon": "🔀",
-    "rule_name": "Proxy",
-    "group_label": "代理服务",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "proxy",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
-        "path": "./ruleset/proxy.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "proxymedia",
-    "label": "代理媒体",
-    "emoji": "🎥",
-    "icon": "🎥",
-    "rule_name": "Proxy Media",
-    "group_label": "代理媒体",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "proxymedia",
-        "behavior": "domain",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Domain.yaml",
-        "path": "./ruleset/proxymedia.yaml",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": [
-      {
-        "key": "proxymedia-ip",
-        "behavior": "classical",
-        "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml",
-        "path": "./ruleset/proxymedia-ip.yaml",
-        "interval": 86400
-      }
-    ]
-  },
-  {
     "name": "yahoo",
     "label": "Yahoo 服务",
     "emoji": "📰",
@@ -1189,6 +1137,58 @@
         "format": "mrs",
         "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "proxymedia",
+    "label": "代理媒体",
+    "emoji": "🎥",
+    "icon": "🎥",
+    "rule_name": "Proxy Media",
+    "group_label": "代理媒体",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "proxymedia",
+        "behavior": "domain",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Domain.yaml",
+        "path": "./ruleset/proxymedia.yaml",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": [
+      {
+        "key": "proxymedia-ip",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml",
+        "path": "./ruleset/proxymedia-ip.yaml",
+        "interval": 86400
+      }
+    ]
+  },
+  {
+    "name": "proxy",
+    "label": "代理服务",
+    "emoji": "🔀",
+    "icon": "🔀",
+    "rule_name": "Proxy",
+    "group_label": "代理服务",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "proxy",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs",
+        "path": "./ruleset/proxy.mrs",
         "interval": 86400
       }
     ],
