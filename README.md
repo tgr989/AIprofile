@@ -5,7 +5,7 @@ AI-generated profile
 
 TCSCloud SeedNet 的 TW Top 1000 和 A/B 实测报告收录在 `egress-check`。TCSCloud 分流、Meta、Line 和 Shopee 的自维护域名规则集中在 `mmw/ruleset/tcscloud-seednet`。 [实测报告](egress-check/README.md#tcscloud-seednet) · [域名规则](mmw/ruleset/tcscloud-seednet/)
 
-分组名 `group_label` 使用纯文字。`emoji` 和 `icon` 使用同一个 emoji。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
+分组名 `group_label` 使用纯文字。每组的 `emoji` 和 `icon` 使用同一个图标。两个 Wi-Fi Calling 组共用 🛜，ESET 安全服务使用 🛡️。
 
 原版妙妙屋通过 `post_fetch` 覆写生成 `AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
 
