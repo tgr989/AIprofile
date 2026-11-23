@@ -15,11 +15,6 @@
 #     interval: 86400
 
 # payload:
-#   # OpenAI 关键词补充。
-#   - 'DOMAIN-KEYWORD,openai'
-#   - 'DOMAIN-KEYWORD,chatgpt'
-#   - 'DOMAIN-KEYWORD,codex'
-
 #   # ChatGPT Connectors 网段（含 199.47.142.0/23）已由 openai-ip 覆盖。或使用
 #   # mmw/ruleset/openai/ipcidr-openai-chatgpt-connectors.mrs，behavior 为 ipcidr，format 为 mrs。
 #   # ARIN 登记给 OpenAI OpCo, LLC 的 ASN。

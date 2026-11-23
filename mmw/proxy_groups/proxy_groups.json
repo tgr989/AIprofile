@@ -77,6 +77,15 @@
         "interval": 86400
       },
       {
+        "key": "gemini",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gemini.yaml",
+        "path": "./ruleset/gemini.yaml",
+        "interval": 86400
+      },
+      {
         "key": "category-ai-!cn",
         "behavior": "domain",
         "type": "http",
@@ -86,21 +95,12 @@
         "interval": 86400
       },
       {
-        "key": "ai-routing",
-        "type": "http",
-        "behavior": "domain",
-        "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/ai-routing.mrs",
-        "path": "./ruleset/ai-routing.mrs",
-        "interval": 86400
-      },
-      {
-        "key": "ai-routing-classical",
+        "key": "ai-fallback",
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/ai-routing.yaml",
-        "path": "./ruleset/ai-routing.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/ai-fallback.yaml",
+        "path": "./ruleset/ai-fallback.yaml",
         "interval": 86400
       }
     ],

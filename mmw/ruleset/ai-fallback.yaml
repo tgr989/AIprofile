@@ -1,0 +1,24 @@
+# 共用 AI 拦截、关键词兜底与诊断规则。
+# category-ai-!cn 的 UDP 443 拦截默认关闭。启用时，将引号内的整条规则作为一项加入最终订阅的 rules。
+# rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,category-ai-!cn)),REJECT']
+
+payload:
+  # 关键词兜底（也会匹配包含相同字符串的其他站点）。
+  - 'DOMAIN-KEYWORD,claude'
+  - 'DOMAIN-KEYWORD,anthropic'
+  - 'DOMAIN-KEYWORD,openai'
+  - 'DOMAIN-KEYWORD,chatgpt'
+  - 'DOMAIN-KEYWORD,codex'
+  - 'DOMAIN-KEYWORD,intercom'
+  - 'DOMAIN-KEYWORD,statsig'
+  - 'DOMAIN-KEYWORD,fathom'
+  - 'DOMAIN-KEYWORD,growthbook'
+  - 'DOMAIN-KEYWORD,datadog'
+  - 'DOMAIN-KEYWORD,sift'
+  - 'DOMAIN-KEYWORD,sentry'
+  # Meta / Facebook 关键词兜底，按需启用。
+  # - 'DOMAIN-KEYWORD,facebook'
+  # - 'DOMAIN-KEYWORD,fbcdn'
+
+  # Aiip.si 的 DNS 测试探针，按需用于该站检测。
+  - 'DOMAIN-SUFFIX,d.aiip.si'

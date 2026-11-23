@@ -1,7 +1,0 @@
-# 共用 AI 域名补充规则，供 ai-routing 提供方编译 MRS。
-
-# Gemini CLI 站点与 Gemini Docs MCP。
-# https://geminicli.com/docs/get-started/installation/
-# https://aistudio.google.com/docs/coding-agents
-gemini-api-docs-mcp.dev
-+.geminicli.com

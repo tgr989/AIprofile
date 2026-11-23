@@ -26,15 +26,15 @@ AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
-`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `claude` → `openai` → `openai-domain` → `category-ai-!cn` → `ai-routing` → `ai-routing-classical`。`claude` 匹配关键词、GeoSite 和 ASN，`claude-ip` 匹配 IPv4 和 IPv6 CIDR。 [Claude 补充规则](mmw/ruleset/claude.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
+`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `claude` → `openai` → `openai-domain` → `gemini` → `category-ai-!cn` → `ai-fallback`。`claude` 匹配 NTP GeoSite 和 Anthropic ASN，`claude-ip` 匹配 IPv4 和 IPv6 CIDR。 [Claude 补充规则](mmw/ruleset/claude.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
 
 上游 `openai` 提供方使用 MetaCubeX 的 `classical` YAML，包含 ChatGPT 的 Azure Web PubSub 动态域名规则。`openai-domain` 收录 OpenAI、ChatGPT 和 Codex 的补充域名，包括这些客户端使用的第三方服务端点。 [OpenAI 上游规则](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml) · [补充域名清单](mmw/ruleset/openai/domain-openai.list) · [MRS](mmw/ruleset/openai/domain-openai.mrs)
 
-Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `openai-ip` 和 `openai-asn`。`openai-ip` 匹配 OpenAI 汇总 CIDR，`openai-asn` 指向本仓的 `openai.yaml`，其中的 ASN 和关键词 `payload` 目前以注释保留。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [OpenAI 补充规则](mmw/ruleset/openai.yaml)
+Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `openai-ip` 和 `openai-asn`。`openai-ip` 匹配 OpenAI 汇总 CIDR，`openai-asn` 指向本仓的 `openai.yaml`，其中的 ASN `payload` 目前以注释保留。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [OpenAI 补充规则](mmw/ruleset/openai.yaml)
 
 **启用 AI 拦截**
 
-共用 AI 和 Claude 的 UDP 443 拦截默认关闭。两个源文件中的 `# rules:` 都是注释。同步分组清单会加载分流规则，启用拦截还要把选中的 `REJECT` 规则加入最终订阅。 [共用 AI 规则](mmw/ruleset/ai-routing.yaml) · [Claude 规则](mmw/ruleset/claude.yaml)
+共用 AI 和 Claude 的 UDP 443 拦截默认关闭。两个源文件中的 `# rules:` 都是注释。同步分组清单会加载分流规则，启用拦截还要把选中的 `REJECT` 规则加入最终订阅。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml) · [Claude 规则](mmw/ruleset/claude.yaml)
 
 1. 按需准备依赖。共用 AI 规则需要客户端的 GeoSite 数据库含 `category-ai-!cn`。Claude 规则需要 `ASN.mmdb` 和顶层 `rule-providers` 中的 `claude-ip`。`balanced` 和 `comprehensive` 预设会随 AI 服务生成该提供方。手动维护订阅时，用 `claude-ip` 作为 YAML 键，复制分组清单中该条目除 `key` 外的字段。 [分组清单](mmw/proxy_groups/proxy_groups.json)
 2. 从下例复制所需的 `-` 列表项，插入订阅已有的顶层 `rules`，放在广告拦截和高优先级自定义规则之后、常规 AI 分流之前。从源文件复制时，取 `# rules:` 中引号内的完整规则，写成同样的列表项。迁移已有的 `RULE-SET,ai-routing-reject,REJECT` 时，用选中的列表项替换它。
@@ -64,9 +64,9 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
 
 截至 2026-11-23，七份服务清单均只包含 IPv4。汇总库包含七份清单合并后的 2,936 条 IPv4 CIDR，以及 ARIN 分配给 OpenAI OpCo, LLC 的 IPv6 网段 `2604:f20::/28`。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [ARIN IPv6 登记](https://rdap.arin.net/registry/ip/2604:f20::/28)
 
-AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名、关键词和 6 个 ASN 作为备用规则，供后续单独挂载。ASN 对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [关键词和 ASN 规则](mmw/ruleset/meta.yaml)
+AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名和 6 个 ASN 作为备用规则供后续单独挂载，`facebook`、`fbcdn` 关键词以注释形式保留在 `ai-fallback.yaml`。ASN 对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [ASN 备用规则](mmw/ruleset/meta.yaml)
 
-`ai-routing` 保留 Gemini CLI 和共用或零散的 AI 域名，`ai-routing-classical` 紧随其后加载 `ai-routing.yaml` 中的诊断探针与 `classical` 规则。更新各域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用 `common-ai` 的订阅应重新同步分组清单并生成，以加载拆分后的各提供方。 [共用 MRS](mmw/ruleset/ai-routing.mrs) · [共用域名清单](mmw/ruleset/ai-routing.list) · [共用 Classical YAML](mmw/ruleset/ai-routing.yaml)
+`gemini` 以 `classical` YAML 收录 Gemini CLI 站点和 Gemini Docs MCP 域名；`ai-fallback` 排在末尾加载 `ai-fallback.yaml` 中的关键词兜底与诊断探针规则。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用 `common-ai` 或 `ai-routing` 的订阅应重新同步分组清单并生成，以加载拆分后的各提供方。 [Gemini 补充规则](mmw/ruleset/gemini.yaml) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 截至 2026-11-21，Anthropic 公布的 API 入站地址为 `160.79.104.0/23`、`153.61.224.0/22` 和 `2607:6bc0::/48`，工具调用等出站请求使用 `160.79.104.0/21` 和 `153.61.208.0/20`。本规则将两类网段都作为目标地址匹配，其中 `/21` 已覆盖第一条入站 `/23`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses)
 
@@ -84,7 +84,7 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充�
 | `withpersona.com`、`frompersona.com`、`yoti.com` | Net.Coffee 的 KYC 表格及 Claude 身份/年龄核验使用的 Persona 与 Yoti 域名，按后缀匹配并交给 AI 服务 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 页面静态资源和 Claude Code 下载的精确匹配备用规则，均以注释保留。参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1) |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry`、`claude`、`anthropic` 关键词 | `claude.yaml` 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)），覆盖各区域变体及 `anthropic.com.cn` 等包含对应字符串的域名 |
+| `claude`、`anthropic`、`openai`、`chatgpt`、`codex` 及遥测风控关键词 | 收敛于 [ai-fallback.yaml](mmw/ruleset/ai-fallback.yaml) 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)），覆盖各区域变体及 `anthropic.com.cn` 等包含对应字符串的域名 |
 | `153.61.224.0/22` | Claude API 的入站网段，由 `claude-ip` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 | `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
@@ -96,7 +96,7 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充�
 
 `claude-ip` 收录 41 条 CIDR，涵盖 Anthropic 登记网段、运营商转分配、BGP 公告及 Claude 官方 IP 清单。更新地址时编辑明文清单，再运行 `mihomo convert-ruleset ipcidr text mmw/ruleset/claude/ipcidr-claude.list mmw/ruleset/claude/ipcidr-claude.mrs`。 [MRS](mmw/ruleset/claude/ipcidr-claude.mrs) · [明文清单](mmw/ruleset/claude/ipcidr-claude.list)
 
-`claude.yaml` 保留 `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry` 等关键词兜底（覆盖 `browser-intake-us5-datadoghq.com` 等变体）；`domain-claude.list` 中重复的 `sentry.io` 与三条 Intercom 后缀已注释并交由云服务的 `sentry.mrs` 和 `intercom.mrs` 维护。更早命中广告拦截的连接仍由广告分组处理。
+`ai-fallback.yaml` 保留 `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry` 等关键词兜底（覆盖 `browser-intake-us5-datadoghq.com` 等变体）；`domain-claude.list` 中重复的 `sentry.io` 与三条 Intercom 后缀已注释并交由云服务的 `sentry.mrs` 和 `intercom.mrs` 维护。更早命中广告拦截的连接仍由广告分组处理。
 
 Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登录、Google 地图、页面静态资源和下载域名在 `domain-claude.list` 中以注释形式保留，默认交由订阅的其他规则匹配。推荐在客户端将 **`谷歌服务`、`苹果服务` 与 `AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。按需取消注释并重新编译 MRS 后，同域名的其他应用请求也会交给 AI 服务。
 
