@@ -1,0 +1,31 @@
+# OpenAI ASN 分流与 ChatGPT Voice 拦截。
+# 按需将 rule-providers 和 rules 并入订阅的同名配置段。
+# openai-asn 以 classical YAML 加载下方的 payload。
+rules: [
+  # 拒绝发往 ChatGPT Voice 官方目标网段的 UDP 3478 和 TCP 443。
+  'AND,((NETWORK,UDP),(DST-PORT,3478),(RULE-SET,chatgpt-voice,no-resolve)),REJECT',
+  'AND,((NETWORK,TCP),(DST-PORT,443),(RULE-SET,chatgpt-voice,no-resolve)),REJECT',
+]
+
+rule-providers:
+  chatgpt-voice:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.mrs
+    path: ./ruleset/ipcidr-openai-chatgpt-voice.mrs
+    interval: 86400
+
+payload:
+  # OpenAI 关键词补充。
+  - 'DOMAIN-KEYWORD,openai'
+  - 'DOMAIN-KEYWORD,chatgpt'
+  - 'DOMAIN-KEYWORD,codex'
+
+  # ChatGPT Connectors 网段（含 199.47.142.0/23）已由 openai-ip 覆盖。或使用
+  # mmw/ruleset/openai/ipcidr-openai-chatgpt-connectors.mrs，behavior 为 ipcidr，format 为 mrs。
+  # ARIN 登记给 OpenAI OpCo, LLC 的 ASN。
+  # https://whois.arin.net/rest/org/OOL-15/asns
+  - 'IP-ASN,232,no-resolve'
+  - 'IP-ASN,401518,no-resolve'
+  - 'IP-ASN,401864,no-resolve'

@@ -1,0 +1,89 @@
+# Claude、Claude Code 与 Cowork 的域名规则。+. 匹配域名及其各级子域。
+# 来源见 ../claude-supplement.yaml。
+
+# Claude 站点、API 与登录域名。
++.anthropic.com
+aws-external-anthropic.*.api.aws
++.claude.ai
++.claude.com
++.clau.de
++.anthropic.team
++.ant.dev
++.antspace.dev
++.chatbotclaude.com
++.claude.app
++.claude.dev
++.claude.new
++.claude.site
++.claudeacademy.com
++.claudepages.dev
++.claudestudio.com
+
+# 用户内容、Artifacts、Claude in Chrome 和 MCP 文档及连接器。
++.claudeusercontent.com
++.claudemcpclient.com
++.claudemcpcontent.com
++.modelcontextprotocol.com
++.modelcontextprotocol.io
++.modelcontextprotocol.net
++.modelcontextprotocol.org
+
+# 外部 CDN、认证与内容站点。
+servd-anthropic-website.b-cdn.net
+anthropic.com.cdn.cloudflare.net
+anthropic.auth0.com
+anthropic-com.ghost.io
+
+# Linux DO 社区清单收录的域名后缀。
++.anthropiccdn.com
++.anthropic-cdn.com
++.anthropicsystem.com
++.anthropic.cloud
+
+# Persona 身份核验和邮件，以及 Intercom 客服。
++.withpersona.com
++.frompersona.com
++.intercom.io
++.intercomcdn.com
++.intercomassets.com
++.intercom-messenger.com
+
+# 错误报告、运行指标、功能开关与访问统计。
++.sentry.io
++.statsigapi.net
++.statsig.com
++.us5.datadoghq.com
+browser-intake-us5-datadoghq.com
+cdn.growthbook.io
+cdn.usefathom.com
+
+# 风控服务。
++.siftscience.com
+
+# Stripe.js 遥测与 Firebase 推送注册的共用端点，按需启用。
+# r.stripe.com
+# fcmtoken.googleapis.com
+
+# hCaptcha 由云服务分组的 hcaptcha.mrs 覆盖。
+# X 分流清单列出的共用人机验证与身份核验服务，按需启用。
+# challenges.cloudflare.com
+# +.yoti.com
+
+# 共用认证域名按需启用。Google 登录及 OAuth / OpenID Connect。
+# accounts.google.com
+# oauth2.googleapis.com
+# openidconnect.googleapis.com
+
+# Apple 授权及账户认证。
+# appleid.apple.com
+# idmsa.apple.com
+
+# Google 地图 API 用于身份核验相关请求。
+# maps.googleapis.com
+
+# NodeSeek 列出的页面静态资源和 Claude Code 下载域名。
+# t0.gstatic.com
+# t1.gstatic.com
+# t2.gstatic.com
+# t3.gstatic.com
+# storage.googleapis.com

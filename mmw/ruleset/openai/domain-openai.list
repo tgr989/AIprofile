@@ -1,0 +1,23 @@
+# OpenAI、ChatGPT 与 Codex 的补充域名。
+# +. 匹配主域和各级子域，.ct.sendgrid.net 匹配该域名下的各级子域。
++.ai.com
+chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com
+openai-api.arkoselabs.com
++.client-api.arkoselabs.com
+
+# ChatGPT 与 Codex 客户端使用的第三方主机。
+# https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
+.ct.sendgrid.net
+cdn.workos.com
+forwarder.workos.com
+frontend-apps-multi-region.workos.com
+images.workoscdn.com
+challenges.cloudflare.com
+humb.apple.com
+js.stripe.com
+# claude-domain 的 sentry.io 后缀覆盖以下主机。
+# o207216.ingest.sentry.io
+# claude 提供方通过 datadog 关键词覆盖这个端点，此处启用精确域名规则。
+rum.browser-intake-datadoghq.com
+setup.workos.com
+workos.imgix.net
