@@ -1,0 +1,27 @@
+# xAI、Grok、SpaceXSI 与 Cursor 域名规则。+. 匹配主域及各级子域。
+
+# xAI / Grok / SpaceXSI。
++.grok.com
++.grok.me
++.grok.x.com
++.grokbot.com
++.grokipedia.com
++.grokusercontent.com
++.spacex.ai
++.spacexsi.com
++.x.ai
+
+# Cursor 与其云代理、二进制及制品存储。
++.cursor-cdn.com
++.cursor.com
++.cursor.sh
++.cursor.so
++.cursorapi.com
++.cursorvm.com
+agent-stores.s3.amazonaws.com
+agent-stores.s3.us-east-1.amazonaws.com
+anysphere-binaries.s3.us-east-1.amazonaws.com
+cloud-agent-artifacts.s3.us-east-1.amazonaws.com
+cursor.blob.core.windows.net
+# WorkOS 已由云服务分组的 workos 规则集统一覆盖。
+# +.workos.com

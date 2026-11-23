@@ -1,20 +1,8 @@
+# X / Twitter 社交平台域名规则（xAI / Grok / SpaceXSI / Cursor 已拆分至 xai.list）。
 +.ads-twitter.com
 +.cms-twdigitalassets.com
-+.cursor-cdn.com
-+.cursor.com
-+.cursor.sh
-+.cursor.so
-+.cursorapi.com
-+.cursorvm.com
-+.grok.com
-+.grok.me
-+.grokbot.com
-+.grokipedia.com
-+.grokusercontent.com
 +.periscope.tv
 +.pscp.tv
-+.spacex.ai
-+.spacexsi.com
 +.t.co
 +.tellapart.com
 +.tweetdeck.com
@@ -34,12 +22,4 @@
 +.twttr.net
 +.twvid.com
 +.vine.co
-# WorkOS 已由云服务分组的 workos 规则集统一覆盖。
-# +.workos.com
-+.x.ai
 +.x.com
-agent-stores.s3.amazonaws.com
-agent-stores.s3.us-east-1.amazonaws.com
-anysphere-binaries.s3.us-east-1.amazonaws.com
-cloud-agent-artifacts.s3.us-east-1.amazonaws.com
-cursor.blob.core.windows.net
