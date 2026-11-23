@@ -2,7 +2,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # 家宽VPS分流一键自查检测 Egress-Check v2.19.6      鸣谢：https://ip.net.coffee
 #
-# 用 mtr 取每个域名的"第一个公网跳", 按 ASN 自动分组上色, 直接可视化线路分流.
+# 用 mtr 取每个域名的第一个可见公网跳，按 ASN 分组并复测可比较的差异。
 # ASN 差异是可见路由差异的线索，不能单独证明目标实际看到的出口或应用分流。
 #
 # 默认行为 (无 -4/-6):
@@ -211,13 +211,13 @@ usage() {
     cat <<EOF
 家宽VPS分流一键自查检测 Egress-Check v${VERSION}   鸣谢：${BRAND_URL}
 Usage: $(basename "$0") [options]
-  (no flag)      自动: 网络环境 + IPv4 线路分流 + IPv6 线路分流
+  (no flag)      自动检测网络环境并分别比较 IPv4、IPv6 的可见首跳 ASN
   -I, --interactive
                  交互菜单: 输入 0-7 选择检测模式，默认 1
   -4, --ipv4     只跑 IPv4
   -6, --ipv6     只跑 IPv6
   --json         JSON 输出
-  --compact      简洁报告，不显示路径 ASN 摘要及正常组域名
+  --compact      简洁报告，略去路径 ASN 摘要和基准匹配组的域名
   --no-color     关闭颜色
   --low-resource 低并发低压力模式
   --only <CAT>   只跑指定分类
@@ -961,7 +961,7 @@ print_env_section() {
 }
 print_pass_header() {
     [[ $OUTPUT_JSON -eq 1 ]] && return 0
-    printf "\n  %s%s 线路分流检测%s  %s%s%s\n" "$BOLD" "$1" "$R" "$GRAY" "$(repeat_char "─" 44)" "$R"
+    printf "\n  %s%s MTR 首跳检测%s  %s%s%s\n" "$BOLD" "$1" "$R" "$GRAY" "$(repeat_char "─" 44)" "$R"
 }
 print_category_header() {
     [[ $OUTPUT_JSON -eq 1 ]] && return 0
@@ -1049,7 +1049,7 @@ print_result_row() {
         [[ "$is_split" == -1 ]] && status="${9:-无法判定}"
         if [[ "$is_split" == 1 ]]; then
             latency_disp="$(printf '%s%s%s' "$YELLOW" "$(format_latency_text "$latency")" "$R")"
-            printf "      %b  %s%-*s  %b  %s%-3s  %-12s  ⮜ 分流%s\n" "$marker" "$YELLOW" "$domain_width" "$domain" "$latency_disp" "$YELLOW" "$cc" "$asn_label" "$R"
+            printf "      %b  %s%-*s  %b  %s%-3s  %-12s  ⮜ 首跳 ASN 差异已复测%s\n" "$marker" "$YELLOW" "$domain_width" "$domain" "$latency_disp" "$YELLOW" "$cc" "$asn_label" "$R"
         else
             [[ -z "$asn" && "$is_split" != -1 ]] && status="$isp"
             [[ "$latency" == - && "$ip" != - ]] && status+=" (目标未回应)"
@@ -1063,7 +1063,7 @@ print_result_row() {
     # All markers occupy one display cell, including color-disabled output.
     if [[ "$is_split" == "1" ]]; then
         latency_disp="$(printf '%s%s%s' "$YELLOW" "$(format_latency_text "$latency")" "$R")"
-        printf "      %b  %s%-*s  %-*s  %b  %s%-3s  %s  ⮜ 分流%s\n" "$marker" "$YELLOW" "$domain_width" "$domain" "$ip_width" "$ip" "$latency_disp" "$YELLOW" "$cc" "$asn_isp" "$R"
+        printf "      %b  %s%-*s  %-*s  %b  %s%-3s  %s  ⮜ 首跳 ASN 差异已复测%s\n" "$marker" "$YELLOW" "$domain_width" "$domain" "$ip_width" "$ip" "$latency_disp" "$YELLOW" "$cc" "$asn_isp" "$R"
     else
         latency_disp="$(format_latency "$latency")"
         printf "      %b  %-*s  %-*s  %b  %-3s  %s%s%s\n" "$marker" "$domain_width" "$domain" "$ip_width" "$ip" "$latency_disp" "$cc" "$DIM" "$asn_isp" "$R"
@@ -1149,37 +1149,35 @@ run_mtr_group() {
 }
 
 run_check_pass() {
-    local label="$1" ip_flag="$2" tmp_file="$3" prefix base_asn mtr_base_asn effective_base_asn base_desc topology_note base_evidence
+    local label="$1" ip_flag="$2" tmp_file="$3" prefix base_asn mtr_base_asn effective_base_asn base_source base_desc base_evidence
     case "$label" in
         IPv4) prefix=V4; base_asn="${V4_BASE_ASN:-}"; mtr_base_asn="${V4_MTR_BASE_ASN:-}"; base_evidence="${V4_MTR_BASE_EVIDENCE:-}" ;;
         IPv6) prefix=V6; base_asn="${V6_BASE_ASN:-}"; mtr_base_asn="${V6_MTR_BASE_ASN:-}"; base_evidence="${V6_MTR_BASE_EVIDENCE:-}" ;;
     esac
     effective_base_asn="$base_asn"
-    base_desc="默认出口 ${base_asn:+AS$base_asn}"
-    case "$EGRESS_BASE_MODE" in
-        echo) ;;
-        mtr)
-            if [[ -n "$mtr_base_asn" ]]; then
-                effective_base_asn="$mtr_base_asn"
-                base_desc="MTR主路径 AS$mtr_base_asn"
-            fi
-            ;;
-        auto|*)
-            if [[ -n "$base_asn" && -n "$mtr_base_asn" && "$base_asn" != "$mtr_base_asn" ]]; then
-                effective_base_asn="$mtr_base_asn"
-                base_desc="MTR主路径 AS$mtr_base_asn"
-                topology_note="HTTP出口 AS$base_asn 与稳定 MTR首跳 AS$mtr_base_asn 不同；本轮按 MTR主路径比较，不直接证明 NAT 或分流"
-            fi
-            ;;
-    esac
+    base_source=""
+    base_desc="未知"
+    if [[ -n "$base_asn" ]]; then
+        base_source=http_echo
+        base_desc="HTTP 回显 IP 所属 AS$base_asn"
+    fi
+    if [[ -n "$mtr_base_asn" && "$EGRESS_BASE_MODE" != echo &&
+          ( "$EGRESS_BASE_MODE" == mtr || "$mtr_base_asn" != "$base_asn" ) ]]; then
+        effective_base_asn="$mtr_base_asn"
+        base_source=mtr
+        base_desc="稳定 MTR 首跳 AS$mtr_base_asn"
+        if [[ "$mtr_base_asn" != "$base_asn" ]]; then
+            local echo_asn="${base_asn:+AS$base_asn}"
+            base_desc+="（HTTP 回显 ASN ${echo_asn:-未知}）"
+        fi
+    fi
+    printf -v "${prefix}_EFFECTIVE_ASN" '%s' "$effective_base_asn"
+    printf -v "${prefix}_BASE_SOURCE" '%s' "$base_source"
     eval "${prefix}_OK=0"; eval "${prefix}_DOWN=0"; eval "${prefix}_HIDDEN=0"
     local SPLIT_COLORS=( "$YELLOW" "$MAGENTA" "$RED" "$CYAN" )
     local split_color_n=4
     print_pass_header "$label"
-    if [[ $OUTPUT_JSON -eq 0 && -n "${topology_note:-}" ]]; then
-        printf "    %s %s%s%s\n" "$SYM_INFO" "$CYAN" "$topology_note" "$R"
-        printf "      %sHTTP出口仍用于展示真实对外 IP；MTR 用于比较不同域名的路由路径%s\n" "$DIM" "$R"
-    fi
+    [[ $OUTPUT_JSON -eq 0 ]] && printf "    %s比较基准  %s%s\n" "$DIM" "$base_desc" "$R"
     local out_dir; out_dir="$(mktemp -d "$RUN_DIR/mtr.XXXXXX")"
     local DOMAIN_WIDTH=24 IP_WIDTH=15 gi
     [[ "$ip_flag" == "-6" ]] && IP_WIDTH=39
@@ -1284,7 +1282,7 @@ run_check_pass() {
         elif ! route_evidence_comparable "$base_evidence" "$evidence"; then
             comparison_reason="$(route_evidence_reason "$base_evidence" "$evidence")"
         elif [[ "$confirmed" == 1 ]]; then
-            is_split=1; comparison="repeatable_difference"; comparison_scope="complete_prefix"; comparison_reason="复测首跳 ASN 差异，疑似分流；不证明应用出口改变"
+            is_split=1; comparison="repeatable_difference"; comparison_scope="complete_prefix"; comparison_reason="复测确认可见首跳 ASN 与基准不同"
         elif [[ -z "$comparison_reason" ]]; then
             comparison_reason="首跳差异未经确认 / 无法判定"
         fi
@@ -1345,7 +1343,7 @@ run_check_pass() {
     printf -v "${prefix}_UNKNOWN" '%s' "$unknown_count"
     if [[ $OUTPUT_JSON -eq 0 && $route_count -gt 0 ]]; then
         printf "\n  %s\n" "$(rule_single 72)"
-        printf "  %s%s 线路分流汇总%s  %s(基准 = %s)%s\n" "$BOLD" "$label" "$R" "$DIM" "$base_desc" "$R"
+        printf "  %s%s 可见首跳汇总%s\n" "$BOLD" "$label" "$R"
         printf "  %s\n" "$(rule_single 72)"
         local key round
         for round in base split unknown; do
@@ -1359,9 +1357,9 @@ run_check_pass() {
                 [[ "$asn_disp" == ip:* ]] && asn_disp="${asn_disp#ip:}" || asn_disp="AS$asn_disp"
                 local marker tag tagcol
                 if [[ "${route_split[$key]}" == "1" ]]; then
-                    marker="${SPLIT_COLORS[${route_scidx[$key]} % split_color_n]}●${R}"; tag="⚠ 首跳差异已复测（疑似分流）"; tagcol="$YELLOW"
+                    marker="${SPLIT_COLORS[${route_scidx[$key]} % split_color_n]}●${R}"; tag="⚠ 首跳 ASN 差异已复测"; tagcol="$YELLOW"
                 elif [[ "${route_split[$key]}" == "0" ]]; then
-                    marker="${GREEN}●${R}"; tag="✓ 符合预期（未分流）"; tagcol="$GREEN"
+                    marker="${GREEN}●${R}"; tag="✓ 首跳 ASN 与基准一致"; tagcol="$GREEN"
                 else
                     marker="$SYM_SKIP"; tag="首跳证据不足 / 无法判定"; tagcol="$GRAY"
                 fi
@@ -1377,10 +1375,11 @@ run_check_pass() {
             done
         done
         if [[ $split_idx -ge 1 ]]; then
-            printf "  %s%s %s检测到分流: %d 条非默认线路, %d 个域名被分流到其他出口%s\n" "$BOLD" "$SYM_WARN" "$YELLOW" "$split_idx" "$split_domain_count" "$R"
+            printf "  %s%s %s复测确认 %d 个域名的可见首跳 ASN 与基准不同，涉及 %d 个 ASN%s\n" "$BOLD" "$SYM_WARN" "$YELLOW" "$split_domain_count" "$split_idx" "$R"
         elif [[ $unknown_count -eq 0 ]]; then
-            printf "  %s%s %s所有域名走同一出口 (AS%s) — 未检测到分流%s\n" "$BOLD" "$SYM_INFO" "$GREEN" "$effective_base_asn" "$R"
-        else
+            printf "  %s%s %s所有已测域名的可见首跳 ASN 均与基准 AS%s 一致%s\n" "$BOLD" "$SYM_INFO" "$GREEN" "$effective_base_asn" "$R"
+        fi
+        if [[ $unknown_count -gt 0 ]]; then
             printf "  %s%s %s本轮 %d 个域名无法判定%s\n" "$BOLD" "$SYM_INFO" "$GRAY" "$unknown_count" "$R"
         fi
 
@@ -1475,11 +1474,11 @@ END_EPOCH=$(date +%s); ELAPSED=$((END_EPOCH - START_EPOCH)); ELAPSED_STR="$(form
 if [[ $OUTPUT_JSON -eq 0 ]]; then
     printf "\n"; rule_double 72
     if [[ $V4_PASS_RAN -eq 1 ]]; then
-        printf "  IPv4:  %s%d 域名%s   %s%d 种可见 ASN%s   %s%d 域名分流%s   %s%d 路径隐藏%s   %s%d 探测失败%s\n" "$GREEN" "$V4_OK" "$R" "$CYAN" "$V4_ROUTE_COUNT" "$R" "$YELLOW" "$V4_SPLIT_DOMAINS" "$R" "$GRAY" "$V4_HIDDEN" "$R" "$RED" "$V4_DOWN" "$R"
+        printf "  IPv4:  %s%d 个域名有可见首跳%s   %s%d 个首跳分组%s   %s%d 个域名首跳 ASN 差异已复测%s   %s%d 路径隐藏%s   %s%d 探测失败%s\n" "$GREEN" "$V4_OK" "$R" "$CYAN" "$V4_ROUTE_COUNT" "$R" "$YELLOW" "$V4_SPLIT_DOMAINS" "$R" "$GRAY" "$V4_HIDDEN" "$R" "$RED" "$V4_DOWN" "$R"
         printf "         %s%d 无法判定（包含隐藏、失败及首跳证据不足）%s\n" "$GRAY" "$V4_UNKNOWN" "$R"
     else printf "  IPv4:  %s skipped\n" "$SYM_SKIP"; fi
     if [[ $V6_PASS_RAN -eq 1 ]]; then
-        printf "  IPv6:  %s%d 域名%s   %s%d 种可见 ASN%s   %s%d 域名分流%s   %s%d 路径隐藏%s   %s%d 探测失败%s\n" "$GREEN" "$V6_OK" "$R" "$CYAN" "$V6_ROUTE_COUNT" "$R" "$YELLOW" "$V6_SPLIT_DOMAINS" "$R" "$GRAY" "$V6_HIDDEN" "$R" "$RED" "$V6_DOWN" "$R"
+        printf "  IPv6:  %s%d 个域名有可见首跳%s   %s%d 个首跳分组%s   %s%d 个域名首跳 ASN 差异已复测%s   %s%d 路径隐藏%s   %s%d 探测失败%s\n" "$GREEN" "$V6_OK" "$R" "$CYAN" "$V6_ROUTE_COUNT" "$R" "$YELLOW" "$V6_SPLIT_DOMAINS" "$R" "$GRAY" "$V6_HIDDEN" "$R" "$RED" "$V6_DOWN" "$R"
         printf "         %s%d 无法判定（包含隐藏、失败及首跳证据不足）%s\n" "$GRAY" "$V6_UNKNOWN" "$R"
     else printf "  IPv6:  %s skipped  %s%s%s\n" "$SYM_SKIP" "$DIM" "${V6_SKIP_REASON:-}" "$R"; fi
     printf "\n  检测脚本：%shttps://github.com/AIFansX/egress-check%s\n" "$CYAN" "$R"
@@ -1490,31 +1489,35 @@ build_pass_obj() {
     local prefix="$1" ran="$2" tmp_file="$3" skip_reason="$4"
     if [[ "$ran" == "1" ]]; then
         local ok down hidden routes
+        local asn_var="${prefix}_EFFECTIVE_ASN" source_var="${prefix}_BASE_SOURCE"
         eval "ok=\${${prefix}_OK}"; eval "down=\${${prefix}_DOWN}"; eval "hidden=\${${prefix}_HIDDEN}"; eval "routes=\${${prefix}_ROUTE_COUNT}"
-        jq -n --argjson ok "$ok" --argjson dn "$down" --argjson hidden "$hidden" --argjson rc "$routes" --slurpfile r "$tmp_file" \
+        jq -n --argjson ok "$ok" --argjson dn "$down" --argjson hidden "$hidden" --argjson rc "$routes" \
+            --arg asn "${!asn_var}" --arg source "${!source_var}" --slurpfile r "$tmp_file" \
             '$r[0] as $rows |
-            {available:true, summary:{total:($ok+$hidden+$dn), ok:$ok, hidden:$hidden, down:$dn,
+            {available:true, baseline_asn:(if $asn == "" then null else "AS"+$asn end),
+             baseline_source:(if $source == "" then null else $source end),
+             summary:{total:($ok+$hidden+$dn), ok:$ok, hidden:$hidden, down:$dn,
              unknown:([$rows[] | select(.split == null)] | length)},
              route_count:$rc, split_routing_detected:
                (if any($rows[]; .split == true) then true
                 elif all($rows[]; .split == false) then false else null end),
              results:$rows}'
     else
-        jq -n --arg reason "$skip_reason" '{available:false, summary:null, route_count:0, split_routing_detected:null, results:null, reason:$reason}'
+        jq -n --arg reason "$skip_reason" '{available:false, baseline_asn:null, baseline_source:null, summary:null, route_count:0, split_routing_detected:null, results:null, reason:$reason}'
     fi
 }
-V4_PASS_JSON="$(build_pass_obj V4 "$V4_PASS_RAN" "$TMP_V4_RESULTS" "IPv4 出口不可用")"
-V6_PASS_JSON="$(build_pass_obj V6 "$V6_PASS_RAN" "$TMP_V6_RESULTS" "${V6_SKIP_REASON:-IPv6 出口不可用或已禁用}")"
+build_pass_obj V4 "$V4_PASS_RAN" "$TMP_V4_RESULTS" "IPv4 出口不可用" > "$RUN_DIR/ipv4.json"
+build_pass_obj V6 "$V6_PASS_RAN" "$TMP_V6_RESULTS" "${V6_SKIP_REASON:-IPv6 出口不可用或已禁用}" > "$RUN_DIR/ipv6.json"
 jq -n --arg ts "$START_TS" --arg host "$HOST_NAME" --arg ver "$VERSION" --arg defegr "$DEFAULT_EGRESS" \
     --arg v4ip "$V4_IP" --arg v4info "$V4_INFO" --arg v6ip "$V6_IP" --arg v6info "$V6_INFO" \
     --arg v4echo "$V4_ECHO_DETAIL" --arg v6echo "$V6_ECHO_DETAIL" \
     --argjson v4uniq "$V4_ECHO_UNIQUE" --argjson v6uniq "$V6_ECHO_UNIQUE" \
-    --argjson elapsed "$ELAPSED" --argjson v4 "$V4_PASS_JSON" --argjson v6 "$V6_PASS_JSON" \
+    --argjson elapsed "$ELAPSED" --slurpfile v4 "$RUN_DIR/ipv4.json" --slurpfile v6 "$RUN_DIR/ipv6.json" \
     '{ timestamp:$ts, host:$host, version:$ver, elapsed_seconds:$elapsed,
        env:{ default_egress:$defegr,
          ipv4:{ip:(if $v4ip=="" then null else $v4ip end), info:$v4info, echo_unique_count:$v4uniq, echo_detail:(if $v4echo=="" then null else $v4echo end), snat_suspected:($v4uniq>1)},
          ipv6:{ip:(if $v6ip=="" then null else $v6ip end), info:$v6info, echo_unique_count:$v6uniq, echo_detail:(if $v6echo=="" then null else $v6echo end), snat_suspected:($v6uniq>1)} },
-       ipv4:$v4, ipv6:$v6 }' > "$FINAL_JSON"
+       ipv4:$v4[0], ipv6:$v6[0] }' > "$FINAL_JSON"
 [[ $OUTPUT_JSON -eq 1 ]] && cat "$FINAL_JSON"
 LAST_JSON="$CACHE_DIR/last.json"
 if mv -f -- "$FINAL_JSON" "$LAST_JSON" 2>/dev/null; then chmod 600 "$LAST_JSON" 2>/dev/null || true; FINAL_JSON=""

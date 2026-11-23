@@ -1,7 +1,7 @@
 # ChatGPT Voice 官方目标地址
 # https://openai.com/chatgpt-voice.json
 # 上游生成时间 2026-11-16T01:33:53.175979+00:00
-# UDP 3478 / TCP 443 由外层路由规则匹配
+# 外层路由规则仅拒绝目标 IP 命中此清单或 OpenAI ASN 的 UDP 3478 和 UDP 443。TCP 443 按订阅中的其他规则分流。
 
 4.150.48.254/32
 4.151.50.34/32

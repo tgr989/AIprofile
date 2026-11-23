@@ -1,6 +1,6 @@
 # 共用 AI 拦截和诊断规则。
-# 拒绝目标属于 category-ai-!cn 的 UDP 443，按需并入订阅的 rules。
-rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,category-ai-!cn)),REJECT']
+# category-ai-!cn 的 UDP 443 拦截默认关闭。启用时，将引号内的整条规则作为一项加入最终订阅的 rules。
+# rules: ['AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,category-ai-!cn)),REJECT']
 
 payload:
   # Aiip.si 的 DNS 测试探针，按需用于该站检测。

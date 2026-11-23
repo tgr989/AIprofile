@@ -1,15 +1,15 @@
-# Meta 的关键词和 ASN 备用规则，供后续以 classical YAML 提供方挂载。
-payload:
-  # 关键词匹配。
-  - 'DOMAIN-KEYWORD,facebook'
-  - 'DOMAIN-KEYWORD,fbcdn'
+# # Meta 的关键词和 ASN 备用规则，供后续以 classical YAML 提供方挂载。
+# payload:
+#   # 关键词匹配。
+#   - 'DOMAIN-KEYWORD,facebook'
+#   - 'DOMAIN-KEYWORD,fbcdn'
 
-  # Meta 对等网络集合及 APNIC 登记的 Facebook Singapore ASN。
-  # https://www.radb.net/query/?keywords=AS-FACEBOOK
-  # https://rdap.apnic.net/autnum/149642
-  - 'IP-ASN,11917,no-resolve'
-  - 'IP-ASN,32934,no-resolve'
-  - 'IP-ASN,34825,no-resolve'
-  - 'IP-ASN,54115,no-resolve'
-  - 'IP-ASN,63293,no-resolve'
-  - 'IP-ASN,149642,no-resolve'
+#   # Meta 对等网络集合及 APNIC 登记的 Facebook Singapore ASN。
+#   # https://www.radb.net/query/?keywords=AS-FACEBOOK
+#   # https://rdap.apnic.net/autnum/149642
+#   - 'IP-ASN,11917,no-resolve'
+#   - 'IP-ASN,32934,no-resolve'
+#   - 'IP-ASN,34825,no-resolve'
+#   - 'IP-ASN,54115,no-resolve'
+#   - 'IP-ASN,63293,no-resolve'
+#   - 'IP-ASN,149642,no-resolve'

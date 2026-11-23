@@ -10,7 +10,6 @@ SeedNet 默认公网 IPv4 [已脱敏] AS4780，Datawave 默认公网 IPv4 [已�
 判定口径（适用主清单与补测）
 两台 VPS 固定同一目标 IPv4。SeedNet 在相同跳位复现异常路径且 Datawave 可见基准首跳的条目，记为疑似路径分流。
 本报告以目标端重复回显非默认公网 IPv4 确认出口变化。TCP 443 示踪与 TTL 2 HTTPS 实连分别记录。
-原榜单逐站 A/B 完整跳点和 HTTPS 回显详见 tcscloud-seednet-ab-172.txt。
 
 路径分流结果（60 项）
 59 项为疑似路径分流。所列 65 组目标两轮均复现同一 SeedNet ICMP 跳点，TCP 443 示踪也均在 TTL 2 可见目标地址回应。

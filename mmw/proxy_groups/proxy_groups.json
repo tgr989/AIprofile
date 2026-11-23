@@ -54,8 +54,8 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude-supplement.yaml",
-        "path": "./ruleset/claude-supplement.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude.yaml",
+        "path": "./ruleset/claude.yaml",
         "interval": 86400
       },
       {
@@ -612,7 +612,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/meta-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/meta-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -652,7 +652,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/line-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/line-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -1166,7 +1166,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/shopee-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/shopee-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -1187,7 +1187,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/category-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
