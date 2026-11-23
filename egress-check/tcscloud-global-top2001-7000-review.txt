@@ -22,7 +22,7 @@ A 为 TCSCloud SeedNet（AS4780）。B 为 Datawave TW（AS142433）。
 覆盖与 DNS
 两端均查询 5,000 个裸域。4,808 个域名完成两轮同目标探测，覆盖 4,323 个不同的公网 IPv4。192 个域名在本次测量中未获得可测公网 IPv4。
 使用 www 入口 116 个，使用 Google DoH 作固定地址来源 0 个。
-两端裸域 IPv4 解析集合不同 566 个。SeedNet 裸域返回 0.0.0.0 的有 127 个，两端 DNS 明细见逐站 CSV。
+两端裸域 IPv4 解析集合不同 566 个。SeedNet 裸域返回 0.0.0.0 的有 127 个。
 
 两轮 HTTPS
 第 1 轮 A 收到 4,530 个 HTTP 响应，B 收到 4,535 个。
@@ -78,5 +78,3 @@ AWS 地址范围 https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGu
 筛选后 6665  原榜 6864  fordham.edu  150.108.166.32  A 301/301  B */*
 
 榜单文件 global-top2001-7000-no-cn.csv
-逐站明细 global-top2001-7000-ab-2026-11-23.csv
-补查 DNS 返回码 0 表示 NOERROR，2 表示 SERVFAIL，3 表示 NXDOMAIN。逐站明细里的 * 表示该跳无响应。

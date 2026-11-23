@@ -25,11 +25,6 @@ bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/
 - [TW Top 1000 分流与待判定报告](tcscloud-tw-top1000-review.txt)
 - [全球 Top 2000 A/B 报告](tcscloud-global-top2000-review.txt)
 - [全球第 2001–7000 名 A/B 报告](tcscloud-global-top2001-7000-review.txt)
-- [Meta、LINE、Yahoo、Shopee A/B 报告](service-families-2026-11-23/report.txt)
-- [疑似短路径的 A/B 复测](tcscloud-route-verification-2026-11-23.txt)
-- [blog.esuteru.com 与 jin115.com 的 ip.sh 复测](tcscloud-jin115-esuteru-ip-sh-2026-11-23.txt)
-
-CSV 中的 `[redacted]` 标记已脱敏的 VPS 出口地址和私网地址。
 
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |
@@ -42,7 +37,7 @@ CSV 中的 `[redacted]` 标记已脱敏的 VPS 出口地址和私网地址。
 
 ## 名单格式
 
-`tw-top1000.csv` 保留 `NetAPI_Rank_TW` 和 `Domain` 两个数据列，在首列增加 `EgressRule`。以下是表头和第一条记录。
+`tw-top1000.csv`、`global-top2000-no-cn.csv` 和 `global-top2001-7000-no-cn.csv` 均在首列提供 `EgressRule`，可直接通过 `--rules` 加载。其中 `tw-top1000.csv` 保留 `NetAPI_Rank_TW` 和 `Domain` 两个数据列，以下是表头和第一条记录。
 
 ```csv
 EgressRule,NetAPI_Rank_TW,Domain
