@@ -229,6 +229,27 @@
     "ip_rules": []
   },
   {
+    "name": "microsoft",
+    "label": "微软服务",
+    "emoji": "Ⓜ️",
+    "icon": "Ⓜ️",
+    "rule_name": "Microsoft",
+    "group_label": "微软服务",
+    "presets": ["balanced", "comprehensive"],
+    "site_rules": [
+      {
+        "key": "microsoft",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
+        "path": "./ruleset/microsoft.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
     "name": "cloud",
     "label": "云服务",
     "emoji": "☁️",
@@ -569,27 +590,6 @@
     ]
   },
   {
-    "name": "microsoft",
-    "label": "微软服务",
-    "emoji": "Ⓜ️",
-    "icon": "Ⓜ️",
-    "rule_name": "Microsoft",
-    "group_label": "微软服务",
-    "presets": ["balanced", "comprehensive"],
-    "site_rules": [
-      {
-        "key": "microsoft",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs",
-        "path": "./ruleset/microsoft.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "meta",
     "label": "Meta 服务",
     "emoji": "♾️",
@@ -702,6 +702,48 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/linkedin.mrs",
         "path": "./ruleset/linkedin.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "tiktok",
+    "label": "Tiktok",
+    "emoji": "🎶",
+    "icon": "🎶",
+    "rule_name": "Tiktok",
+    "group_label": "Tiktok",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "tiktok",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
+        "path": "./ruleset/tiktok.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "spotify",
+    "label": "Spotify",
+    "emoji": "🎵",
+    "icon": "🎵",
+    "rule_name": "Spotify",
+    "group_label": "Spotify",
+    "presets": ["comprehensive"],
+    "site_rules": [
+      {
+        "key": "spotify",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
+        "path": "./ruleset/spotify.mrs",
         "interval": 86400
       }
     ],
@@ -966,48 +1008,6 @@
     "ip_rules": []
   },
   {
-    "name": "tiktok",
-    "label": "Tiktok",
-    "emoji": "🎶",
-    "icon": "🎶",
-    "rule_name": "Tiktok",
-    "group_label": "Tiktok",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "tiktok",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs",
-        "path": "./ruleset/tiktok.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
-    "name": "spotify",
-    "label": "Spotify",
-    "emoji": "🎵",
-    "icon": "🎵",
-    "rule_name": "Spotify",
-    "group_label": "Spotify",
-    "presets": ["comprehensive"],
-    "site_rules": [
-      {
-        "key": "spotify",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs",
-        "path": "./ruleset/spotify.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
-  },
-  {
     "name": "pixiv",
     "label": "Pixiv",
     "emoji": "🎨",
@@ -1044,6 +1044,27 @@
         "format": "mrs",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/abema.mrs",
         "path": "./ruleset/abema.mrs",
+        "interval": 86400
+      }
+    ],
+    "ip_rules": []
+  },
+  {
+    "name": "ehentai",
+    "label": "E-Hentai",
+    "emoji": "🔞",
+    "icon": "🔞",
+    "rule_name": "E-Hentai",
+    "group_label": "E-Hentai",
+    "presets": [],
+    "site_rules": [
+      {
+        "key": "ehentai",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
+        "path": "./ruleset/ehentai.mrs",
         "interval": 86400
       }
     ],
@@ -1100,27 +1121,6 @@
         "interval": 86400
       }
     ]
-  },
-  {
-    "name": "ehentai",
-    "label": "E-Hentai",
-    "emoji": "🔞",
-    "icon": "🔞",
-    "rule_name": "E-Hentai",
-    "group_label": "E-Hentai",
-    "presets": [],
-    "site_rules": [
-      {
-        "key": "ehentai",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ehentai.mrs",
-        "path": "./ruleset/ehentai.mrs",
-        "interval": 86400
-      }
-    ],
-    "ip_rules": []
   },
   {
     "name": "yahoo",

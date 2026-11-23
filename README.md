@@ -160,6 +160,6 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 分组清单包含 37 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
-新增服务所在区段为 **云服务 → 私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。
+**苹果服务 → 微软服务 → 云服务** 三组相邻，随后是 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务 → 电报消息**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。
 
-清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud 分流 → 非中国**。其他额外分组按 **金融服务 → 数字货币 → Tiktok → Spotify** 排列。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+社交媒体之后依次是 **Tiktok → Spotify → 流媒体**。清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud 分流 → 非中国**。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
