@@ -1,12 +1,25 @@
-# Meta / Muse 补充域名。
-+.facebookquotes4u.com
+# Meta / Muse / Llama 补充域名，配合上游 MetaCubeX geosite:meta 使用。+. 匹配主域及各级子域。
+
+# Meta AI、Muse 与 Llama 补充域名（上游 meta.mrs 未收录）。
+# ecto1usercontent.com 与 meta-agents-apps.workers.dev 见 https://muse.ai/ 响应头 CSP。
+# meta-models.github.io 见 https://dev.meta.ai/docs/muse-code。
++.ecto1usercontent.com
++.fb.ai
++.llamameta.net
++.meta-agents-apps.workers.dev
++.wit.ai
+meta-models.github.io
+
+# Meta 生态补充域名（上游 meta.mrs 未收录，或仅精确收录主域）。
++.facebook.co
 +.fbaddins.com
 +.fbcdn-a.akamaihd.net
 +.instagr.am
-+.ip6.static.sl-reverse.com
++.instagram.net
++.mapillary.com
++.meta.me
++.metamail.com
++.metastatus.com
++.whatsapp.app
 +.whatsapp.biz
-+.llamameta.net
-
-# Muse Code SDK 文档。
-# https://dev.meta.ai/docs/muse-code
-meta-models.github.io
++.workrooms.com

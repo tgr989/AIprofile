@@ -64,7 +64,7 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
 
 截至 2026-11-23，七份服务清单均只包含 IPv4。汇总库包含七份清单合并后的 2,936 条 IPv4 CIDR，以及 ARIN 分配给 OpenAI OpCo, LLC 的 IPv6 网段 `2604:f20::/28`。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [ARIN IPv6 登记](https://rdap.arin.net/registry/ip/2604:f20::/28)
 
-AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名作为备用 MRS 保留，`facebook`、`fbcdn` 关键词与 6 个 ASN（对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐）均以注释形式统一保留在 `ai-fallback.yaml`。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
+AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse / Llama 的补充域名由 `meta-domain` 挂载在 `Meta 服务` 中，`facebook`、`fbcdn` 关键词与 6 个 ASN（对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐）均以注释形式统一保留在 `ai-fallback.yaml`。 [补充域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 `ai-fallback` 排在 AI 服务 `site_rules` 末尾，以 `classical` YAML 统一加载 Gemini CLI / Docs MCP 域名、关键词兜底、诊断探针及 Anthropic / OpenAI ASN；NTP 域名分类由前置的 `category-ntp` MRS 独立加载。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用旧提供方（如 `common-ai`、`ai-routing`、`claude`、`gemini`、`openai-asn`）的订阅应重新同步分组清单并生成。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
@@ -122,7 +122,7 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 | GG-WFC | giffgaff / O2 Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
 | ESET | MetaCubeX ESET 域名规则集。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/eset.list) | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 苹果定位 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
-| Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads 等域名，以及 Facebook IP 网段。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
+| Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads、Llama 等域名（上游 MRS + 自维护 `meta-domain` 与 SeedNet 补充），以及 Facebook IP 网段。[上游域名](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [补充域名](mmw/ruleset/meta/domain-meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
 | Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
 
 Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`Shopee 服务` 和 `Yahoo 服务` 可以单独勾选，各自选择出口。
