@@ -5,11 +5,11 @@ AI-generated profile
 
 [TCSCloud SeedNet 实测与 Mihomo 规则](egress-check/README.md#tcscloud-seednet)收录 TW Top 1000 实测报告，以及 TCSCloud 分流、Line 和 Shopee 使用的自维护域名规则。
 
-图标统一使用单个 emoji；同一分组的 `emoji`、`icon` 与 `group_label` 前缀保持一致。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
+分组名 `group_label` 使用纯文字。`emoji` 和 `icon` 使用同一个 emoji。同类服务共用图标，例如 Wi-Fi Calling 使用 📶，ESET 安全服务使用 🛡️。
 
-原版妙妙屋通过 `post_fetch` 覆写生成 `🚀 AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`🚀 AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
+原版妙妙屋通过 `post_fetch` 覆写生成 `AI 节点组`。客户端拉取 Clash/Mihomo 订阅时，脚本用实际节点和代理集合填充该组。模板已定义同名组时会更新它，只有节点或代理集合的配置也能创建它。`AI 节点组` 排在分组列表首位，已有的 `🚀 节点选择` 紧随其后，两组各自选择出口。[AI 节点组覆写脚本](mmw/overrides/ai-select.js)
 
-启用覆写后，预设中的 `🤖 AI 服务`、`☁️ 云服务`、`🐟 漏网之鱼` 等普通手选组会依次列出 `🚀 AI 节点组` 和 `🚀 节点选择` 作为前两个候选。选择前者跟随 AI 出口，选择后者跟随通用出口。脚本会把已有的 AI 候选移到首位并去重。
+启用覆写后，预设中的 `AI 服务`、`云服务`、`🐟 漏网之鱼` 等普通手选组会依次列出 `AI 节点组` 和 `🚀 节点选择` 作为前两个候选。选择前者跟随 AI 出口，选择后者跟随通用出口。脚本会把已有的 AI 候选移到首位并去重。同一覆写会把 `DIRECT` 放在 `国内服务` 和 `私有网络` 的首位。
 
 广告拦截、私有网络、国内服务、TMO-WFC、GG-WFC、PT 站点、PT Tracker、ESET 和苹果定位均跳过。自动测速、故障转移、负载均衡、按条件筛选节点、仅从订阅动态取节点和仅含内置策略的组也跳过。`🚀 节点选择` 或链式拨号依赖的节点池保留原有候选。要调整跳过的服务组，可编辑脚本的 `excluded`。
 
@@ -18,15 +18,15 @@ AI-generated profile
 1. 在妙妙屋「系统设置」开启「覆写脚本」。
 2. 进入「覆写管理 → 添加覆写设置」，名称可填「AI 基础选择器」，类型选「脚本」，钩子选「转换为客户端配置前」（`post_fetch`），粘贴 [ai-select.js](mmw/overrides/ai-select.js) 的全部内容并启用、保存。
 3. 在目标订阅的「覆写配置」中勾选该脚本，再让客户端更新订阅。将脚本放入本仓库或同步分组清单，不会自动启用它。
-4. 在客户端为 `🚀 AI 节点组` 选定一个固定节点。首次使用且没有已保存选择时，普通手选组默认使用它。客户端若恢复了此前保存的选择，可在相应分组中切换。
+4. 在客户端为 `AI 节点组` 选定一个固定节点。首次使用且没有已保存选择时，普通手选组默认使用它。客户端若恢复了此前保存的选择，可在相应分组中切换。
 
-已启用覆写的订阅可在妙妙屋保存新版脚本后刷新。AI 节点组可在客户端的代理组面板选择。原版网页编辑器的「特殊节点」栏固定显示内置选项。如果保存的订阅本身已定义 AI 组，桌面端也可以拖动组名左侧的手柄，把它加入其他组。
+已启用覆写的订阅可在妙妙屋保存新版脚本。分组改名后，重新同步清单并生成或更新订阅，再在客户端刷新。AI 节点组可在客户端的代理组面板选择。原版网页编辑器的「特殊节点」栏固定显示内置选项。如果保存的订阅本身已定义 AI 组，桌面端也可以拖动组名左侧的手柄，把它加入其他组。
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
 AI 服务保留 `category-ai-!cn`、`openai` 和 `claude` 三个规则源。[claude.yaml](mmw/ruleset/claude.yaml) 在本仓库维护，初始规则来自 [iluobei/clash-pt-rules](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)。Claude 的域名、关键词、GeoSite、IP 和 ASN 规则统一在这个文件中维护。
 
-`balanced`、`comprehensive` 两个预设的 `openai` 提供方使用 MetaCubeX 的 `classical` YAML，包含 ChatGPT 的 Azure Web PubSub 动态域名规则。发往 `chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com` 的 TCP 443 会由该规则交给 `🤖 AI 服务`。 [OpenAI 上游规则](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml) · [共用补充规则](mmw/ruleset/ai-routing.yaml)
+`balanced`、`comprehensive` 两个预设的 `openai` 提供方使用 MetaCubeX 的 `classical` YAML，包含 ChatGPT 的 Azure Web PubSub 动态域名规则。发往 `chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com` 的 TCP 443 会由该规则交给 `AI 服务`。 [OpenAI 上游规则](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml) · [共用补充规则](mmw/ruleset/ai-routing.yaml)
 
 Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。ChatGPT Voice 使用官方 CIDR 清单生成的 MRS，拒绝发往这些网段的 UDP 3478 和 TCP 443。 [ipcidr-openai-chatgpt-voice.mrs](mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.mrs) · [Voice CIDR 清单](mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.list) · [OpenAI 网络说明](https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps)
 
@@ -70,7 +70,7 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
 | `sentry`、`claude`、`anthropic` 关键词 | `sentry` 来自 Net.Coffee，`claude` / `anthropic` 兜底参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)；覆盖包含这些字符串的域名，参考项目的 `anthropic.com.cn` 也由此覆盖 |
 | `153.61.224.0/22` | Claude API 的入站网段，由 `claude` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
-| `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `🤖 AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
+| `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
 参考项目的其他 Anthropic 域名、IP 和 ASN 已由现有规则覆盖；其 OpenAI 清单中的 `chatgpt.livekit.cloud`、`host.livekit.cloud`、`turn.livekit.cloud` 也已由 AI 服务中的 `openai` / `category-ai-!cn` 覆盖。本次按 Claude 与实时通信相关范围合并差异，不整体挂载该项目的 Facebook、X 等规则集。
 
@@ -80,7 +80,7 @@ hCaptcha 的 `hcaptcha.mrs` 从云服务移入 AI 服务，随 `balanced` 和 `c
 
 现有 `datadog` 关键词已覆盖 `datadoghq` 及 `browser-intake-us5-datadoghq.com` 等变体，`sift` 关键词和 `sentry.io` 后缀也继续保留。更早命中广告拦截的连接仍由广告分组处理。
 
-Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登录、Google 地图、页面静态资源和下载域名在 `claude.yaml` 中以注释形式保留，默认交由订阅的其他规则匹配。推荐在客户端将 **`🔍 谷歌服务`、`🍏 苹果服务` 与 `🤖 AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。以后按需取消注释时，同域名的其他应用请求也会交给 AI 服务。
+Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登录、Google 地图、页面静态资源和下载域名在 `claude.yaml` 中以注释形式保留，默认交由订阅的其他规则匹配。推荐在客户端将 **`谷歌服务`、`苹果服务` 与 `AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。以后按需取消注释时，同域名的其他应用请求也会交给 AI 服务。
 
 已启用的第三方服务域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
 
@@ -103,11 +103,11 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 | TMO-WFC | T-Mobile Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
 | GG-WFC | giffgaff / O2 Wi-Fi Calling 域名与 IP 网段 | 按需选择 |
 | ESET | MetaCubeX ESET 域名规则集（当前仅使用 MRS） | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
-| 📍 苹果定位服务 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
-| ♾️ Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads 等域名，以及 Facebook IP 网段。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
-| 💬 Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
+| 苹果定位 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
+| Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads 等域名，以及 Facebook IP 网段。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
+| Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
 
-Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`🛍️ Shopee 服务` 和 `🟣 Yahoo 服务` 可以单独勾选，各自选择出口。
+Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`Shopee 服务` 和 `Yahoo 服务` 可以单独勾选，各自选择出口。
 
 妙妙屋当前生成器为这些普通分组默认选择 `🚀 节点选择`，分组清单不能指定默认出口。生成后需在客户端为 **ESET** 选择统一出口：中国大陆网络使用 `DIRECT`；境外需要中国出口时选择中国大陆节点。`DIRECT` 使用设备当前网络，并不自动获得中国 IP。
 
@@ -134,9 +134,9 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 所有规则集下载 URL 均使用 GitHub 或 raw.githubusercontent.com 的原始地址，不附加第三方代理前缀。
 
-Claude 分流更新后，还需在客户端刷新规则提供方，并为 `🤖 AI 服务` 选择固定节点。确认最终配置中的 `claude` 提供方指向本仓库的 `mmw/ruleset/claude.yaml`，并包含 `RULE-SET,claude,🤖 AI 服务` 和对应的规则提供方。AI 规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。合并后的配置发布后，旧订阅需在妙妙屋重新同步分组清单并重新生成，再在客户端更新订阅。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
+Claude 分流更新后，还需在客户端刷新规则提供方，并为 `AI 服务` 选择固定节点。确认最终配置中的 `claude` 提供方指向本仓库的 `mmw/ruleset/claude.yaml`，并包含 `RULE-SET,claude,AI 服务` 和对应的规则提供方。AI 规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。合并后的配置发布后，旧订阅需在妙妙屋重新同步分组清单并重新生成，再在客户端更新订阅。网页检测只能验证浏览器发起的请求，Claude Code 的实际出口仍需结合客户端连接记录核对。
 
-分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 14 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。`🔀 TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
+分组清单包含妙妙屋默认清单中的 24 个分组和本仓库新增的 14 个分组。清单开头为 **AI 节点组 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
 新增服务所在区段为 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。ESET 也先于云服务。
 

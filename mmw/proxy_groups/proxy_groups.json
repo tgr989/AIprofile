@@ -5,7 +5,7 @@
     "emoji": "🚀",
     "icon": "🚀",
     "rule_name": "AI Select",
-    "group_label": "🚀 AI 节点组",
+    "group_label": "AI 节点组",
     "presets": ["minimal", "balanced", "comprehensive"],
     "site_rules": [],
     "ip_rules": []
@@ -16,7 +16,7 @@
     "emoji": "🛑",
     "icon": "🛑",
     "rule_name": "Ad Block",
-    "group_label": "🛑 广告拦截",
+    "group_label": "广告拦截",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -37,7 +37,7 @@
     "emoji": "🤖",
     "icon": "🤖",
     "rule_name": "AI Services",
-    "group_label": "🤖 AI 服务",
+    "group_label": "AI 服务",
     "presets": ["balanced", "comprehensive"],
     "site_rules": [
       {
@@ -85,7 +85,7 @@
     "emoji": "📹",
     "icon": "📹",
     "rule_name": "Youtube",
-    "group_label": "📹 油管视频",
+    "group_label": "油管视频",
     "presets": ["balanced", "comprehensive"],
     "site_rules": [
       {
@@ -106,7 +106,7 @@
     "emoji": "🔍",
     "icon": "🔍",
     "rule_name": "Google",
-    "group_label": "🔍 谷歌服务",
+    "group_label": "谷歌服务",
     "presets": ["balanced", "comprehensive"],
     "site_rules": [
       {
@@ -137,7 +137,7 @@
     "emoji": "📍",
     "icon": "📍",
     "rule_name": "苹果定位",
-    "group_label": "📍 苹果定位",
+    "group_label": "苹果定位",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -158,7 +158,7 @@
     "emoji": "🍏",
     "icon": "🍏",
     "rule_name": "Apple",
-    "group_label": "🍏 苹果服务",
+    "group_label": "苹果服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -188,7 +188,7 @@
     "emoji": "🏠",
     "icon": "🏠",
     "rule_name": "Private",
-    "group_label": "🏠 私有网络",
+    "group_label": "私有网络",
     "presets": ["minimal", "balanced", "comprehensive"],
     "site_rules": [],
     "ip_rules": [
@@ -209,7 +209,7 @@
     "emoji": "📶",
     "icon": "📶",
     "rule_name": "TMO-WFC",
-    "group_label": "📶 TMO-WFC",
+    "group_label": "TMO-WFC",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -240,7 +240,7 @@
     "emoji": "📶",
     "icon": "📶",
     "rule_name": "GG-WFC",
-    "group_label": "📶 GG-WFC",
+    "group_label": "GG-WFC",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -271,7 +271,7 @@
     "emoji": "🎞️",
     "icon": "🎞️",
     "rule_name": "🎞️ 站点",
-    "group_label": "🎞️ PT 站点",
+    "group_label": "PT 站点",
     "presets": [],
     "site_rules": [
       {
@@ -292,7 +292,7 @@
     "emoji": "🔗",
     "icon": "🔗",
     "rule_name": "PT Tracker",
-    "group_label": "🔗 PT Tracker",
+    "group_label": "PT Tracker",
     "presets": [],
     "site_rules": [
       {
@@ -313,7 +313,7 @@
     "emoji": "🛡️",
     "icon": "🛡️",
     "rule_name": "ESET",
-    "group_label": "🛡️ ESET",
+    "group_label": "ESET",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -334,7 +334,7 @@
     "emoji": "📺",
     "icon": "📺",
     "rule_name": "Bilibili",
-    "group_label": "📺 哔哩哔哩",
+    "group_label": "哔哩哔哩",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -364,7 +364,7 @@
     "emoji": "🔒",
     "icon": "🔒",
     "rule_name": "Location:CN",
-    "group_label": "🔒 国内服务",
+    "group_label": "国内服务",
     "presets": ["minimal", "balanced", "comprehensive"],
     "site_rules": [
       {
@@ -404,7 +404,7 @@
     "emoji": "📲",
     "icon": "📲",
     "rule_name": "Telegram",
-    "group_label": "📲 电报消息",
+    "group_label": "电报消息",
     "presets": ["balanced", "comprehensive"],
     "site_rules": [
       {
@@ -435,7 +435,7 @@
     "emoji": "🐱",
     "icon": "🐱",
     "rule_name": "Github",
-    "group_label": "🐱 Github",
+    "group_label": "Github",
     "presets": ["balanced", "comprehensive"],
     "site_rules": [
       {
@@ -465,7 +465,7 @@
     "emoji": "Ⓜ️",
     "icon": "Ⓜ️",
     "rule_name": "Microsoft",
-    "group_label": "Ⓜ️ 微软服务",
+    "group_label": "微软服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -486,7 +486,7 @@
     "emoji": "♾️",
     "icon": "♾️",
     "rule_name": "Meta",
-    "group_label": "♾️ Meta 服务",
+    "group_label": "Meta 服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -517,7 +517,7 @@
     "emoji": "💬",
     "icon": "💬",
     "rule_name": "Line",
-    "group_label": "💬 Line 服务",
+    "group_label": "Line 服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -547,7 +547,7 @@
     "emoji": "🌐",
     "icon": "🌐",
     "rule_name": "Social Media",
-    "group_label": "🌐 社交媒体",
+    "group_label": "社交媒体",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -595,7 +595,7 @@
     "emoji": "🎬",
     "icon": "🎬",
     "rule_name": "Streaming",
-    "group_label": "🎬 流媒体",
+    "group_label": "流媒体",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -661,7 +661,7 @@
     "emoji": "🎮",
     "icon": "🎮",
     "rule_name": "Gaming",
-    "group_label": "🎮 游戏平台",
+    "group_label": "游戏平台",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -718,7 +718,7 @@
     "emoji": "📚",
     "icon": "📚",
     "rule_name": "Education",
-    "group_label": "📚 教育资源",
+    "group_label": "教育资源",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -775,7 +775,7 @@
     "emoji": "💰",
     "icon": "💰",
     "rule_name": "Financial",
-    "group_label": "💰 金融服务",
+    "group_label": "金融服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -832,7 +832,7 @@
     "emoji": "🪙",
     "icon": "🪙",
     "rule_name": "Cryptocurrency",
-    "group_label": "🪙 数字货币",
+    "group_label": "数字货币",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -853,7 +853,7 @@
     "emoji": "☁️",
     "icon": "☁️",
     "rule_name": "Cloud Services",
-    "group_label": "☁️ 云服务",
+    "group_label": "云服务",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -928,7 +928,7 @@
     "emoji": "🎶",
     "icon": "🎶",
     "rule_name": "Tiktok",
-    "group_label": "🎶 Tiktok",
+    "group_label": "Tiktok",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -949,7 +949,7 @@
     "emoji": "🎵",
     "icon": "🎵",
     "rule_name": "Spotify",
-    "group_label": "🎵 Spotify",
+    "group_label": "Spotify",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -970,7 +970,7 @@
     "emoji": "🎨",
     "icon": "🎨",
     "rule_name": "Pixiv",
-    "group_label": "🎨 Pixiv",
+    "group_label": "Pixiv",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -991,7 +991,7 @@
     "emoji": "📡",
     "icon": "📡",
     "rule_name": "Abema",
-    "group_label": "📡 Abema",
+    "group_label": "Abema",
     "presets": ["comprehensive"],
     "site_rules": [
       {
@@ -1012,7 +1012,7 @@
     "emoji": "🔀",
     "icon": "🔀",
     "rule_name": "Proxy",
-    "group_label": "🔀 代理服务",
+    "group_label": "代理服务",
     "presets": [],
     "site_rules": [
       {
@@ -1033,7 +1033,7 @@
     "emoji": "🎭",
     "icon": "🎭",
     "rule_name": "Proxy Media",
-    "group_label": "🎭 代理媒体",
+    "group_label": "代理媒体",
     "presets": [],
     "site_rules": [
       {
@@ -1064,7 +1064,7 @@
     "emoji": "🔞",
     "icon": "🔞",
     "rule_name": "E-Hentai",
-    "group_label": "🔞 E-Hentai",
+    "group_label": "E-Hentai",
     "presets": [],
     "site_rules": [
       {
@@ -1085,7 +1085,7 @@
     "emoji": "🟣",
     "icon": "🟣",
     "rule_name": "Yahoo",
-    "group_label": "🟣 Yahoo 服务",
+    "group_label": "Yahoo 服务",
     "presets": [],
     "site_rules": [
       {
@@ -1106,7 +1106,7 @@
     "emoji": "🛍️",
     "icon": "🛍️",
     "rule_name": "Shopee",
-    "group_label": "🛍️ Shopee 服务",
+    "group_label": "Shopee 服务",
     "presets": [],
     "site_rules": [
       {
@@ -1136,7 +1136,7 @@
     "emoji": "🔀",
     "icon": "🔀",
     "rule_name": "TCSCloud Avoid",
-    "group_label": "🔀 TCSCloud 分流",
+    "group_label": "TCSCloud 分流",
     "presets": [],
     "site_rules": [
       {
@@ -1157,7 +1157,7 @@
     "emoji": "🌍",
     "icon": "🌍",
     "rule_name": "Non-China",
-    "group_label": "🌍 非中国",
+    "group_label": "非中国",
     "presets": [],
     "site_rules": [
       {

@@ -27,11 +27,11 @@ CSV 中的 `[redacted]` 标记已脱敏的 VPS 出口地址和私网地址。
 
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |
-| 💬 Line 服务 | [MRS](../mmw/ruleset/line-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/line-tcscloud-seednet-avoid.list) | 1 |
-| 🛍️ Shopee 服务 | [MRS](../mmw/ruleset/shopee-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/shopee-tcscloud-seednet-avoid.list) | 10 |
-| 🔀 TCSCloud 分流 | [MRS](../mmw/ruleset/category-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/category-tcscloud-seednet-avoid.list) | 11 |
+| Line 服务 | [MRS](../mmw/ruleset/line-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/line-tcscloud-seednet-avoid.list) | 1 |
+| Shopee 服务 | [MRS](../mmw/ruleset/shopee-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/shopee-tcscloud-seednet-avoid.list) | 10 |
+| TCSCloud 分流 | [MRS](../mmw/ruleset/category-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/category-tcscloud-seednet-avoid.list) | 11 |
 
-`💬 Line 服务` 和 `🛍️ Shopee 服务` 同时加载各自的上游 MRS。`♾️ Meta 服务` 和 `🟣 Yahoo 服务` 使用各自的上游规则。同步[妙妙屋分组清单](../mmw/proxy_groups/proxy_groups.json)后，可分别为各组选择出口。
+`Line 服务` 和 `Shopee 服务` 同时加载各自的上游 MRS。`Meta 服务` 和 `Yahoo 服务` 使用各自的上游规则。同步[妙妙屋分组清单](../mmw/proxy_groups/proxy_groups.json)后，可分别为各组选择出口。
 
 ## 名单格式
 

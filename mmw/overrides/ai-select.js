@@ -1,10 +1,24 @@
 // 妙妙屋覆写脚本：转换为客户端配置前（post_fetch）。
 function main(config) {
-  var name = "🚀 AI 节点组";
+  var name = "AI 节点组";
+  var legacyName = "🚀 AI 节点组";
   var mainName = "🚀 节点选择";
   var groups = config["proxy-groups"];
   if (groups === undefined) groups = [];
   if (!Array.isArray(groups)) return config;
+
+  // 恢复国内服务和私有网络的直连优先顺序。
+  var directFirstNames = ["国内服务", "私有网络", "🔒 国内服务", "🏠 私有网络"];
+  groups.forEach(function(g) {
+    if (g.type !== "select" || directFirstNames.indexOf(g.name) < 0) return;
+    var candidates = Array.isArray(g.proxies) ? g.proxies : [];
+    g.proxies = ["DIRECT"].concat(candidates.filter(function(p) { return p !== "DIRECT"; }));
+  });
+
+  if (!groups.some(function(g) { return g.name === name; }) &&
+      groups.some(function(g) { return g.name === legacyName; })) {
+    name = legacyName;
+  }
 
   var proxies = config.proxies || [];
   var providers = config["proxy-providers"] || {};
@@ -55,11 +69,12 @@ function main(config) {
   var selector = { name: name, type: "select", proxies: nodes };
   if (sources.length) selector.use = sources;
 
-  var excluded = new Set([
-    "🛑 广告拦截", "🏠 私有网络", "🔒 国内服务",
-    "📶 TMO-WFC", "📶 GG-WFC", "🎞️ PT 站点", "🔗 PT Tracker",
-    "🛡️ ESET", "📍 苹果定位"
-  ]);
+  var excluded = new Set(directFirstNames.concat([
+    "广告拦截", "TMO-WFC", "GG-WFC", "PT 站点", "PT Tracker", "ESET", "苹果定位",
+    // 兼容尚未重新生成的订阅。
+    legacyName, "🛑 广告拦截", "📶 TMO-WFC", "📶 GG-WFC", "🎞️ PT 站点",
+    "🔗 PT Tracker", "🛡️ ESET", "📍 苹果定位"
+  ]));
   var builtins = new Set(["DIRECT", "REJECT", "REJECT-DROP", "REJECT-TINYGIF", "PASS", "COMPATIBLE"]);
   otherGroups.forEach(function(g) {
     if (g.type !== "select" || excluded.has(g.name) || upstreams.has(g.name)) return;
