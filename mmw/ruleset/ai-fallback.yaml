@@ -38,12 +38,13 @@ payload:
   - 'DOMAIN,gemini-api-docs-mcp.dev'
   - 'DOMAIN-SUFFIX,geminicli.com'
 
+  # 其他
   # Aiip.si 的 DNS 测试探针，按需用于该站检测。
   - 'DOMAIN-SUFFIX,d.aiip.si'
 
   # ── 2. 时间同步（NTP） ─────────────────────────────────────────────────────
-  # Net.Coffee 的 NTP 域名分类。
-  - 'GEOSITE,category-ntp'
+  # NTP 域名分类已改由分组清单的 category-ntp（category-ntp.mrs）独立加载，避免强制载入 geosite.dat。
+  # - 'GEOSITE,category-ntp'
   # 匹配所有发往 UDP 123 的 NTP 连接，按需启用。
   # - 'AND,((NETWORK,UDP),(DST-PORT,123))'
 
@@ -73,13 +74,13 @@ payload:
   - 'IP-ASN,400243,no-resolve'
   - 'IP-ASN,401551,no-resolve'
 
-  # ARIN 登记给 OpenAI OpCo, LLC 的 ASN（备用，按需启用）。
-  # ChatGPT Connectors 网段（含 199.47.142.0/23）已由 openai-ip 覆盖；或单独使用
+  # ARIN 登记给 OpenAI OpCo, LLC 的 ASN（启用）。
+  # ChatGPT Connectors 网段（含 199.47.142.0/23）亦由 openai-ip 覆盖；或单独使用
   # mmw/ruleset/openai/ipcidr-openai-chatgpt-connectors.mrs（behavior: ipcidr, format: mrs）。
   # https://whois.arin.net/rest/org/OOL-15/asns
-  # - 'IP-ASN,232,no-resolve'
-  # - 'IP-ASN,401518,no-resolve'
-  # - 'IP-ASN,401864,no-resolve'
+  - 'IP-ASN,232,no-resolve'
+  - 'IP-ASN,401518,no-resolve'
+  - 'IP-ASN,401864,no-resolve'
 
   # Meta 对等网络集合及 APNIC 登记的 Facebook Singapore ASN（备用，按需启用）。
   # https://www.radb.net/query/?keywords=AS-FACEBOOK

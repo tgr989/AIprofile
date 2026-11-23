@@ -2,6 +2,7 @@
 set -euo pipefail
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
+egress_script="${EGRESS_SCRIPT:-$project_dir/egress-check/ip.sh}"
 command -v jq >/dev/null
 work="$(mktemp -d)"
 trap 'rm -rf -- "$work"' EXIT
@@ -57,7 +58,7 @@ check() {
     local expected_asn="${6:+AS$6}" expected_source="$7"
     local cache="$work/cache-$mode-$http_asn-$mtr_base"
     EGRESS_BASE_MODE="$mode" TEST_HTTP_ASN="$http_asn" TEST_MTR_BASE="$mtr_base" EGRESS_CACHE="$cache" \
-        bash "$project_dir/egress-check/ip.sh" --rules "$work/rules" --json > "$work/output.json"
+        bash "$egress_script" --rules "$work/rules" --json > "$work/output.json"
     cmp "$work/output.json" "$cache/last.json"
     jq -e --argjson same "$same" --argjson different "$different" --arg asn "$expected_asn" --arg source "$expected_source" '
         def nullable: if . == "" then null else . end;
@@ -85,13 +86,13 @@ check mtr  64510 hidden false null  64510 http_echo
 
 export EGRESS_BASE_MODE=auto TEST_HTTP_ASN='' TEST_MTR_BASE=stable
 TEST_HTTP6_ASN=64520 TEST_MTR6_BASE=hidden EGRESS_CACHE="$work/mixed" \
-    bash "$project_dir/egress-check/ip.sh" --rules "$work/rules" --json > "$work/mixed.json"
+    bash "$egress_script" --rules "$work/rules" --json > "$work/mixed.json"
 jq -e '[.ipv4, .ipv6] | map([.baseline_asn,.baseline_source]) ==
     [["AS64510","mtr"],["AS64520","http_echo"]]' "$work/mixed.json" >/dev/null
 printf 'PASS independent IPv4/IPv6 baselines\n'
 
 for format in --no-color --compact; do
-    EGRESS_CACHE="$work/text" bash "$project_dir/egress-check/ip.sh" -4 "$format" --rules "$work/rules" > "$work/report"
+    EGRESS_CACHE="$work/text" bash "$egress_script" -4 "$format" --rules "$work/rules" > "$work/report"
     grep -Fq '比较基准  稳定 MTR 首跳 AS64510' "$work/report"
     grep -Fq '⮜ 首跳 ASN 差异已复测' "$work/report"
     grep -Fq '复测确认 1 个域名的可见首跳 ASN 与基准不同' "$work/report"
@@ -99,6 +100,6 @@ done
 jq -e '.ipv6 | .available == false and has("baseline_asn") and has("baseline_source")
     and .baseline_asn == null and .baseline_source == null' "$work/text/last.json" >/dev/null
 printf 'Test|same.test|\n' > "$work/one-rule"
-EGRESS_CACHE="$work/text" bash "$project_dir/egress-check/ip.sh" -4 --rules "$work/one-rule" > "$work/report"
+EGRESS_CACHE="$work/text" bash "$egress_script" -4 --rules "$work/one-rule" > "$work/report"
 grep -Fq '所有已测域名的可见首跳 ASN 均与基准 AS64510 一致' "$work/report"
 printf 'PASS matched and differing hops in terminal reports; skipped family has no baseline\n'

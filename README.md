@@ -26,11 +26,11 @@ AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI
 
 Claude / Claude Code 分流于 **2026-11-14** 对照 [Net.Coffee 域名清单](https://ip.net.coffee/claude/site.html)、[NodeSeek 原帖《整合了一下claude的分流规则，surge格式》](https://www.nodeseek.com/post-682343-1)（正文更新日期：2026-04-10）和 [Aiip.si 分流说明](https://aiip.si/routing/)核对并按需采用。**保持广告拦截 → AI 服务的原有顺序**。Sentry 等遥测域名若先命中广告拦截，视为已由规则处理，不作为 AI 分流遗漏。
 
-`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `openai` → `openai-domain` → `category-ai-!cn` → `ai-fallback`。`ai-fallback` 集中承载 Gemini 补充域名、NTP GeoSite、关键词兜底、诊断探针和各厂商 ASN，`claude-ip` 与 `openai-ip` 匹配 IPv4 和 IPv6 CIDR。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
+`balanced` 和 `comprehensive` 预设中，AI 服务的 `site_rules` 依次为 `claude-domain` → `openai` → `openai-domain` → `category-ai-!cn` → `category-ntp` → `ai-fallback`。`category-ntp` 使用 MetaCubeX 的二进制 MRS 加载 NTP 域名，`ai-fallback` 集中承载 Gemini 补充域名、关键词兜底、诊断探针和各厂商 ASN，`claude-ip` 与 `openai-ip` 匹配 IPv4 和 IPv6 CIDR。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml) · [iluobei 原始规则](https://raw.githubusercontent.com/iluobei/clash-pt-rules/refs/heads/main/claude.yaml)
 
 上游 `openai` 提供方使用 MetaCubeX 的 `classical` YAML，包含 ChatGPT 的 Azure Web PubSub 动态域名规则。`openai-domain` 收录 OpenAI、ChatGPT 和 Codex 的补充域名，包括这些客户端使用的第三方服务端点。 [OpenAI 上游规则](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.yaml) · [补充域名清单](mmw/ruleset/openai/domain-openai.list) · [MRS](mmw/ruleset/openai/domain-openai.mrs)
 
-Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `claude-ip` 和 `openai-ip`。`openai-ip` 匹配 OpenAI 汇总 CIDR，OpenAI ASN 备用规则以注释保留在 `ai-fallback.yaml`。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
+Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流。AI 分组的 `ip_rules` 引用 `claude-ip` 和 `openai-ip`。`openai-ip` 匹配 OpenAI 汇总 CIDR，`ai-fallback.yaml` 同时启用 OpenAI ASN（`AS232`、`AS401518`、`AS401864`）作为兜底。 [汇总 MRS](mmw/ruleset/openai/ipcidr-openai.mrs) · [汇总明文清单](mmw/ruleset/openai/ipcidr-openai.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 **启用 AI 拦截**
 
@@ -66,7 +66,7 @@ Mihomo 能获取主机名时，ChatGPT 网页、API 和 Codex 使用域名分流
 
 AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse 的补充域名作为备用 MRS 保留，`facebook`、`fbcdn` 关键词与 6 个 ASN（对照 Meta 公布的对等集合和 Facebook Singapore 的 APNIC 登记补齐）均以注释形式统一保留在 `ai-fallback.yaml`。 [备用域名 MRS](mmw/ruleset/meta/domain-meta.mrs) · [域名清单](mmw/ruleset/meta/domain-meta.list) · [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
-`ai-fallback` 排在 AI 服务 `site_rules` 末尾，以 `classical` YAML 统一加载 Gemini CLI / Docs MCP 域名、NTP 分类、关键词兜底、诊断探针及 Anthropic ASN。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用旧提供方（如 `common-ai`、`ai-routing`、`claude`、`gemini`、`openai-asn`）的订阅应重新同步分组清单并生成。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
+`ai-fallback` 排在 AI 服务 `site_rules` 末尾，以 `classical` YAML 统一加载 Gemini CLI / Docs MCP 域名、关键词兜底、诊断探针及 Anthropic / OpenAI ASN；NTP 域名分类由前置的 `category-ntp` MRS 独立加载。更新各 `.mrs` 域名规则时编辑对应的 `.list`，再运行 `mihomo convert-ruleset domain text <输入.list> <输出.mrs>`。仍引用旧提供方（如 `common-ai`、`ai-routing`、`claude`、`gemini`、`openai-asn`）的订阅应重新同步分组清单并生成。 [AI 兜底规则](mmw/ruleset/ai-fallback.yaml)
 
 截至 2026-11-21，Anthropic 公布的 API 入站地址为 `160.79.104.0/23`、`153.61.224.0/22` 和 `2607:6bc0::/48`，工具调用等出站请求使用 `160.79.104.0/21` 和 `153.61.208.0/20`。本规则将两类网段都作为目标地址匹配，其中 `/21` 已覆盖第一条入站 `/23`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses)
 
@@ -102,9 +102,9 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 
 已启用的第三方服务域名由多个应用共用，其他应用访问相同域名也走 AI 服务；关键词还可能匹配无关站点。
 
-`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。`ai-fallback.yaml` 保留 `GEOSITE,category-ntp`，将该分类内的时间服务器域名交给 AI 服务，需要客户端的 GeoSite 数据库包含 `category-ntp`。其中的 `time.google.com`、`time.apple.com` 仍按 NTP 规则处理，不受上述 Google / Apple 精确匹配规则注释影响。
+`geosite:anthropic` 的当前条目已由 `category-ai-!cn` 覆盖。AI 服务的 `category-ntp` 提供方使用 MetaCubeX 的 `geo/geosite/category-ntp.mrs`（`behavior: domain`、`format: mrs`），将该分类内的时间服务器域名交给 AI 服务，无需客户端加载 `geosite.dat`。其中的 `time.google.com`、`time.apple.com` 仍按 NTP 规则处理，不受上述 Google / Apple 精确匹配规则注释影响。
 
-**当前启用 NTP 域名分类。** `ai-fallback.yaml` 中的 UDP 123 端口兜底以注释形式保留。纯 IP 连接且内核未识别到域名，或域名未被 NTP 分类收录时，流量按后续规则处理。 [Mihomo 的域名与端口匹配说明](https://wiki.metacubex.one/config/rules/)
+**当前启用 NTP 域名 MRS 规则集。** `ai-fallback.yaml` 中的 UDP 123 端口兜底以注释形式保留。纯 IP 连接且内核未识别到域名，或域名未被 `category-ntp.mrs` 收录时，流量按后续规则处理。 [Mihomo 的域名与端口匹配说明](https://wiki.metacubex.one/config/rules/)
 
 需要启用 NTP 端口兜底时，在 `ai-fallback.yaml` 中取消对应规则的注释，发布后在客户端刷新 `ai-fallback` 规则提供方。
 

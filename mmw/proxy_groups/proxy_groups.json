@@ -77,6 +77,15 @@
         "interval": 86400
       },
       {
+        "key": "category-ntp",
+        "behavior": "domain",
+        "type": "http",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ntp.mrs",
+        "path": "./ruleset/category-ntp.mrs",
+        "interval": 86400
+      },
+      {
         "key": "ai-fallback",
         "behavior": "classical",
         "type": "http",
