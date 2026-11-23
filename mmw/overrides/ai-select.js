@@ -2,6 +2,7 @@
 const aiName = "⚡ AI 节点";
 const nodeSelectionName = "🚀 节点选择";
 const directGroups = new Set(["广告拦截", "国内服务", "私有网络"]);
+const aiDefaultGroups = new Set(["AI 服务", "谷歌服务", "苹果服务", "云服务"]);
 
 function main(config) {
   const groups = config["proxy-groups"];
@@ -11,11 +12,12 @@ function main(config) {
   const nodeSelection = groups.find(group => group.name === nodeSelectionName);
   if (aiGroup && nodeSelection) {
     groups.splice(groups.indexOf(aiGroup), 1);
-    groups.splice(groups.indexOf(nodeSelection), 0, aiGroup);
+    groups.splice(groups.indexOf(nodeSelection) + 1, 0, aiGroup);
     insertAiCandidates(groups);
   }
 
   applyDirectDefaults(groups);
+  if (aiGroup) applyAiDefaults(groups);
   return config;
 }
 
@@ -25,7 +27,7 @@ function insertAiCandidates(groups) {
     if (group.name === aiName || !members.includes(nodeSelectionName)) continue;
 
     const candidates = members.filter(name => name !== aiName);
-    candidates.splice(candidates.indexOf(nodeSelectionName), 0, aiName);
+    candidates.splice(candidates.indexOf(nodeSelectionName) + 1, 0, aiName);
     group.proxies = candidates;
   }
 }
@@ -36,6 +38,16 @@ function applyDirectDefaults(groups) {
 
     group.proxies = ["DIRECT", ...membersOf(group).filter(name => name !== "DIRECT")];
     group["default-selected"] = "DIRECT";
+  }
+}
+
+function applyAiDefaults(groups) {
+  for (const group of groups) {
+    if (!aiDefaultGroups.has(group.name)) continue;
+
+    const members = membersOf(group);
+    if (!members.includes(aiName)) group.proxies = [...members, aiName];
+    group["default-selected"] = aiName;
   }
 }
 

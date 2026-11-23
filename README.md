@@ -7,11 +7,13 @@ TCSCloud SeedNet 的 TW Top 1000 和 A/B 实测报告收录在 `egress-check`。
 
 AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI 节点`。每组的 `emoji` 和 `icon` 使用同一个图标。两个 Wi-Fi Calling 组共用 🛜，ESET 安全服务使用 🛡️。
 
-妙妙屋在 `post_fetch` 阶段应用覆写。订阅同时定义 `⚡ AI 节点` 和 `🚀 节点选择` 时，脚本把 AI 组移到 `🚀 节点选择` 的紧前一位。 [AI 节点覆写脚本](mmw/overrides/ai-select.js)
+妙妙屋在 `post_fetch` 阶段应用覆写。订阅同时定义 `⚡ AI 节点` 和 `🚀 节点选择` 时，脚本把 AI 组移到 `🚀 节点选择` 的紧后一位。 [AI 节点覆写脚本](mmw/overrides/ai-select.js)
 
-其他策略组的 `proxies` 含有 `🚀 节点选择` 时，脚本把 `⚡ AI 节点` 放在它的紧前一位并去重。
+其他策略组的 `proxies` 含有 `🚀 节点选择` 时，脚本把 `⚡ AI 节点` 放在它的紧后一位并去重。
 
 `广告拦截`、`国内服务` 和 `私有网络` 同样按候选中是否含有 `🚀 节点选择` 应用上述规则，并将 `DIRECT` 置顶、去重，设为 `default-selected`。
+
+订阅包含 `⚡ AI 节点` 时，脚本为 `AI 服务`、`谷歌服务`、`苹果服务` 和 `云服务` 补齐该候选，并设为 `default-selected`。
 
 **启用覆写**
 
