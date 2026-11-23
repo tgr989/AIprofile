@@ -45,7 +45,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude/domain-claude.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/claude/domain-claude.mrs",
         "path": "./ruleset/domain-claude.mrs",
         "interval": 86400
       },
@@ -63,7 +63,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/domain-openai.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/openai/domain-openai.mrs",
         "path": "./ruleset/domain-openai.mrs",
         "interval": 86400
       },
@@ -81,7 +81,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/ai-fallback.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/ai-fallback.yaml",
         "path": "./ruleset/ai-fallback.yaml",
         "interval": 86400
       }
@@ -92,7 +92,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/claude/ipcidr-claude.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/claude/ipcidr-claude.mrs",
         "path": "./ruleset/ipcidr-claude.mrs",
         "interval": 86400
       },
@@ -101,7 +101,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai.mrs",
         "path": "./ruleset/ipcidr-openai.mrs",
         "interval": 86400
       }
@@ -173,7 +173,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/apple-location.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/apple-location.yaml",
         "path": "./ruleset/apple-location.yaml",
         "interval": 86400
       }
@@ -254,7 +254,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/workos.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/workos.mrs",
         "path": "./ruleset/workos.mrs",
         "interval": 86400
       },
@@ -386,7 +386,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tmo-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tmo-wfc-domain.yaml",
         "path": "./ruleset/tmo-wfc-domain.yaml",
         "interval": 86400
       }
@@ -397,7 +397,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tmo-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tmo-wfc-ip.yaml",
         "path": "./ruleset/tmo-wfc-ip.yaml",
         "interval": 86400
       }
@@ -417,7 +417,7 @@
         "behavior": "classical",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gg-wfc-domain.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/gg-wfc-domain.yaml",
         "path": "./ruleset/gg-wfc-domain.yaml",
         "interval": 86400
       }
@@ -428,7 +428,7 @@
         "behavior": "ipcidr",
         "type": "http",
         "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/gg-wfc-ip.yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/gg-wfc-ip.yaml",
         "path": "./ruleset/gg-wfc-ip.yaml",
         "interval": 86400
       }
@@ -621,7 +621,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/meta-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -661,7 +661,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/line-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -1123,7 +1123,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/shopee-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
@@ -1144,7 +1144,7 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }

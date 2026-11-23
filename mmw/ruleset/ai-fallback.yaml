@@ -25,7 +25,7 @@
 #     type: http
 #     behavior: ipcidr
 #     format: mrs
-#     url: https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.mrs
+#     url: https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/openai/ipcidr-openai-chatgpt-voice.mrs
 #     path: ./ruleset/ipcidr-openai-chatgpt-voice.mrs
 #     interval: 86400
 

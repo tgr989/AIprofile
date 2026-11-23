@@ -9,7 +9,7 @@ bash ip.sh --rules ./tw-top1000.csv
 也可以在存有这份 CSV 的目录直接运行本仓库的脚本。文件路径相对于执行命令时的工作目录。
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/AIprofile/refs/heads/main/egress-check/ip.sh) --rules ./tw-top1000.csv
+bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/egress-check/ip.sh) --rules ./tw-top1000.csv
 ```
 
 `ip.sh` 基于上游 v2.19.6。本仓版本通过临时文件合并 IPv4 和 IPv6 的报告，支持保存整份 Top 1000 结果。无参数时使用脚本内置规则。[上游对应提交](https://github.com/AIFansX/egress-check/blob/7b4854073dc88bebfa50f68691845341009a8cb1/ip.sh) · [MIT 许可证](LICENSE)
