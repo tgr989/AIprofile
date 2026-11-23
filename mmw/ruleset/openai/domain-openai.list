@@ -5,6 +5,10 @@
 chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com
 openai-api.arkoselabs.com
 +.client-api.arkoselabs.com
+# Statsig 功能开关与灰度域名（OpenAI 已收购 Statsig；下列两个子域已由 claude-domain 的 statsig.com / statsigapi.net 后缀及 claude.yaml 关键词覆盖）。
+# +.api.statsig.com
+# +.events.statsigapi.net
++.featuregates.org
 
 # ChatGPT 与 Codex 客户端使用的第三方主机。
 # https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps

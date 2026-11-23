@@ -5,12 +5,3 @@
 # https://aistudio.google.com/docs/coding-agents
 gemini-api-docs-mcp.dev
 +.geminicli.com
-
-# AI 服务共用的遥测和客服域名。
-# statsig.com 和 statsigapi.net 后缀分别覆盖下面两个子域。
-# +.api.statsig.com
-# +.events.statsigapi.net
-+.featuregates.org
-# Intercom 已由云服务分组的 intercom.mrs 统一覆盖。
-# +.intercom.io
-# +.intercomcdn.com
