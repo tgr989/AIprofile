@@ -10,10 +10,9 @@
 +.wit.ai
 meta-models.github.io
 
-# Meta 生态补充域名（上游 meta.mrs 未收录，或仅精确收录主域）。
+# Meta 生态补充域名（上游 meta.mrs 未收录；含原 SeedNet 补充的 +.instagr.am）。
 +.facebook.co
 +.fbaddins.com
-+.fbcdn-a.akamaihd.net
 +.instagr.am
 +.instagram.net
 +.mapillary.com

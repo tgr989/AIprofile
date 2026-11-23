@@ -633,15 +633,6 @@
         "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/meta/domain-meta.mrs",
         "path": "./ruleset/domain-meta.mrs",
         "interval": 86400
-      },
-      {
-        "key": "meta-tcscloud-seednet-avoid",
-        "behavior": "domain",
-        "type": "http",
-        "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.mrs",
-        "path": "./ruleset/meta-tcscloud-seednet-avoid.mrs",
-        "interval": 86400
       }
     ],
     "ip_rules": [

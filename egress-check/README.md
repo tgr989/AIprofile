@@ -47,7 +47,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/mmw-profile/refs/head
 
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |
-| Meta 服务 | [MRS](../mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/meta-tcscloud-seednet-avoid.list) | 1 |
+| Meta 服务 | [MRS](../mmw/ruleset/meta/domain-meta.mrs) · [源清单](../mmw/ruleset/meta/domain-meta.list)（含 `+.instagr.am`） | 17 |
 | Line 服务 | [MRS](../mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.list) | 1 |
 | Shopee 服务 | [MRS](../mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.list) | 11 |
 | TCSCloud 分流 | [MRS](../mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.list) | 11 |
