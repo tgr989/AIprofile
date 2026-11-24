@@ -666,12 +666,12 @@
         "interval": 86400
       },
       {
-        "key": "line-tcscloud-seednet-avoid",
+        "key": "line-domain",
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs",
-        "path": "./ruleset/line-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/line/domain-line.mrs",
+        "path": "./ruleset/domain-line.mrs",
         "interval": 86400
       }
     ],
@@ -1128,12 +1128,12 @@
         "interval": 86400
       },
       {
-        "key": "shopee-tcscloud-seednet-avoid",
+        "key": "shopee-domain",
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs",
-        "path": "./ruleset/shopee-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/shopee/domain-shopee.mrs",
+        "path": "./ruleset/domain-shopee.mrs",
         "interval": 86400
       }
     ],
@@ -1141,11 +1141,11 @@
   },
   {
     "name": "tcscloud-avoid",
-    "label": "TCSCloud 分流",
+    "label": "TCSCloud Avoid",
     "emoji": "↪️",
     "icon": "↪️",
     "rule_name": "TCSCloud Avoid",
-    "group_label": "TCSCloud 分流",
+    "group_label": "TCSCloud Avoid",
     "presets": [],
     "site_rules": [
       {
@@ -1153,12 +1153,22 @@
         "behavior": "domain",
         "type": "http",
         "format": "mrs",
-        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.mrs",
         "path": "./ruleset/category-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
     ],
-    "ip_rules": []
+    "ip_rules": [
+      {
+        "key": "asn-tcscloud-seednet-avoid",
+        "behavior": "classical",
+        "type": "http",
+        "format": "yaml",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud/asn-tcscloud-seednet-avoid.yaml",
+        "path": "./ruleset/asn-tcscloud-seednet-avoid.yaml",
+        "interval": 86400
+      }
+    ]
   },
   {
     "name": "proxymedia",

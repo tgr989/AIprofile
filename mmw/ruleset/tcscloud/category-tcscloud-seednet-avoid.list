@@ -1,0 +1,27 @@
+# https://www.nodeseek.com/post-1037709-1
+# tcscloud 有两种处理方式, 分流或者阻断
+# 流量异常可能会被阻断, 是否放出待测
+
+# 台湾顶级域名
++.tw
++.taipei
+
+# 台湾社区与游戏
++.ptt.cc
++.gamesofa.com
+
+# 台湾银行
++.sinopac.com
++.ctbcbank.com
++.fubon.com
++.anz.com
++.bankchb.com
++.jpmorgan.com
++.o-bank.com
++.sc.com
+
+# 台湾支付
++.jkopay.com
++.gashpoint.com
++.newebpay.com
++.pxpayplus.com

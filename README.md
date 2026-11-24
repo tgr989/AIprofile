@@ -3,7 +3,7 @@ AI-generated profile
 
 妙妙屋使用的分组清单位于 [mmw/proxy_groups/proxy_groups.json](mmw/proxy_groups/proxy_groups.json)，本仓库维护的规则集位于 [mmw/ruleset](mmw/ruleset/)。
 
-TCSCloud SeedNet 的 TW Top 1000 和 A/B 实测报告收录在 `egress-check`。TCSCloud 分流、Line 和 Shopee 的自维护域名规则集中在 `mmw/ruleset/tcscloud-seednet`，Meta 的补充域名规则集中在 `mmw/ruleset/meta`。 [实测报告](egress-check/README.md#tcscloud-seednet) · [SeedNet 规则](mmw/ruleset/tcscloud-seednet/) · [Meta 规则](mmw/ruleset/meta/)
+TCSCloud SeedNet 的 TW Top 1000 和 A/B 实测报告收录在 `egress-check`。TCSCloud Avoid、Meta、LINE 和 Shopee 的自维护规则存放在各自的目录。 [实测报告](egress-check/README.md#tcscloud-seednet) · [TCSCloud Avoid 规则](mmw/ruleset/tcscloud/) · [Meta 规则](mmw/ruleset/meta/) · [LINE 规则](mmw/ruleset/line/) · [Shopee 规则](mmw/ruleset/shopee/)
 
 AI 组的 `label` 为 `AI 节点`，客户端分组名 `group_label` 为 `⚡ AI 节点`。每组的 `emoji` 和 `icon` 使用同一个图标。两个 Wi-Fi Calling 组共用 🛜，ESET 安全服务使用 🛡️。
 
@@ -123,7 +123,7 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 | ESET | MetaCubeX ESET 域名规则集。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/eset.list) | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 苹果定位 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
 | Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads、Llama 等域名（上游 MRS + 自维护 `meta-domain` 补充），以及 Facebook IP 网段。[上游域名](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [补充域名](mmw/ruleset/meta/domain-meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
-| Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs) | 按需选择 |
+| Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/line/domain-line.mrs) | 按需选择 |
 
 Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`Shopee 服务` 和 `Yahoo 服务` 可以单独勾选，各自选择出口。
 
@@ -145,8 +145,8 @@ PT Tracker 使用 MetaCubeX 的 `geo/geosite/tracker.mrs`（`behavior: domain`�
 
 确认最终配置包含 `claude-domain`、`ai-fallback`、`claude-ip` 等提供方及各自的 `RULE-SET`，其中 `claude-ip` 带 `no-resolve`。AI 域名规则排在 Google、云服务和通用代理规则之前，广告拦截继续优先。在客户端为 `AI 服务` 选择固定节点，并通过连接记录确认 Claude Code 的实际出口。
 
-分组清单包含 37 个分组。清单开头为 **⚡ AI 节点 → 广告拦截 → AI 服务**。`TCSCloud 分流` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
+分组清单包含 37 个分组。清单开头为 **⚡ AI 节点 → 广告拦截 → AI 服务**。`TCSCloud Avoid` 可单独勾选。[妙妙屋官方默认清单](https://github.com/iluobei/miaomiaowu/blob/main/proxy_groups/proxy-groups-lite.json)
 
 **苹果服务 → 微软服务 → 云服务** 三组相邻，随后是 **私有网络 → TMO-WFC → GG-WFC → PT 站点 → PT Tracker → ESET → 哔哩哔哩 → 国内服务 → 电报消息**。两个 Wi-Fi Calling 分组紧随私有网络。PT 站点先于 PT Tracker，两者均先于国内服务。
 
-社交媒体之后依次是 **Tiktok → Spotify → 流媒体**。清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud 分流 → 代理媒体 → 代理服务 → 非中国**。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。
+社交媒体之后依次是 **Tiktok → Spotify → 流媒体**。清单末尾为 **Yahoo 服务 → Shopee 服务 → TCSCloud Avoid → 代理媒体 → 代理服务 → 非中国**。手动勾选分组或编辑已有订阅时，还需核对最终配置中的顺序。

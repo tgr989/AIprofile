@@ -48,11 +48,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/mmw-profile/refs/head
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |
 | Meta 服务 | [MRS](../mmw/ruleset/meta/domain-meta.mrs) · [源清单](../mmw/ruleset/meta/domain-meta.list)（含 `+.instagr.am`） | 17 |
-| Line 服务 | [MRS](../mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/line-tcscloud-seednet-avoid.list) | 1 |
-| Shopee 服务 | [MRS](../mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/shopee-tcscloud-seednet-avoid.list) | 11 |
-| TCSCloud 分流 | [MRS](../mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.mrs) · [源清单](../mmw/ruleset/tcscloud-seednet/category-tcscloud-seednet-avoid.list) | 11 |
+| Line 服务 | [MRS](../mmw/ruleset/line/domain-line.mrs) · [源清单](../mmw/ruleset/line/domain-line.list) | 1 |
+| Shopee 服务 | [MRS](../mmw/ruleset/shopee/domain-shopee.mrs) · [源清单](../mmw/ruleset/shopee/domain-shopee.list) | 11 |
+| TCSCloud Avoid | [域名 MRS](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.mrs) · [域名清单](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.list) · [ASN 清单](../mmw/ruleset/tcscloud/asn-tcscloud-seednet-avoid.yaml) | 16 条域名规则、26 条 ASN 规则 |
 
 `Meta 服务`、`Line 服务` 和 `Shopee 服务` 各加载上游 MRS 和表中的自维护 MRS。`Yahoo 服务` 使用上游规则。同步[妙妙屋分组清单](../mmw/proxy_groups/proxy_groups.json)后，可分别为各组选择出口。
+
+`TCSCloud Avoid` 的 ASN 清单收录 Meta、LINE、Shopee 和 Yahoo 已观察到路由公告的自有网络。Mihomo 使用客户端的 `ASN.mmdb` 匹配目标 IP，规则带 `no-resolve`。
 
 ## 名单格式
 
