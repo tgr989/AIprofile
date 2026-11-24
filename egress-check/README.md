@@ -47,14 +47,14 @@ bash <(curl -fsSL https://raw.githubusercontent.com/tgr989/mmw-profile/refs/head
 
 | 妙妙屋分组 | 自维护规则 | 条数 |
 | --- | --- | --- |
-| Meta 服务 | [MRS](../mmw/ruleset/meta/domain-meta.mrs) · [源清单](../mmw/ruleset/meta/domain-meta.list)（含 `+.instagr.am`） | 17 |
-| Line 服务 | [MRS](../mmw/ruleset/line/domain-line.mrs) · [源清单](../mmw/ruleset/line/domain-line.list) | 1 |
-| Shopee 服务 | [MRS](../mmw/ruleset/shopee/domain-shopee.mrs) · [源清单](../mmw/ruleset/shopee/domain-shopee.list) | 11 |
-| TCSCloud Avoid | [域名 MRS](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.mrs) · [域名清单](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.list) · [ASN 清单](../mmw/ruleset/tcscloud/asn-tcscloud-seednet-avoid.yaml) | 16 条域名规则、26 条 ASN 规则 |
+| Meta 服务 | [MRS](../mmw/ruleset/meta/domain-meta.mrs) · [源清单](../mmw/ruleset/meta/domain-meta.list)（含 `+.instagr.am`） | 23 |
+| Line 服务 | [MRS](../mmw/ruleset/line/domain-line.mrs) · [源清单](../mmw/ruleset/line/domain-line.list) | 2 |
+| Shopee 服务 | [MRS](../mmw/ruleset/shopee/domain-shopee.mrs) · [源清单](../mmw/ruleset/shopee/domain-shopee.list) | 23 |
+| TCSCloud Avoid | [域名 MRS](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.mrs) · [域名清单](../mmw/ruleset/tcscloud/category-tcscloud-seednet-avoid.list) · [IP MRS](../mmw/ruleset/tcscloud/ipcidr-tcscloud-seednet-avoid.mrs) · [IP 清单](../mmw/ruleset/tcscloud/ipcidr-tcscloud-seednet-avoid.list) | 40 条域名规则、308 条 CIDR（折叠为 304 条） |
 
 `Meta 服务`、`Line 服务` 和 `Shopee 服务` 各加载上游 MRS 和表中的自维护 MRS。`Yahoo 服务` 使用上游规则。同步[妙妙屋分组清单](../mmw/proxy_groups/proxy_groups.json)后，可分别为各组选择出口。
 
-`TCSCloud Avoid` 的 ASN 清单收录 Meta、LINE、Shopee 和 Yahoo 已观察到路由公告的自有网络。Mihomo 使用客户端的 `ASN.mmdb` 匹配目标 IP，规则带 `no-resolve`。
+`TCSCloud Avoid` 域名规则覆盖 `.tw`、`.taipei`、台湾银行与支付，并补充经 TW Top 1,000 与全球非中国 Top 100,000 正向碰撞确认的非 `.tw` 分流站点（`beanfun.com`、`garena.com`、`hamivideo.hinet.net`、Livedoor 博客平台后缀与头部独立站，以及与露天市集共用 Cloudflare IP `104.18.10.27/32` 的连带站点）。`ip_rules` 加载商家 BGP 分流表聚合后的 IPv4 `ipcidr` MRS（含 6 条静态网段），带 `no-resolve` 匹配纯 IP 连接。
 
 ## 名单格式
 

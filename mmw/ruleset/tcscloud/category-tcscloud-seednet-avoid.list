@@ -1,14 +1,39 @@
-# https://www.nodeseek.com/post-1037709-1
-# tcscloud 有两种处理方式, 分流或者阻断
-# 流量异常可能会被阻断, 是否放出待测
-
 # 台湾顶级域名
 +.tw
 +.taipei
 
-# 台湾社区与游戏
+# 补充非 .tw 后缀分流站点
+# 社区、游戏与影音
 +.ptt.cc
 +.gamesofa.com
++.beanfun.com
++.garena.com
++.hamivideo.hinet.net
+
+# Livedoor 博客平台后缀与头部独立域名站点（AS38631）
++.livedoor.jp
++.livedoor.biz
++.livedoor.blog
++.blog.jp
++.doorblog.jp
++.ldblog.jp
++.2chblog.jp
++.blogcms.jp
++.esuteru.com
++.jin115.com
++.hamusoku.com
++.itainews.com
++.vippers.jp
++.nwknews.jp
++.onecall2ch.com
++.animesoku.com
++.crx7601.com
++.yugioh-starlight.com
+
+# 与露天市集共用 Cloudflare IP（104.18.10.27/32）被连带分流的站点
++.embassy.gov.au
++.carrefoursolucoes.com.br
++.1001jeux.fr
 
 # 台湾银行
 +.sinopac.com

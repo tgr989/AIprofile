@@ -123,7 +123,7 @@ Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登�
 | ESET | MetaCubeX ESET 域名规则集。[域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/eset.list) | 中国大陆网络选择 `DIRECT`；境外按需选择中国大陆出口 |
 | 苹果定位 | `gspe1-ssl.ls.apple.com` 及其子域名 | 按需选择，独立于 GG-WFC |
 | Meta 服务 | Facebook、Instagram、Messenger、WhatsApp、Threads、Llama 等域名（上游 MRS + 自维护 `meta-domain` 补充），以及 Facebook IP 网段。[上游域名](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.list) · [补充域名](mmw/ruleset/meta/domain-meta.list) · [IP 清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list) | 按需选择 |
-| Line 服务 | LINE 上游 MRS，并补充 `linebiz.com` 及其子域名。[补充 MRS](mmw/ruleset/line/domain-line.mrs) | 按需选择 |
+| Line 服务 | LINE 上游 MRS，并补充 `linebiz.com`、`nav.cx` 及其子域名。[补充 MRS](mmw/ruleset/line/domain-line.mrs) | 按需选择 |
 
 Meta 服务和 Line 服务排在社交媒体之前。单独勾选社交媒体时，Facebook 和 Instagram 仍可使用该组的出口。`Shopee 服务` 和 `Yahoo 服务` 可以单独勾选，各自选择出口。
 

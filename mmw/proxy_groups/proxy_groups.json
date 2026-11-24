@@ -1160,12 +1160,12 @@
     ],
     "ip_rules": [
       {
-        "key": "asn-tcscloud-seednet-avoid",
-        "behavior": "classical",
+        "key": "ipcidr-tcscloud-seednet-avoid",
+        "behavior": "ipcidr",
         "type": "http",
-        "format": "yaml",
-        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud/asn-tcscloud-seednet-avoid.yaml",
-        "path": "./ruleset/asn-tcscloud-seednet-avoid.yaml",
+        "format": "mrs",
+        "url": "https://raw.githubusercontent.com/tgr989/mmw-profile/refs/heads/main/mmw/ruleset/tcscloud/ipcidr-tcscloud-seednet-avoid.mrs",
+        "path": "./ruleset/ipcidr-tcscloud-seednet-avoid.mrs",
         "interval": 86400
       }
     ]
