@@ -1,5 +1,5 @@
 # https://www.nodeseek.com/post-1037709-1
-# 细化 .tw 规则：仅拦截 .edu.tw / .gov.tw / .mil.tw、台湾金融支付及 Top 20,000 实测命中分流网段的站点，释放其余 98% 正常 .tw 站点走原生出口。
+# 细化 .tw 规则：仅拦截 .edu.tw / .gov.tw / .mil.tw、台湾金融支付及 Top 20,000 实测命中分流网段的活跃站点（16 条停权、改制或异常旧域以注释保留），释放其余 98% 正常 .tw 站点走原生出口。
 
 # 台湾高校、政府、军方与台北市政顶级域
 +.edu.tw
@@ -86,7 +86,8 @@ www.friday.tw
 +.zerojudge.tw
 +.firdi.org.tw
 +.cnsonline.com.tw
-+.iiiedu.org.tw
+# 原资策会教研所旧域（已改制为 ispan.com.tw），主站及子域 404
+# +.iiiedu.org.tw
 +.hurc.org.tw
 +.csti.tw
 +.narlabs.org.tw
@@ -112,13 +113,16 @@ www.friday.tw
 +.nari.org.tw
 +.medicaltravel.org.tw
 +.ectimes.org.tw
-+.loxa.com.tw
+# 早期 Loxa 教育网，已于 2012 年终止服务关站
+# +.loxa.com.tw
 +.ishm.idv.tw
 +.2y.idv.tw
 +.cjcu.tw
 +.kinmen.org.tw
-+.fenglin.idv.tw
-+.xn--9krt9f03etqmwqq10lz60c.tw
+# 个人 .idv.tw 站点，HTTPS 连接重置无响应
+# +.fenglin.idv.tw
+# 中文域名「國立故宮博物院.tw」源站返回 400 Invalid URL，官网已由 +.gov.tw 覆盖
+# +.xn--9krt9f03etqmwqq10lz60c.tw
 +.iicm.org.tw
 +.ijprt.org.tw
 +.tjcha.org.tw
@@ -140,7 +144,8 @@ www.friday.tw
 +.fpgmuseum.com.tw
 +.tsoe.org.tw
 +.chinesege.org.tw
-+.cert.org.tw
+# TWCERT/CC 早期旧域返回 404，现官网已由 +.twcert.org.tw 覆盖
+# +.cert.org.tw
 +.tkis.tw
 +.tbtsf.org.tw
 +.ciic.org.tw
@@ -158,7 +163,8 @@ www.friday.tw
 +.triz.org.tw
 +.wkb.idv.tw
 +.dmd.org.tw
-+.landchg.org.tw
+# 国土利用监测旧域仅剩 IIS 默认空白页，正式系统已由 +.gov.tw 覆盖
+# +.landchg.org.tw
 +.go2school.com.tw
 +.unison.org.tw
 +.apuct.org.tw
@@ -172,7 +178,8 @@ www.friday.tw
 +.siggraph.org.tw
 +.aci-taiwan.org.tw
 +.eutw.org.tw
-+.script.tw
+# 台大网段泛解析旧域，TLS 握手失败且 HTTP 返回 404
+# +.script.tw
 
 # Top 20,000 .tw 命中关贸网路（AS9671）的站点
 +.e-fpg.com.tw
@@ -285,7 +292,8 @@ www.friday.tw
 +.tntn.com.tw
 +.gamapay.com.tw
 +.cnma.org.tw
-+.beauty-event.com.tw
+# 过期美妆档期活动旧域，全站返回 403 Forbidden
+# +.beauty-event.com.tw
 +.sl-pc.org.tw
 +.387.com.tw
 +.zippy.com.tw
@@ -297,7 +305,8 @@ www.friday.tw
 +.ea-hwa.com.tw
 +.radiantek.com.tw
 +.ratech.com.tw
-+.qingyu.com.tw
+# 全站开启 401 Authorization Required 密码锁
+# +.qingyu.com.tw
 +.ecf.com.tw
 +.twiggy.com.tw
 +.comicstar.com.tw
@@ -314,7 +323,8 @@ www.friday.tw
 +.wumajia.com.tw
 +.tnatrc.com.tw
 +.hicomma.com.tw
-+.yc-pco.com.tw
+# 耀际病媒防治旧域（已并入 rentokil-initial.com.tw），主机停权 Account Suspended
+# +.yc-pco.com.tw
 +.kky.com.tw
 +.ctwm.org.tw
 +.nikokids.com.tw
@@ -353,14 +363,16 @@ www.friday.tw
 +.ropeway.com.tw
 +.cucumber.com.tw
 +.michelson-biotech.com.tw
-+.fusari.tw
+# 全站开启 401 Unauthorized 密码锁
+# +.fusari.tw
 +.hotta.com.tw
 +.persimmonbooks.com.tw
 +.auroratrust.org.tw
 +.two-way.com.tw
 +.apresort.com.tw
 +.cgprdi.org.tw
-+.capital-hotel.com.tw
+# 首都大饭店集团旧官网（旗舰馆已歇业），跳转返回 404
+# +.capital-hotel.com.tw
 +.froghome.tw
 +.mylemon.com.tw
 +.ijysheng.com.tw
@@ -370,12 +382,14 @@ www.friday.tw
 +.slime5.com.tw
 +.topicschool.org.tw
 +.nv.com.tw
-+.futien.org.tw
+# 捕梦网共享主机失效站点，长期返回 503 Service Unavailable
+# +.futien.org.tw
 +.nanjichang.com.tw
 +.mnda.org.tw
 +.taro-pastry.com.tw
 +.012book.com.tw
-+.1452.com.tw
+# 宏益纤维股票代码旧域（官网为 hongyilon.com.tw），TLS 报错且 HTTP 403
+# +.1452.com.tw
 +.artie.com.tw
 +.dataimage.com.tw
 +.boh.com.tw
@@ -418,7 +432,8 @@ www.friday.tw
 +.sjpork.com.tw
 +.hkfce.org.tw
 +.wide.com.tw
-+.jacreative.com.tw
+# CloudLinux Apache 默认测试空主机页
+# +.jacreative.com.tw
 +.lcs.com.tw
 +.green-flow.com.tw
 +.sigma-medical.com.tw
@@ -454,7 +469,8 @@ www.friday.tw
 +.obis.com.tw
 +.meterindco.com.tw
 +.doumygo.com.tw
-+.chuyuculture.com.tw
+# 珠友文化旧域（官网已迁至 chuyu-culture.com），仅剩 CentOS Apache 默认测试页
+# +.chuyuculture.com.tw
 +.oaktree.com.tw
 +.globalchild.com.tw
 +.ibcgifts.com.tw
