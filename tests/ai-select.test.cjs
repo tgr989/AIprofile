@@ -6,8 +6,8 @@ const vm = require("node:vm");
 
 const script = fs.readFileSync(path.join(__dirname, "../mmw/overrides/ai-select.js"), "utf8");
 const override = vm.runInNewContext(script + "\nmain");
-const ai = "⚡ AI 节点";
-const nodeSelection = "🚀 节点选择";
+const ai = "AI";
+const nodeSelection = "PROXY";
 
 function selectGroup(name, proxies) {
   return { name, type: "select", proxies };
@@ -22,6 +22,87 @@ function configAfter(config) {
 function groupsAfter(config) {
   return Object.fromEntries(configAfter(config)["proxy-groups"].map(group => [group.name, group]));
 }
+
+test("旧组名和已改名配置中的旧引用统一为 PROXY、FINAL、AUTO 和 AI", () => {
+  const oldNames = ["🚀 节点选择", "⚡ AI 节点", "♻️ 自动选择", "🐟 漏网之鱼"];
+  const [oldProxy, oldAi, oldAuto, oldFinal] = oldNames;
+  const newNames = [nodeSelection, ai, "AUTO", "FINAL"];
+
+  for (const [proxyName, aiName, autoName, finalName] of [oldNames, newNames]) {
+    const result = configAfter({
+      proxies: [{ name: "链式落地", "dialer-proxy": oldAuto }],
+      "proxy-groups": [
+        selectGroup(proxyName, ["DIRECT"]),
+        { name: autoName, type: "url-test", proxies: ["DIRECT"] },
+        {
+          ...selectGroup(finalName, [oldProxy, oldAuto]),
+          "default-selected": oldAuto,
+          "empty-fallback": oldAuto
+        },
+        selectGroup(aiName, ["DIRECT"])
+      ],
+      rules: [
+        `IP-CIDR,203.0.113.0/24,${oldAi},no-resolve`,
+        `AND,((NETWORK,UDP),(DST-PORT,443)),${oldProxy}`,
+        `SUB-RULE,(NETWORK,tcp),${oldFinal}`,
+        `MATCH, ${oldFinal}`
+      ],
+      "sub-rules": { [oldFinal]: [`MATCH,${oldAuto}`] }
+    });
+
+    assert.deepEqual(result["proxy-groups"].map(group => group.name), newNames);
+    assert.deepEqual(result["proxy-groups"][3], {
+      ...selectGroup("FINAL", [nodeSelection, ai, "AUTO"]),
+      "default-selected": "AUTO",
+      "empty-fallback": "AUTO"
+    });
+    assert.equal(result.proxies[0]["dialer-proxy"], "AUTO");
+    assert.deepEqual(result.rules, [
+      "IP-CIDR,203.0.113.0/24,AI,no-resolve",
+      "AND,((NETWORK,UDP),(DST-PORT,443)),PROXY",
+      `SUB-RULE,(NETWORK,tcp),${oldFinal}`,
+      "MATCH, FINAL"
+    ]);
+    assert.deepEqual(result["sub-rules"], { [oldFinal]: ["MATCH,AUTO"] });
+  }
+});
+
+test("新组名被节点占用时继续使用原 AI 组", () => {
+  const oldAi = "⚡ AI 节点";
+  const groups = groupsAfter({
+    proxies: [{ name: ai }],
+    "proxy-groups": [
+      selectGroup(nodeSelection, ["DIRECT"]),
+      selectGroup(oldAi, ["DIRECT"]),
+      selectGroup("AI 服务", [nodeSelection])
+    ]
+  });
+  assert.deepEqual(Object.keys(groups), [nodeSelection, oldAi, "AI 服务"]);
+  assert.deepEqual(groups["AI 服务"].proxies, [nodeSelection, oldAi]);
+  assert.equal(groups["AI 服务"]["default-selected"], oldAi);
+});
+
+test("新旧组并存时优先使用 AI，并在两种节点选择后补齐候选", () => {
+  const oldAi = "⚡ AI 节点";
+  const oldProxy = "🚀 节点选择";
+  const groups = groupsAfter({
+    "proxy-groups": [
+      selectGroup(oldProxy, ["DIRECT"]),
+      selectGroup(oldAi, ["DIRECT"]),
+      selectGroup(nodeSelection, ["DIRECT"]),
+      selectGroup("FINAL", [nodeSelection, "DIRECT"]),
+      selectGroup("旧服务组", [oldProxy, "DIRECT"]),
+      selectGroup("AI 服务", [oldProxy, nodeSelection]),
+      selectGroup(ai, ["DIRECT"])
+    ]
+  });
+
+  assert.deepEqual(Object.keys(groups), [oldProxy, oldAi, nodeSelection, ai, "FINAL", "旧服务组", "AI 服务"]);
+  assert.deepEqual(groups.FINAL.proxies, [nodeSelection, ai, "DIRECT"]);
+  assert.deepEqual(groups["旧服务组"].proxies, [oldProxy, ai, "DIRECT"]);
+  assert.deepEqual(groups["AI 服务"].proxies, [oldProxy, nodeSelection, ai]);
+  assert.equal(groups["AI 服务"]["default-selected"], ai);
+});
 
 test("AI 组移到节点选择的紧后一位", () => {
   for (const names of [
