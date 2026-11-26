@@ -84,7 +84,7 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse / Llama �
 | `withpersona.com`、`frompersona.com`、`yoti.com` | Net.Coffee 的 KYC 表格及 Claude 身份/年龄核验使用的 Persona 与 Yoti 域名，按后缀匹配并交给 AI 服务 |
 | `t0.gstatic.com` 至 `t3.gstatic.com`、`storage.googleapis.com` | 页面静态资源和 Claude Code 下载的精确匹配备用规则，均以注释保留。参考 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1) |
 | `modelcontextprotocol.com`、`.io`、`.net`、`.org`，以及 `cdn.growthbook.io` | 合并 [jinxinkai/clash-ai-rules 的 Anthropic 清单](https://github.com/jinxinkai/clash-ai-rules/blob/e25782af4ab7afb6ff528fc2a61e22523ff082cb/Anthropic.yaml) 中尚未覆盖的 MCP 与功能开关域名；不代表覆盖任意第三方 MCP 服务器 |
-| `claude`、`anthropic` 及遥测风控关键词 | 收敛于 [ai-fallback.yaml](mmw/ruleset/ai-fallback.yaml) 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)，覆盖各区域变体及 `anthropic.com.cn`）；`openai`、`chatgpt`、`codex` 关键词以注释保留 |
+| `claude`、`anthropic` 及遥测风控关键词 | 收敛于 [ai-fallback.yaml](mmw/ruleset/ai-fallback.yaml) 的关键词兜底（参考 Net.Coffee 与 [NodeSeek 原帖](https://www.nodeseek.com/post-682343-1)，覆盖未显式收录的域名变体）；`openai`、`chatgpt`、`codex` 关键词以注释保留 |
 | `153.61.224.0/22` | Claude API 的入站网段，由 `claude-ip` 按目标 IP 分流。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 | `153.61.208.0/20` | Anthropic 发起工具调用时使用的出站网段。客户端访问其中的目标 IP 时，也交给 `AI 服务`。[Anthropic 固定 IP 清单](https://platform.claude.com/docs/en/api/ip-addresses) |
 
@@ -92,11 +92,13 @@ AI 分组通过 `category-ai-!cn` 识别 Meta AI 流量。Meta / Muse / Llama �
 
 云服务的 `site_rules` 以 hCaptcha、WorkOS、Sentry、Intercom、GitHub、GitLab 开头，其中 `workos` 由本仓维护的 MRS 统一覆盖 WorkOS / AuthKit 域名，`sentry` 与 `intercom` 分别引用 MetaCubeX 的 `geo/geosite/sentry.mrs` 和 `geo/geosite/intercom.mrs`。OneDrive 由「微软服务」的 `microsoft` 提供方匹配，上游清单覆盖 OneDrive 和 SharePoint 域名。云服务和微软服务随 `balanced` 和 `comprehensive` 预设启用。 [WorkOS MRS](mmw/ruleset/workos.mrs) · [WorkOS 明文清单](mmw/ruleset/workos.list) · [Sentry 域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sentry.list) · [Intercom 域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/intercom.list) · [微软域名清单](https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list)
 
-`claude-domain` 收录 7 条精确域名、34 条域名后缀和 1 条 AWS 区域通配规则。更新时编辑明文清单，再运行 `mihomo convert-ruleset domain text mmw/ruleset/claude/domain-claude.list mmw/ruleset/claude/domain-claude.mrs`。 [MRS](mmw/ruleset/claude/domain-claude.mrs) · [明文清单](mmw/ruleset/claude/domain-claude.list)
+新增域名或网段前，先核对同一预设启用的单服务或单品牌 MRS，包括域名后缀和 CIDR 包含关系。完整覆盖的候选按注释保留，并注明提供方及匹配规则。
 
-`claude-ip` 收录 41 条 CIDR，涵盖 Anthropic 登记网段、运营商转分配、BGP 公告及 Claude 官方 IP 清单。更新地址时编辑明文清单，再运行 `mihomo convert-ruleset ipcidr text mmw/ruleset/claude/ipcidr-claude.list mmw/ruleset/claude/ipcidr-claude.mrs`。 [MRS](mmw/ruleset/claude/ipcidr-claude.mrs) · [明文清单](mmw/ruleset/claude/ipcidr-claude.list)
+`claude-domain` 收录 9 条精确域名、36 条域名后缀和 1 条 AWS 区域通配规则。更新时编辑明文清单，再运行 `mihomo convert-ruleset domain text mmw/ruleset/claude/domain-claude.list mmw/ruleset/claude/domain-claude.mrs`。 [MRS](mmw/ruleset/claude/domain-claude.mrs) · [明文清单](mmw/ruleset/claude/domain-claude.list)
 
-`ai-fallback.yaml` 保留 `intercom`、`statsig`、`fathom`、`growthbook`、`datadog`、`sift`、`sentry` 等关键词兜底（覆盖 `browser-intake-us5-datadoghq.com` 等变体）；`domain-claude.list` 中重复的 `sentry.io` 与三条 Intercom 后缀已注释并交由云服务的 `sentry.mrs` 和 `intercom.mrs` 维护。更早命中广告拦截的连接仍由广告分组处理。
+`claude-ip` 收录 19 条 CIDR，涵盖 Anthropic 登记网段、运营商转分配、BGP 公告及 Claude 官方 API 地址。更新地址时编辑明文清单，再运行 `mihomo convert-ruleset ipcidr text mmw/ruleset/claude/ipcidr-claude.list mmw/ruleset/claude/ipcidr-claude.mrs`。 Claude 爬虫及托管浏览器的 Google Cloud 地址由谷歌服务的 `google-ip` 覆盖，明文清单保留地址及覆盖前缀。可选 UDP 443 拦截示例中的 `RULE-SET,claude-ip` 使用去重后的网段范围。 [MRS](mmw/ruleset/claude/ipcidr-claude.mrs) · [明文清单](mmw/ruleset/claude/ipcidr-claude.list)
+
+Cloudflare CDN 域名由云服务的 `cloudflare` 覆盖。`claude-domain` 显式收录 Statsig 和 Segment 域名，广告拦截未启用时 Segment 流量可由 AI 服务匹配。Google Cloud 的 Claude API 域名由谷歌服务的 `google.mrs` 覆盖，已知 Sentry 和 Intercom 端点由云服务的对应规则覆盖。相关候选在明文清单中保留为注释。`ai-fallback.yaml` 保留关键词兜底，更早命中广告拦截的连接由广告分组处理。
 
 Google / Apple 登录备用规则于 **2026-11-15** 按官方资料核对。登录、Google 地图、页面静态资源和下载域名在 `domain-claude.list` 中以注释形式保留，默认交由订阅的其他规则匹配。推荐在客户端将 **`谷歌服务`、`苹果服务` 与 `AI 服务` 选择为同一个固定节点，保持出口 IP 一致**；仅选择相同地区或分别使用自动选择，不能保证出口一致。按需取消注释并重新编译 MRS 后，同域名的其他应用请求也会交给 AI 服务。
 

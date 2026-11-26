@@ -3,7 +3,10 @@
 
 # Claude 站点、API 与登录域名。
 +.anthropic.com
+# 云平台的专用 Claude API 端点见 https://platform.claude.com/docs/en/api/ip-addresses#cloud-platforms
 aws-external-anthropic.*.api.aws
+# 谷歌服务的 google.mrs 已通过 +.googleapis.com 覆盖该专用端点。
+# claude.googleapis.com
 +.claude.ai
 +.claude.com
 +.clau.de
@@ -30,7 +33,8 @@ aws-external-anthropic.*.api.aws
 
 # 外部 CDN、认证与内容站点。
 servd-anthropic-website.b-cdn.net
-anthropic.com.cdn.cloudflare.net
+# 云服务的 cloudflare.mrs 中 +.cloudflare.net 已覆盖。
+# anthropic.com.cdn.cloudflare.net
 anthropic.auth0.com
 anthropic-com.ghost.io
 
@@ -44,46 +48,60 @@ anthropic-com.ghost.io
 +.withpersona.com
 +.frompersona.com
 +.yoti.com
-# Intercom 其余后缀已由云服务分组的 intercom.mrs 统一覆盖，此处仅保留上游未收录的 intercom-messenger.com。
+# Intercom 共用后缀由云服务的 intercom.mrs 维护，以下客服端点已由 +.intercom.io 覆盖。
+# https://www.nodeseek.com/post-1069758-1
 # +.intercom.io
 # +.intercomcdn.com
 # +.intercomassets.com
+# api-iam.intercom.io
+# nexus-websocket-a.intercom.io
 +.intercom-messenger.com
 
 # 错误报告、运行指标、功能开关与访问统计。
-# Sentry 已由云服务分组的 sentry.mrs 统一覆盖。
+# Sentry 共用后缀由云服务的 sentry.mrs 维护，以下遥测端点已由 +.sentry.io 覆盖。
+# https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/anthropic
 # +.sentry.io
+# o1158394.ingest.us.sentry.io
+# us.sentry.io
 +.statsigapi.net
 +.statsig.com
+# Statsig 功能开关和事件上报端点见 https://docs.statsig.com/infrastructure/statsig_domains
+featureassets.org
+prodregistryv2.org
 +.us5.datadoghq.com
 browser-intake-us5-datadoghq.com
 cdn.growthbook.io
 cdn.usefathom.com
+usefathom.com
+# Segment 域名独立维护，广告拦截未启用时也能命中 AI 服务。
++.segment.io
++.segment.com
 
 # 风控服务。
 +.siftscience.com
 
-# Stripe.js 遥测与 Firebase 推送注册的共用端点，按需启用。
+# Stripe.js 共用遥测端点，comprehensive 的金融服务通过 stripe.mrs 中的 +.stripe.com 覆盖。按需启用。
 # r.stripe.com
+# Firebase 共用推送注册端点由谷歌服务的 google.mrs 中的 +.googleapis.com 覆盖。按需启用。
 # fcmtoken.googleapis.com
 
 # hCaptcha 由云服务分组的 hcaptcha.mrs 覆盖。
-# X 分流清单列出的共用 Cloudflare 人机验证域名，按需启用。
+# Cloudflare Turnstile 共用验证端点由云服务的 cloudflare.mrs 中的 +.cloudflare.com 覆盖。固定到 AI 出口可能使其他站点的页面与验证出口不一致。
 # challenges.cloudflare.com
 
-# 共用认证域名按需启用。Google 登录及 OAuth / OpenID Connect。
+# Google 登录及 OAuth / OpenID Connect 共用端点由谷歌服务的 google.mrs 覆盖，分别匹配 +.google.com 和 +.googleapis.com。
 # accounts.google.com
 # oauth2.googleapis.com
 # openidconnect.googleapis.com
 
-# Apple 授权及账户认证。
+# Apple 授权及账户认证由 comprehensive 的苹果服务通过 apple.mrs 中的 +.apple.com 覆盖。
 # appleid.apple.com
 # idmsa.apple.com
 
-# Google 地图 API 用于身份核验相关请求。
+# Google 地图 API 用于身份核验相关请求，谷歌服务的 google.mrs 中的 +.googleapis.com 已覆盖。
 # maps.googleapis.com
 
-# NodeSeek 列出的页面静态资源和 Claude Code 下载域名。
+# NodeSeek 列出的页面静态资源和 Claude Code 下载域名由谷歌服务的 google.mrs 覆盖，分别匹配 +.gstatic.com 和 +.googleapis.com。
 # t0.gstatic.com
 # t1.gstatic.com
 # t2.gstatic.com

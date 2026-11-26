@@ -2,10 +2,11 @@
 # +. 匹配主域和各级子域，.ct.sendgrid.net 匹配该域名下的各级子域。
 +.ai.com
 +.openaimerge.com
-chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com
+# 微软服务的 microsoft.mrs 中 +.azure.com 已覆盖该 Web PubSub 域名。
+# chatgpt-async-webps-prod-eastus-4.webpubsub.azure.com
 openai-api.arkoselabs.com
 +.client-api.arkoselabs.com
-# Statsig 功能开关与灰度域名（OpenAI 已收购 Statsig；下列两个子域已由 claude-domain 的 statsig.com / statsigapi.net 后缀及 ai-fallback.yaml 关键词覆盖）。
+# Statsig 功能开关与灰度域名（OpenAI 已收购 Statsig）。下列后缀已由 claude-domain.mrs 的 +.statsig.com 和 +.statsigapi.net 覆盖。
 # +.api.statsig.com
 # +.events.statsigapi.net
 +.featuregates.org
@@ -16,7 +17,7 @@ openai-api.arkoselabs.com
 # ai-fallback.yaml 通过 datadog 关键词覆盖这个端点，此处启用精确域名规则。
 rum.browser-intake-datadoghq.com
 
-# WorkOS 企业登录与资源域名已由云服务分组的 workos 规则集统一覆盖。
+# WorkOS 企业登录与资源域名由云服务的 workos.mrs 覆盖，匹配 +.workos.com、+.workoscdn.com 和 workos.imgix.net。
 # cdn.workos.com
 # forwarder.workos.com
 # frontend-apps-multi-region.workos.com
@@ -24,16 +25,16 @@ rum.browser-intake-datadoghq.com
 # setup.workos.com
 # workos.imgix.net
 
-# 共用的人机验证、Apple 设备校验与 Stripe 前端脚本域名，按需启用：
-# 全局接管 challenges.cloudflare.com 可能导致其他分流或直连站点因主站与验证请求出口不一致而循环卡盾；
-# humb.apple.com、register.appattest.apple.com 与 js.stripe.com 默认分别交由苹果服务和金融服务分组处理（balanced 预设未含苹果服务时可按需启用）。
+# 共用的人机验证、Apple 设备校验与 Stripe 前端脚本域名，按需启用。
+# cloudflare.mrs 的 +.cloudflare.com 覆盖 Turnstile。固定到 AI 出口可能使其他站点的页面与验证出口不一致。
+# comprehensive 的 apple.mrs 中 +.apple.com 覆盖两个 Apple 端点，stripe.mrs 中 +.stripe.com 覆盖 js.stripe.com。
 # challenges.cloudflare.com
 # humb.apple.com
 # register.appattest.apple.com
 # js.stripe.com
 
-# Intercom 与 Sentry 已由云服务分组的 intercom.mrs（含 js.intercomcdn.com）与 sentry.mrs 统一覆盖；
-# o33249.ingest.sentry.io 另由上游 openai.yaml 和 category-ai-!cn.mrs 精确收录。
+# 云服务的 intercom.mrs 中 +.intercom.io 和 +.intercomcdn.com 覆盖下列 Intercom 后缀。
+# 云服务的 sentry.mrs 中 +.sentry.io 覆盖下列两个 Sentry 端点。
 # +.intercom.io
 # +.intercomcdn.com
 # o207216.ingest.sentry.io
